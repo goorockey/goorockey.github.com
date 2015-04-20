@@ -14,7 +14,7 @@
      {% if config.swiftype_key %}
     <!--增加swiftype搜索功能-->
     <!--form class="menu-item menu-item-{{ itemName }}">
-      <input type="text" id="st-search-input" class="st-search-input" style="width:80px;"  />
+      <input type="text" id="st-search-input" class="st-default-search-input" style="width:80px;"  />
     </form-->
     {% set swiftype_key = config.swiftype_key %}
     <script type="text/javascript">
