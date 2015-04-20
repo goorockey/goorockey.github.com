@@ -105,17 +105,16 @@ creative_commons: by-nc-sa
 # See: https://www.google.com/webmasters/
 #google_site_verification: VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0
 
-
-# Google 分析 ID
-google_analytics: UA-28958629-1
-
 # 站点起始时间
 since: 2011
 
 # 头像
-avatar:
+avatar: http://www.gravatar.com/avatar/7cc8c0a0927d6dbcafd4b6ec3826ce41
 
 swiftype_key: W8NNP1sZaY6a224zSHEB
+
+# Google 分析 ID
+google_analytics: UA-28958629-1
 
 # =============================================================================
 # End NexT Theme configuration

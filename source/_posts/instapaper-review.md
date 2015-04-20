@@ -16,6 +16,8 @@ categories: programming
 - 用[SendGrid]服务发送邮件
 - nodejs实现, 用到了cheerio、request、cron、sugar、ejs、sendgrid等几个模块
 
+<!--more-->
+
 ###抓文章
 
 Instapaper提供有API，可以获取到已读文章，但它需要填表、人工审核，感觉不容易通过，索性就自己模拟登录，抓下来算了。F12看了一下，发现Instapaper通信协议极其简单，好抓得很。
