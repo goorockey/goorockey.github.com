@@ -108,7 +108,11 @@ li { list-style: circle; }
 
   br { display: none; }
 
-  .menu-item { margin-left: 10px; }
+  .menu-item {
+    margin-left: 10px;
+
+    +mobile() { margin-top: 10px; }
+  }
 
   .menu-item a {
     padding: 5px 10px;
