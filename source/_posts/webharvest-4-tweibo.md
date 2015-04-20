@@ -24,4 +24,4 @@ categories: programming
 
 配置文件如下
 
-[[ gist goorockey:9368146 ]]
+{% gist 9368146 %}

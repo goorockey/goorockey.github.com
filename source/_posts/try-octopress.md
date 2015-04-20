@@ -28,4 +28,4 @@ categories: blog
 
 仿照着，写了个友情链接侧栏的插件, 当然直接在source/_include/asides/ 写静态页面也可以，纯练手:
 
-[[ gist goorockey:3689183 ]]
+{% gist 3689183 %}
