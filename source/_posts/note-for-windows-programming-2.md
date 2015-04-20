@@ -112,7 +112,7 @@ JOB\_OBJECT\_UILIMIT\_HANDLES | 防止作业中的进程使用同一作业外部
 
 - 初始化线程时会把 线程函数的入参(pvParam)、线程函数的指针(pfnStartAddrj) 压栈。
 
-![线程堆栈](http://img.goorockey.com/2011/09/clip_image0011.png)
+![线程堆栈](http://www.goorockey.com/uploads/2011/09/clip_image0011.png)
 
 - 每个线程还有一个指令寄存器（IP）和堆栈指针寄存器（SP）。IP初始指向BaseThreadStart函数，它包含在Kernel32.dll中。
 

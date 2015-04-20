@@ -35,7 +35,7 @@ ssh端口转发有三种：
 
 考虑这样的场景：
 
-![本地转发](http://img.goorockey.com/2012/02/image002_thumb.jpg)
+![本地转发](http://www.goorockey.com/uploads/2012/02/image002_thumb.jpg)
 
 一个运行在服务器116.1.1.1的程序提供端口389的数据通信，但防火墙只允许其他计算机对服务器做ssh的通信。
 
@@ -61,7 +61,7 @@ ssh端口转发有三种：
 
 例如，考虑这样的场景，用本地转发来进行远程桌面：
 
-![远程桌面](http://img.goorockey.com/2012/02/image_thumb.png)
+![远程桌面](http://www.goorockey.com/uploads/2012/02/image_thumb.png)
 
 现在要在机子A对机子C做远程桌面。但机子A和机子C都在不同的子网，不能直接通信，也都只能跟机子B用ssh通信。
 
@@ -87,7 +87,7 @@ ssh端口转发有三种：
 
 考虑这样的场景：
 
-![远程转发](http://img.goorockey.com/2012/02/image003_thumb.jpg)
+![远程转发](http://www.goorockey.com/uploads/2012/02/image003_thumb.jpg)
 
 客户端A和服务端B的端口都还是7001和389。
 
@@ -102,7 +102,7 @@ ssh端口转发有三种：
 
     $ ssh –D <local port>  <ssh host>
 
-![动态转发](http://img.goorockey.com/2012/02/image005_thumb.jpg)
+![动态转发](http://www.goorockey.com/uploads/2012/02/image005_thumb.jpg)
 
 跟其他两种端口转发不同的是，动态转发在数据包经过ssh通过到达服务端后，sshd会根据把封装数据包的协议，转发到对应的主机和端口。
 
