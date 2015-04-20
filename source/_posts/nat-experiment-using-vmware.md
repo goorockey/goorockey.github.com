@@ -14,7 +14,7 @@ categories: network
 
 先上拓扑图（可能有点不规范）：
 
-![拓扑图](http://www.goorockey.com/uploads/2012/03/image_thumb.png)
+![拓扑图](http://img.goorockey.com/2012/03/image_thumb.png)
 
 如图分别有4台机子：A、B在内网，但在不同的网段中，C做网关，控制网段间的访问。D在外网。
 
@@ -38,7 +38,7 @@ categories: network
 
 VMWare新建几张网卡（菜单栏【edit】-【Virtual Network Editor】），要求一张为Bridged（NAT应该也行），两张为Host-only。
 
-![VMWare网卡设置](http://www.goorockey.com/uploads/2012/03/151306312_thumb.png)
+![VMWare网卡设置](http://img.goorockey.com/2012/03/151306312_thumb.png)
 
 设置A、B网卡分别为VMnet1和VMnet2，这是为了使它们原始都不能互访。
 

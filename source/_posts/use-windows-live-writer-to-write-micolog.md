@@ -18,7 +18,7 @@ categories: blog
 
 1.选择“其他日志服务”
 
-![其他日志服务](http://www.goorockey.com/uploads/2011/05/image11-300x254.png)
+![其他日志服务](http://img.goorockey.com/2011/05/image11-300x254.png)
 
 <!--more-->
 
@@ -26,13 +26,13 @@ categories: blog
 
 用户名和密码是Micolog管理页面中设置的rpc用户和密码
 
-![rpc用户和密码](http://www.goorockey.com/uploads/2011/05/image21-300x256.png)
+![rpc用户和密码](http://img.goorockey.com/2011/05/image21-300x256.png)
 
 3.设置博客的类型
 
 推介选择WordPress 2.2+, 发布的URL就是 “你的博客地址/rpc”
 
-![博客类型](http://www.goorockey.com/uploads/2011/05/image31-300x255.png)
+![博客类型](http://img.goorockey.com/2011/05/image31-300x255.png)
 
 4.之后，等它配置完成就可以用Live Writer写Micolog了：）
 
@@ -46,11 +46,11 @@ categories: blog
 
     【工具】-【选项】-【编辑】，勾选“自动保存草稿间隔”
 
-![自动保存草稿间隔](http://www.goorockey.com/uploads/2011/05/image41-300x285.png)
+![自动保存草稿间隔](http://img.goorockey.com/2011/05/image41-300x285.png)
 
     再选择【首选项】标签，勾选“发布前提醒我指定标签”
 
-![发布前提醒我制定标签](http://www.goorockey.com/uploads/2011/05/image51-300x287.png)
+![发布前提醒我制定标签](http://img.goorockey.com/2011/05/image51-300x287.png)
 
 - 添加Ping服务器
 

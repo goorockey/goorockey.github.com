@@ -7,7 +7,7 @@ title: Goorockey's Blog
 subtitle:
 description:
 author: goorockey
-language:
+language: en
 timezone: Asia/Shanghai
 
 # URL
@@ -62,7 +62,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
@@ -79,11 +79,44 @@ feed:
 # Disqus
 disqus_shortname: goorockeyslife
 
-# Header
-menu:
-  Home: /
-  Archives: /archives/
-  Projects: /projects
-rss: /atom.xml
+tag_generator:
+  per_page: 10
+
+# =============================================================================
+# NexT Theme configuration
+# =============================================================================
 
 
+# 社交链接，将在侧栏中显示
+social:
+  GitHub: https://github.com/goorockey
+  Weibo: http://weibo.com/444891215
+  DouBan: http://www.douban.com/people/goorockey
+  ZhiHu: http://www.zhihu.com/people/goorockey
+
+
+# Creative Commons 4.0 International License.
+# http://creativecommons.org/
+# Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
+creative_commons: by-nc-sa
+
+
+# Google 站长工具验证，请选择 `HTML Meta` 验证方式
+# See: https://www.google.com/webmasters/
+#google_site_verification: VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0
+
+
+# Google 分析 ID
+google_analytics: UA-28958629-1
+
+# 站点起始时间
+since: 2011
+
+# 头像
+avatar:
+
+swiftype_key: W8NNP1sZaY6a224zSHEB
+
+# =============================================================================
+# End NexT Theme configuration
+# =============================================================================
