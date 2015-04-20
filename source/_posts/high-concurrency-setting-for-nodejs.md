@@ -89,7 +89,8 @@ cluster是prefork模型的，即前面一个master负责总的接受请求，然
 
       // Listen for dying processes
       cluster.on('exit', function(worker, code, signal) {
-        debug('A process(pid=%s) of master died (%s). Restarting...', worker.process.pid, signal || code);
+        debug('A process(pid=%s) of master died (%s). Restarting...',
+              worker.process.pid, signal || code);
         cluster.fork();
       });
 
