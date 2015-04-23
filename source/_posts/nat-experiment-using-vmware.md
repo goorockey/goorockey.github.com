@@ -16,6 +16,8 @@ categories: network
 
 ![拓扑图](http://www.goorockey.com/uploads/2012/03/image_thumb.png)
 
+<!--more-->
+
 如图分别有4台机子：A、B在内网，但在不同的网段中，C做网关，控制网段间的访问。D在外网。
 
 要达到：

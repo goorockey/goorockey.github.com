@@ -8,6 +8,8 @@ categories: network
 
 DNS隧道是什么就不解释了。google一下DNS隧道能搜到风河、云风两个大牛相关的blog。这次我用iodine来实现DNS隧道。
 
+<!--more-->
+
 ## 场景 
 现在情况是，用户只能跟外界有DNS通路，想借此进行平常的http、ftp等通信。
 
