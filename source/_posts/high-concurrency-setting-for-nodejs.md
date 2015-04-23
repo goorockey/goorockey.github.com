@@ -69,7 +69,7 @@ nodejs会周期性地向V8发出垃圾回收请求，在并发大的时候经常
 
 ###多进程
 
-nodejs虽然异步可以处理轻松地处理大量请求，但单进程单线程的模型在多核下还没有完全利用硬件资源。亲好nodejs原生的[cluster](http://nodejs.org/api/cluster.html)可以很简单地让程序编程多进程。
+nodejs虽然异步可以处理轻松地处理大量请求，但单进程单线程的模型在多核下还没有完全利用硬件资源。幸好nodejs原生的[cluster模块](http://nodejs.org/api/cluster.html)可以很简单地让程序编程多进程。
 
 cluster是prefork模型的，即前面一个master负责总的接受请求，然后均匀地把请求分发给worker，每个worker是一个独立的进程。
 例如对于express的应用，在程序入口添加以下代码即可：
