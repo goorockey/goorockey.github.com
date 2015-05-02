@@ -171,6 +171,39 @@ def streak_date_format(date)
 end
 {% endcodeblock %}
 
+由于需要对每个contribution响应，更新计数，还要在app/service/event_create_service.rb中添加相应代码。
+
+{% codeblock services/event_create_service.rb lang:ruby %}
+def create_event(project, current_user, status, attributes = {})
+  attributes.reverse_merge!(
+    project: project,
+    action: status,
+    author_id: current_user.id
+  )
+
+  event = Event.create(attributes)
+  if event && event.contribute? # 响应contribution
+    current_user.streak
+  end
+
+  event
+end
+{% endcodeblock %}
+
+最后在app/assets/stylesheets添加相应的CSS文件。
+
+{% codeblock generic/streak.css lang:css %}
+.user-streak {
+  p.light {
+    margin: 0px;
+  }
+
+  h3 {
+    margin: 10px 0px;
+  }
+}
+{% endcodeblock %}
+
 所有改动可以查看我的提交[d69031e](https://github.com/goorockey/gitlabhq/commit/d69031e9add519ece1ebd278d8180a8628ace6d7)。
 
 # 提交pull request
