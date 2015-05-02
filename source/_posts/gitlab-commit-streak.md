@@ -1,6 +1,6 @@
 title: "Gitlab commit streak实现日志"
 date: 2015-04-28 00:00:00
-tags:
+tags: [Gitlab, Github, programming, 开源]
 categories: others
 ---
 
