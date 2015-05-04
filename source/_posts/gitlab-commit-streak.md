@@ -20,9 +20,7 @@ categories: programming
 
 Gitlab是用Ruby on Rails开发的, 整个系统的运行还利用了redis, nginx, sidekiq, unicorn, postgres, 整体的架构可以看[官方文档](https://github.com/gitlabhq/gitlabhq/blob/master/doc/development/architecture.md)。
 
-Gitlab还提供了[Gitlab Development Kit](https://gitlab.com/gitlab-org/gitlab-development-kit), 以方便开发。但我尝试用它的时候, 搭建了几次总是遇到问题, 就放弃了。留个小tips, 就是把每一部分clone下来之后, 把Gemfile的源改成[淘宝的镜像](https://ruby.taobao.org/), 快不少。
-
-最后决定把gitlab的仓库clone下来之后, 直接在production版的/opt/gitlab/里面改代码, 之后把改动同步到仓库, 省心省力。
+Gitlab还提供了开发环境[Gitlab Development Kit](https://gitlab.com/gitlab-org/gitlab-development-kit), 还是比较方便的。留个小tips, 就是把每一部分clone下来之后, 把Gemfile的源改成[淘宝的镜像](https://ruby.taobao.org/), 快不少。
 
 Gitlab的文档相对还比较多, 虽然开发方面的我觉得还略显不够。想向Gitlab贡献代码的, 最好先看看[官方的介绍](https://github.com/gitlabhq/gitlabhq/blob/master/CONTRIBUTING.md)。
 
@@ -190,7 +188,7 @@ def create_event(project, current_user, status, attributes = {})
 end
 {% endcodeblock %}
 
-最后在app/assets/stylesheets添加相应的CSS文件。
+最后在app/assets/stylesheets添加相应的css文件。
 
 {% codeblock generic/streak.css lang:css %}
 .user-streak {
@@ -203,6 +201,11 @@ end
   }
 }
 {% endcodeblock %}
+
+修改js、css等assets资源，需要执行以下命令重新编译资源：
+
+    sudo gitlab-rake assets:clean assets:precompile cache:clear RAILS_ENV=production
+    sudo gitlab-ctl restart
 
 所有改动可以查看我的提交[d69031e](https://github.com/goorockey/gitlabhq/commit/d69031e9add519ece1ebd278d8180a8628ace6d7)。
 
