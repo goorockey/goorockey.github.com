@@ -86,7 +86,6 @@ tag_generator:
 # NexT Theme configuration
 # =============================================================================
 
-
 # 社交链接，将在侧栏中显示
 social:
   GitHub: https://github.com/goorockey
