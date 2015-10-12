@@ -1,7 +1,7 @@
 title: 美剧自动保存到百度盘
 date: 2015-09-08 11:45:07
-tags: [programming, 美剧, 百度盘]
-categories: programming
+tags: [programming, python, 美剧, 百度盘]
+categories: python
 ---
 
 现在习惯每周的美剧都用百度盘的离线下载，然后回家在Pad或者电脑看。

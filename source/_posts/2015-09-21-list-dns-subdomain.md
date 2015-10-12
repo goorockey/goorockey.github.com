@@ -1,7 +1,7 @@
 title: 查看所有子域名
 date: 2015-09-21 20:39:53
 tags: [dns]
-categories: other
+categories: others
 ---
 
 有时候想查看一个域名的所有子域名，纯dig是办不到的。
