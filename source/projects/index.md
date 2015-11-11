@@ -3,6 +3,10 @@ date: 2014-12-10 01:00
 layout: page
 ---
 
+## [node-wechat-terminal](https://github.com/goorockey/node-wechat-terminal)
+
+    微信终端版
+
 ## [Instapaper review](https://github.com/goorockey/instapaper-review)
 
     定期发送Instapaper归档文章的复习邮件
