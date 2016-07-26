@@ -86,6 +86,15 @@ ubuntu下可以直接`apt-get install ngrok-server`，其他的可以到ngrok官
 
 其他更多选项可参考[ngrok官网](https://ngrok.com/)和[ngrok-c的仓库](https://github.com/dosgo/ngrok-c)
 
+## 问题
+
+ngrok的服务端原生是不支持验证的，即ngrokd服务端外放后，其他人的ngrok客户端可以自由连接。
+
+暂时找到两个解决方案：
+
+- 修改源码，参考[Issue #321](https://github.com/inconshreveable/ngrok/issues/321)
+- 使用官方付费的[ngrok-link](https://ngrok.com/product/ngrok-link)
+
 
 ## 参考资源
 
