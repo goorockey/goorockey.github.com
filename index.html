@@ -141,6 +141,103 @@
           
           
             
+              <a class="post-title-link" href="/2016/09/13/angular2-note/">
+                Angular2初试小记
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2016-09-13
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/programming/">programming</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/09/13/angular2-note/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/09/13/angular2-note/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>最近一个网站尝试用<a href="https://angular.io">Angular2</a>，小记一下。</p>
+<h2 id="Angular-1-vs-2"><a href="#Angular-1-vs-2" class="headerlink" title="Angular 1 vs 2"></a>Angular 1 vs 2</h2><p>Angular2对比1，做了很大的调整，代码更加组件化，结构会更清晰，通过<a href="https://angular.io/docs/ts/latest/quickstart.html">官方教程</a>很快能入手。</p>
+<p>同时使用Typescript作为开发语言，支持静态类型检查、js新标准等优点，截止现在使用2.0.2版本的ts。</p>
+<p>截止现在，angular2最新版本为rc.6，还在快速更新中，我开发的时候就经历了rc.4到rc.5比较大的改动。幸好angular自己和相关工具的github repo都比较活跃，每天都有人发现问题，提交代码，讨论解决方案。</p>
+<p>更多介绍参考<a href="https://angular.io/features.html">官方</a>，<a href="https://github.com/angular/angular">Github</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/13/angular2-note/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/angular2/"> #angular2 </a>
+          
+            <a href="/tags/angular-cli/"> #angular-cli </a>
+          
+            <a href="/tags/typescript/"> #typescript </a>
+          
+            <a href="/tags/js/"> #js </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2016/07/27/flash-rom-in-redmi2/">
                 红米2刷第三方rom小记
               </a>
@@ -510,104 +607,6 @@ var dialog = remote.require(&apos;dialog&apos;);
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/30/python-bitwise-difference-with-javascript/">
-                Python按位运算结果跟Js不同
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2015-09-30
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/programming/">programming</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/30/python-bitwise-difference-with-javascript/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/30/python-bitwise-difference-with-javascript/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>由于python的整型是64位的，js的是32位，所以前后端通信的时候，会出现两边按位运算结果不同导致有问题。</p>
-<p>解决是用python中ctypes的c_int32等类型，如:</p>
-<pre><code>[javascript]
-&gt; i = 1443603316765
-&gt; ~i
--494305310
-
-[python]
-&gt;&gt;&gt; import ctypes
-&gt;&gt;&gt; i = 1443603316765
-&gt;&gt;&gt; ~i
--1443603316766
-&gt;&gt;&gt; (ctypes.c_int32(~i).value)
--494305310
-</code></pre>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/python/"> #python </a>
-          
-            <a href="/tags/js/"> #js </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -643,7 +642,7 @@ var dialog = remote.require(&apos;dialog&apos;);
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -657,7 +656,7 @@ var dialog = remote.require(&apos;dialog&apos;);
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

@@ -141,6 +141,101 @@
           
           
             
+              <a class="post-title-link" href="/2011/09/05/note-for-windows-programming-3/">
+                《Windows核心编程》读书笔记3--线程同步
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2011-09-04
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/windows/">windows</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2011/09/05/note-for-windows-programming-3/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/09/05/note-for-windows-programming-3/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>能调用的原子操作</p>
+<pre><code>LONG InterlockedExchangeAdd(PLONG plAddend,LONG Increment);
+LONG InterlockedExchange(PLONG plTarget, LONG lValue);
+PVOID InterlockedExchangePointer(PVOID* ppvTarget, PVOID pvValue);
+PVOID InterlockedCompareExchange(PLONG plDestination, LONG lExchange, LONG lComparand);
+PVOID InterlockedCompareExchangePointer(PVOID* ppvDestination, PVOID pvExchange, PVOID pvComparand);
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2011/09/05/note-for-windows-programming-3/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/programming/"> #programming </a>
+          
+            <a href="/tags/windows/"> #windows </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2011/09/03/note-for-windows-programming-2/">
                 《Windows核心编程》读书笔记2--进程、作业、线程
               </a>
@@ -522,122 +617,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2011/08/19/wm-notify-in-vc/">
-                VC中对WM_NOTIFY的处理
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2011-08-18
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/windows/">windows</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2011/08/19/wm-notify-in-vc/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/08/19/wm-notify-in-vc/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>1.Reflect</p>
-<p>对于WM_NOTIFY消息：</p>
-<blockquote>
-<p>子控件没有Reflect，则由父窗口处理。<br>只要子控件（即消息对应最直接的控件）有了ON_NOTIFY_REFLECT就会被子控件处理,不会被父窗口所处理。</p>
-</blockquote>
-<p><em>Reflect的意思就是把消息反射给子控件处理。</em></p>
-<p>大概的就是这样：</p>
-<table>
-<thead>
-<tr>
-<th>子控件有ON_NOTIFY_REFLECT</th>
-<th>父窗口有ON_NOTIFY</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>WM_NOTIFY未被处理</td>
-<td>WM_NOTIFY只被父窗口处理</td>
-<td>WM_NOTIFY只被子控件处理</td>
-</tr>
-<tr>
-<td>Y</td>
-<td>Y</td>
-<td>WM_NOTIFY只被子控件处理</td>
-</tr>
-</tbody>
-</table>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2011/08/19/wm-notify-in-vc/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/windows/"> #windows </a>
-          
-            <a href="/tags/vc/"> #vc </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -673,7 +652,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -687,7 +666,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

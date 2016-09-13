@@ -141,6 +141,103 @@
           
           
             
+              <a class="post-title-link" href="/2014/05/12/instapaper-review/">
+                用nodejs实现Instapaper回顾邮件自动发送
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2014-05-11
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/programming/">programming</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/05/12/instapaper-review/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/05/12/instapaper-review/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>最近在搞nodejs，刚好有个点子，想实现一个对自己这个月在<a href="http://www.instapaper.com" title="Instapaper">Instapaper</a>的已读文章做回顾，通过邮件形式发到自己的邮箱，起到复习的作用。然后上周末就用了两个通宵把这搞出来了，代码放在<a href="https://github.com/goorockey/instapaper-review">Github</a>上面。</p>
+<p>###总的情况</p>
+<ul>
+<li>整个服务跑在<a href="http://www.appfog.com" title="Appfog">Appfog</a>上</li>
+<li>用<a href="http://sendgrid.com" title="SendGrid">SendGrid</a>服务发送邮件</li>
+<li>nodejs实现, 用到了cheerio、request、cron、sugar、ejs、sendgrid等几个模块</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/05/12/instapaper-review/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/"> #nodejs </a>
+          
+            <a href="/tags/Instapaper/"> #Instapaper </a>
+          
+            <a href="/tags/email/"> #email </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2014/04/21/summary-of-using-wxwidgets/">
                 用wxWidgets做移植的总结
               </a>
@@ -496,99 +593,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012/10/21/try-hadoop/">
-                玩一下hadoop
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2012-10-21
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/hadoop/">hadoop</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2012/10/21/try-hadoop/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/10/21/try-hadoop/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>由于某种原因，今天玩了一下<a href="http://hadoop.apache.org/" title="Hadoop">Hadoop</a>。正确来说，我是玩<a href="http://code.google.com/p/hop/" title="HOP">HOP</a>，一个Hadoop的修改版本。</p>
-<blockquote>
-<p>The Hadoop Online Prototype (HOP) is a modified version of Hadoop MapReduce that allows data to be pipelined between tasks and between jobs. This can enable better cluster utilization and increased parallelism, and allows new functionality: online aggregation (approximate answers as a job runs), and stream processing (MapReduce jobs that run continuously, processing new data as it arrives). </p>
-</blockquote>
-<p>就是多了pipeline（流水线）的Hadoop。分布式流水线可以有效加快各jobs在各节点的同步运算。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012/10/21/try-hadoop/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/programming/"> #programming </a>
-          
-            <a href="/tags/hadoop/"> #hadoop </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -624,7 +628,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -638,7 +642,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

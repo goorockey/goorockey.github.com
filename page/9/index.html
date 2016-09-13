@@ -141,6 +141,101 @@
           
           
             
+              <a class="post-title-link" href="/2011/08/02/use-copy-and-ostream-iterator-to-output-array/">
+                STL中用copy和ostream_iterator输出一个数组
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2011-08-01
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/cpp/">cpp</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2011/08/02/use-copy-and-ostream-iterator-to-output-array/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/08/02/use-copy-and-ostream-iterator-to-output-array/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <pre><code>#include &lt;iostream&gt;
+#include &lt;iterator&gt;
+#include &lt;algorithm&gt;
+
+int a[] = { 335, 33, 98, 39, 54, 24, 3 };
+int nSize = sizeof(a) / sizeof(a[0]);    
+
+// 输出数组a到标准输出，同时每个元素都以空格为结束（最后一个元素后面也会有空格）
+std::copy(a, a + nSize, std::ostream_iterator&lt;int&gt;(std::cout, &quot; &quot;)); 
+</code></pre><p>结果：335 33 98 39 54 24 3</p>
+<p>一个字：妙！！(^0^)/ </p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cpp/"> #cpp </a>
+          
+            <a href="/tags/stl/"> #stl </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2011/05/19/statistics-functions-in-vim/">
                 vim的统计功能
               </a>
@@ -356,7 +451,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -370,7 +465,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

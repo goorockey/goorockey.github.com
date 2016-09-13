@@ -141,6 +141,104 @@
           
           
             
+              <a class="post-title-link" href="/2015/09/30/python-bitwise-difference-with-javascript/">
+                Python按位运算结果跟Js不同
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2015-09-30
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/programming/">programming</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/09/30/python-bitwise-difference-with-javascript/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/30/python-bitwise-difference-with-javascript/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>由于python的整型是64位的，js的是32位，所以前后端通信的时候，会出现两边按位运算结果不同导致有问题。</p>
+<p>解决是用python中ctypes的c_int32等类型，如:</p>
+<pre><code>[javascript]
+&gt; i = 1443603316765
+&gt; ~i
+-494305310
+
+[python]
+&gt;&gt;&gt; import ctypes
+&gt;&gt;&gt; i = 1443603316765
+&gt;&gt;&gt; ~i
+-1443603316766
+&gt;&gt;&gt; (ctypes.c_int32(~i).value)
+-494305310
+</code></pre>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/"> #js </a>
+          
+            <a href="/tags/python/"> #python </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/09/21/list-dns-subdomain/">
                 查看所有子域名
               </a>
@@ -498,103 +596,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/05/12/instapaper-review/">
-                用nodejs实现Instapaper回顾邮件自动发送
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2014-05-11
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/programming/">programming</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/05/12/instapaper-review/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/05/12/instapaper-review/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>最近在搞nodejs，刚好有个点子，想实现一个对自己这个月在<a href="http://www.instapaper.com" title="Instapaper">Instapaper</a>的已读文章做回顾，通过邮件形式发到自己的邮箱，起到复习的作用。然后上周末就用了两个通宵把这搞出来了，代码放在<a href="https://github.com/goorockey/instapaper-review">Github</a>上面。</p>
-<p>###总的情况</p>
-<ul>
-<li>整个服务跑在<a href="http://www.appfog.com" title="Appfog">Appfog</a>上</li>
-<li>用<a href="http://sendgrid.com" title="SendGrid">SendGrid</a>服务发送邮件</li>
-<li>nodejs实现, 用到了cheerio、request、cron、sugar、ejs、sendgrid等几个模块</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/05/12/instapaper-review/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/nodejs/"> #nodejs </a>
-          
-            <a href="/tags/Instapaper/"> #Instapaper </a>
-          
-            <a href="/tags/email/"> #email </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -630,7 +631,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -644,7 +645,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

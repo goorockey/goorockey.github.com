@@ -141,6 +141,122 @@
           
           
             
+              <a class="post-title-link" href="/2011/08/19/wm-notify-in-vc/">
+                VC中对WM_NOTIFY的处理
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2011-08-18
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/windows/">windows</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2011/08/19/wm-notify-in-vc/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/08/19/wm-notify-in-vc/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>1.Reflect</p>
+<p>对于WM_NOTIFY消息：</p>
+<blockquote>
+<p>子控件没有Reflect，则由父窗口处理。<br>只要子控件（即消息对应最直接的控件）有了ON_NOTIFY_REFLECT就会被子控件处理,不会被父窗口所处理。</p>
+</blockquote>
+<p><em>Reflect的意思就是把消息反射给子控件处理。</em></p>
+<p>大概的就是这样：</p>
+<table>
+<thead>
+<tr>
+<th>子控件有ON_NOTIFY_REFLECT</th>
+<th>父窗口有ON_NOTIFY</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WM_NOTIFY未被处理</td>
+<td>WM_NOTIFY只被父窗口处理</td>
+<td>WM_NOTIFY只被子控件处理</td>
+</tr>
+<tr>
+<td>Y</td>
+<td>Y</td>
+<td>WM_NOTIFY只被子控件处理</td>
+</tr>
+</tbody>
+</table>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2011/08/19/wm-notify-in-vc/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/windows/"> #windows </a>
+          
+            <a href="/tags/vc/"> #vc </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2011/08/15/bring-blog-inside-wall/">
                 终于把博客搞到墙内了！
               </a>
@@ -521,101 +637,6 @@ short b = 0x15;
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2011/08/02/use-copy-and-ostream-iterator-to-output-array/">
-                STL中用copy和ostream_iterator输出一个数组
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2011-08-01
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/cpp/">cpp</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2011/08/02/use-copy-and-ostream-iterator-to-output-array/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/08/02/use-copy-and-ostream-iterator-to-output-array/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <pre><code>#include &lt;iostream&gt;
-#include &lt;iterator&gt;
-#include &lt;algorithm&gt;
-
-int a[] = { 335, 33, 98, 39, 54, 24, 3 };
-int nSize = sizeof(a) / sizeof(a[0]);    
-
-// 输出数组a到标准输出，同时每个元素都以空格为结束（最后一个元素后面也会有空格）
-std::copy(a, a + nSize, std::ostream_iterator&lt;int&gt;(std::cout, &quot; &quot;)); 
-</code></pre><p>结果：335 33 98 39 54 24 3</p>
-<p>一个字：妙！！(^0^)/ </p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/cpp/"> #cpp </a>
-          
-            <a href="/tags/stl/"> #stl </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -651,7 +672,7 @@ std::copy(a, a + nSize, std::ostream_iterator&lt;int&gt;(std::cout, &quot; &quot
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -665,7 +686,7 @@ std::copy(a, a + nSize, std::ostream_iterator&lt;int&gt;(std::cout, &quot; &quot
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
