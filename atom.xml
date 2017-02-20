@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.goorockey.com/"/>
-  <updated>2016-09-13T09:35:50.711Z</updated>
+  <updated>2017-02-20T07:45:47.804Z</updated>
   <id>http://www.goorockey.com/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>回收Virtualbox硬盘空间</title>
+    <link href="http://www.goorockey.com/2017/02/02/shrink-virtualbox-disk/"/>
+    <id>http://www.goorockey.com/2017/02/02/shrink-virtualbox-disk/</id>
+    <published>2017-02-02T07:07:54.000Z</published>
+    <updated>2017-02-20T07:45:47.804Z</updated>
+    
+    <content type="html"><![CDATA[<p>Virtualbox虚拟机的虚拟硬盘文件（一般是vdi文件），支持根据使用情况动态增加，即创建硬盘时候设置大小为128G，并不会直接在宿主机创建一个128G的文件，而是根据虚拟机的使用慢慢增加。</p>
+<p>但虚拟硬盘文件的大小不会因为虚拟机里面使用空间减少就自动缩减，需要使用工具完成。</p>
+<a id="more"></a>
+<p>对于Linux虚拟机，Ubuntu为例：</p>
+<ul>
+<li><p>安装zerofree</p>
+<pre><code>$ apt-get install zerofree
+</code></pre></li>
+<li><p>重启虚拟机</p>
+</li>
+<li>在启动的grub菜单，选择进入recovery模式</li>
+<li><p>对要回收的硬盘，以只读模式重新挂载</p>
+<pre><code>$ mount -n -o remount,ro -t ext4 /dev/sda1 /
+</code></pre></li>
+<li><p>使用zerofree把硬盘没使用的空间置零</p>
+<pre><code>$ zerofree /dev/sda1
+</code></pre></li>
+<li><p>关闭虚拟机</p>
+</li>
+<li><p>在宿主机使用VBoxManage工具压缩vdi文件，回收空间</p>
+<pre><code>VBoxManage.exe modifyhd xxx.vdi compact
+</code></pre></li>
+</ul>
+<p>Done!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Virtualbox虚拟机的虚拟硬盘文件（一般是vdi文件），支持根据使用情况动态增加，即创建硬盘时候设置大小为128G，并不会直接在宿主机创建一个128G的文件，而是根据虚拟机的使用慢慢增加。&lt;/p&gt;
+&lt;p&gt;但虚拟硬盘文件的大小不会因为虚拟机里面使用空间减少就自动缩减，需要使用工具完成。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://www.goorockey.com/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://www.goorockey.com/tags/linux/"/>
+    
+      <category term="Virtualbox" scheme="http://www.goorockey.com/tags/Virtualbox/"/>
+    
+  </entry>
   
   <entry>
     <title>Angular2初试小记</title>
@@ -1315,64 +1364,6 @@ blat - -body &amp;lt;邮件正文&amp;gt; -from &amp;lt;发送地址&amp;gt; -to
       <category term="lisp" scheme="http://www.goorockey.com/tags/lisp/"/>
     
       <category term="scheme" scheme="http://www.goorockey.com/tags/scheme/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>从Wordpress转到Octopress</title>
-    <link href="http://www.goorockey.com/2012/09/09/try-octopress/"/>
-    <id>http://www.goorockey.com/2012/09/09/try-octopress/</id>
-    <published>2012-09-09T12:53:00.000Z</published>
-    <updated>2016-07-26T04:37:47.935Z</updated>
-    
-    <content type="html"><![CDATA[<p>想尝试<a href="http://octopress.org" target="_blank" rel="external">Octopress</a>很久了。</p>
-<p><a href="http://octopress.org" target="_blank" rel="external">Octopress</a>自称为A blogging framework for <strong>hackers</strong></p>
-<p>玩<a href="http://octopress.org" target="_blank" rel="external">Octopress</a>主要会涉及到以下技术:</p>
-<ul>
-<li>git</li>
-<li>ruby</li>
-<li>markdown</li>
-</ul>
-<p>这些技术对我来说还是很陌生，也好借此机会熟悉熟悉～</p>
-<p>总的来说，[Octopress］想对于Wordpress的优势有:</p>
-<ul>
-<li>静态页面，速度快</li>
-<li>分布式存储，保证数据的安全。而且即使不能上网，也能本地写博客和预览</li>
-<li>支持用markdown（当然wordpress也有markdown的插件, 但Octopress在命令行写博客更cool)</li>
-</ul>
-<a id="more"></a>
-<p>仿照着，写了个友情链接侧栏的插件, 当然直接在source/_include/asides/ 写静态页面也可以，纯练手:</p>
-<script src="//gist.github.com/3689183.js"></script>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;想尝试&lt;a href=&quot;http://octopress.org&quot;&gt;Octopress&lt;/a&gt;很久了。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://octopress.org&quot;&gt;Octopress&lt;/a&gt;自称为A blogging framework for &lt;strong&gt;hackers&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;玩&lt;a href=&quot;http://octopress.org&quot;&gt;Octopress&lt;/a&gt;主要会涉及到以下技术:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;git&lt;/li&gt;
-&lt;li&gt;ruby&lt;/li&gt;
-&lt;li&gt;markdown&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这些技术对我来说还是很陌生，也好借此机会熟悉熟悉～&lt;/p&gt;
-&lt;p&gt;总的来说，[Octopress］想对于Wordpress的优势有:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;静态页面，速度快&lt;/li&gt;
-&lt;li&gt;分布式存储，保证数据的安全。而且即使不能上网，也能本地写博客和预览&lt;/li&gt;
-&lt;li&gt;支持用markdown（当然wordpress也有markdown的插件, 但Octopress在命令行写博客更cool)&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="blog" scheme="http://www.goorockey.com/categories/blog/"/>
-    
-    
-      <category term="blog" scheme="http://www.goorockey.com/tags/blog/"/>
-    
-      <category term="wordpress" scheme="http://www.goorockey.com/tags/wordpress/"/>
-    
-      <category term="octopress" scheme="http://www.goorockey.com/tags/octopress/"/>
     
   </entry>
   

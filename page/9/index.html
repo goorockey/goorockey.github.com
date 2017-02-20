@@ -141,6 +141,112 @@
           
           
             
+              <a class="post-title-link" href="/2011/08/02/cannot-use-static-and-const-in-the-same-time/">
+                不能同时用static和const修饰一个成员函数
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2011-08-01
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/cpp/">cpp</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2011/08/02/cannot-use-static-and-const-in-the-same-time/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/08/02/cannot-use-static-and-const-in-the-same-time/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>1.普通的成员函数 </p>
+<ul>
+<li><p>编译器会自动为其添加一个<code>this指针</code>作为入参 </p>
+</li>
+<li><p>该成员函数能修改成员变量</p>
+</li>
+</ul>
+<p>2.在成员函数后面加<code>const</code>(注意是后面！) </p>
+<ul>
+<li><p>编译器会自动为其添加一个<code>const *this指针</code>作为入参 </p>
+</li>
+<li><p>该成员函数不能修改成员变量</p>
+</li>
+</ul>
+<p>3.成员函数加<code>static</code></p>
+<ul>
+<li><p>编译器不会加<code>this指针</code></p>
+</li>
+<li><p>该成员函数不能直接访问成员变量，只能访问静态成员变量</p>
+</li>
+</ul>
+<p>所以在成员函数加<code>static</code>和后面加<code>const</code>是矛盾的，即不能同时这样修饰一个成员函数.</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/programming/"> #programming </a>
+          
+            <a href="/tags/cpp/"> #cpp </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2011/08/02/use-copy-and-ostream-iterator-to-output-array/">
                 STL中用copy和ostream_iterator输出一个数组
               </a>
@@ -451,7 +557,7 @@ std::copy(a, a + nSize, std::ostream_iterator&lt;int&gt;(std::cout, &quot; &quot
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -465,7 +571,7 @@ std::copy(a, a + nSize, std::ostream_iterator&lt;int&gt;(std::cout, &quot; &quot
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -527,7 +633,7 @@ std::copy(a, a + nSize, std::ostream_iterator&lt;int&gt;(std::cout, &quot; &quot
         <div class="copyright">
   
   &copy; &nbsp;  2011 - 
-  2016
+  2017
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>

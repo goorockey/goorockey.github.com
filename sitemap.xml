@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.goorockey.com/2017/02/02/shrink-virtualbox-disk/</loc>
+    
+    <lastmod>2017-02-20T07:45:47.804Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.goorockey.com/2016/09/13/angular2-note/</loc>
     
     <lastmod>2016-09-13T09:35:50.711Z</lastmod>
@@ -23,14 +30,14 @@
   </url>
   
   <url>
-    <loc>http://www.goorockey.com/2014/03/05/webharvest-4-tweibo/</loc>
+    <loc>http://www.goorockey.com/2011/08/19/wm-notify-in-vc/</loc>
     
     <lastmod>2016-07-26T04:37:47.939Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.goorockey.com/2011/05/17/use-windows-live-writer-to-write-micolog/</loc>
+    <loc>http://www.goorockey.com/2014/03/05/webharvest-4-tweibo/</loc>
     
     <lastmod>2016-07-26T04:37:47.939Z</lastmod>
     
@@ -44,14 +51,14 @@
   </url>
   
   <url>
-    <loc>http://www.goorockey.com/2011/08/19/wm-notify-in-vc/</loc>
+    <loc>http://www.goorockey.com/2012/02/07/wordpress-in-dotcloud/</loc>
     
     <lastmod>2016-07-26T04:37:47.939Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.goorockey.com/2012/02/07/wordpress-in-dotcloud/</loc>
+    <loc>http://www.goorockey.com/2011/05/17/use-windows-live-writer-to-write-micolog/</loc>
     
     <lastmod>2016-07-26T04:37:47.939Z</lastmod>
     
@@ -75,13 +82,6 @@
     <loc>http://www.goorockey.com/links/index.html</loc>
     
     <lastmod>2016-07-26T04:37:47.939Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.goorockey.com/2011/08/02/cannot-use-static-and-const-in-the-same-time/</loc>
-    
-    <lastmod>2016-07-26T04:37:47.935Z</lastmod>
     
   </url>
   
@@ -163,14 +163,14 @@
   </url>
   
   <url>
-    <loc>http://www.goorockey.com/2015/09/21/list-dns-subdomain/</loc>
+    <loc>http://www.goorockey.com/2012/03/13/nat-experiment-using-vmware/</loc>
     
     <lastmod>2016-07-26T04:37:47.935Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.goorockey.com/2012/03/11/note-for-nat/</loc>
+    <loc>http://www.goorockey.com/2015/09/21/list-dns-subdomain/</loc>
     
     <lastmod>2016-07-26T04:37:47.935Z</lastmod>
     
@@ -324,7 +324,14 @@
   </url>
   
   <url>
-    <loc>http://www.goorockey.com/2012/03/13/nat-experiment-using-vmware/</loc>
+    <loc>http://www.goorockey.com/2011/08/02/cannot-use-static-and-const-in-the-same-time/</loc>
+    
+    <lastmod>2016-07-26T04:37:47.935Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.goorockey.com/2012/03/11/note-for-nat/</loc>
     
     <lastmod>2016-07-26T04:37:47.935Z</lastmod>
     

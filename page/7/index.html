@@ -141,6 +141,117 @@
           
           
             
+              <a class="post-title-link" href="/2011/11/12/install-apache-php-mysql-tomcat-in-centos/">
+                CentOS下安装Apache+php+mysql+tomcat
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2011-11-11
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/linux/">linux</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2011/11/12/install-apache-php-mysql-tomcat-in-centos/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/11/12/install-apache-php-mysql-tomcat-in-centos/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="一、安装及配置Apache-php-mysql"><a href="#一、安装及配置Apache-php-mysql" class="headerlink" title="一、安装及配置Apache+php+mysql"></a>一、安装及配置Apache+php+mysql</h2><p>1.安装Apache+php+mysql</p>
+<ul>
+<li><p>安装Apache+php+Mysql，php连接mysql的组件</p>
+<p>  yum -y install httpd php mysql mysql-server php-mysql</p>
+</li>
+<li><p>安装mysql扩展</p>
+<p>  yum -y install mysql-connector-odbc mysql-devel libdbi-dbd-mysql</p>
+</li>
+<li><p>安装php的扩展</p>
+<p>  yum -y install php-gd php-xml php-mbstring php-ldap php-pear php-xmlrpc</p>
+</li>
+<li><p>安装apache扩展</p>
+<p>  yum -y install httpd-manual mod_ssl mod_perl mod_auth_mysql</p>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2011/11/12/install-apache-php-mysql-tomcat-in-centos/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/"> #linux </a>
+          
+            <a href="/tags/apache/"> #apache </a>
+          
+            <a href="/tags/tomcat/"> #tomcat </a>
+          
+            <a href="/tags/centos/"> #centos </a>
+          
+            <a href="/tags/php/"> #php </a>
+          
+            <a href="/tags/mysql/"> #mysql </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2011/09/05/note-for-windows-programming-3/">
                 《Windows核心编程》读书笔记3--线程同步
               </a>
@@ -515,108 +626,6 @@ PVOID InterlockedCompareExchangePointer(PVOID* ppvDestination, PVOID pvExchange,
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2011/08/22/dont-use-divide-operator-to-implement-divide/">
-                不用除法运算符实现除法及其推广
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2011-08-21
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/programming/">programming</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2011/08/22/dont-use-divide-operator-to-implement-divide/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/08/22/dont-use-divide-operator-to-implement-divide/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>两个正整数x、y，x是y的倍数，不用除法运算符实现x / y。</p>
-<p>1、最简单的方法</p>
-<p>循环用x减y，知道x等于0。</p>
-<pre><code>int Div( int x, int y )
-{
-    int result = 0;
-
-    while ( x &gt; y )
-    {
-        x -= y;
-        result++;
-    }
-
-    return result;
-}
-</code></pre><p>时间复杂度<code>O(n)</code></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2011/08/22/dont-use-divide-operator-to-implement-divide/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/programming/"> #programming </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -652,7 +661,7 @@ PVOID InterlockedCompareExchangePointer(PVOID* ppvDestination, PVOID pvExchange,
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -666,7 +675,7 @@ PVOID InterlockedCompareExchangePointer(PVOID* ppvDestination, PVOID pvExchange,
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -728,7 +737,7 @@ PVOID InterlockedCompareExchangePointer(PVOID* ppvDestination, PVOID pvExchange,
         <div class="copyright">
   
   &copy; &nbsp;  2011 - 
-  2016
+  2017
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>

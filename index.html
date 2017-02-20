@@ -141,6 +141,96 @@
           
           
             
+              <a class="post-title-link" href="/2017/02/02/shrink-virtualbox-disk/">
+                回收Virtualbox硬盘空间
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2017-02-02
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/linux/">linux</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2017/02/02/shrink-virtualbox-disk/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/02/shrink-virtualbox-disk/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Virtualbox虚拟机的虚拟硬盘文件（一般是vdi文件），支持根据使用情况动态增加，即创建硬盘时候设置大小为128G，并不会直接在宿主机创建一个128G的文件，而是根据虚拟机的使用慢慢增加。</p>
+<p>但虚拟硬盘文件的大小不会因为虚拟机里面使用空间减少就自动缩减，需要使用工具完成。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/02/shrink-virtualbox-disk/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/"> #linux </a>
+          
+            <a href="/tags/Virtualbox/"> #Virtualbox </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2016/09/13/angular2-note/">
                 Angular2初试小记
               </a>
@@ -511,102 +601,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/12/try-electron/">
-                electron使用总结
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2015-10-12
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/nodejs/">nodejs</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/10/12/try-electron/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/12/try-electron/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>帮人做个简单的文件整理程序，尝试用<a href="http://electron.atom.io/">electron</a>来实现，总结一下。</p>
-<h2 id="主进程和渲染进程"><a href="#主进程和渲染进程" class="headerlink" title="主进程和渲染进程"></a>主进程和渲染进程</h2><p>electron的程序运行时，分为主进程和渲染进程。主进程即为<code>var app = require(&#39;app&#39;);</code>所在一侧，也是程序的入口。通过<code>BrowserWindow</code>实例<code>loadUrl</code>访问网页时，会创建出渲染进程。</p>
-<p>某些包是只有主进程才能包含的，如常用的<code>dialog</code>。想在渲染进程的逻辑中调用这些包，有两个方法，一个是使用<code>remote</code>包，如：</p>
-<pre><code>var remote = require(&apos;remote&apos;);
-var dialog = remote.require(&apos;dialog&apos;);
-</code></pre><p>另一个方法是使用<code>ipc</code>，即进程通信，发消息给主进程，由主进程调用后，把结果再通过<code>ipc</code>返回渲染进程。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/12/try-electron/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/programming/"> #programming </a>
-          
-            <a href="/tags/electron/"> #electron </a>
-          
-            <a href="/tags/nodejs/"> #nodejs </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -642,7 +636,7 @@ var dialog = remote.require(&apos;dialog&apos;);
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -656,7 +650,7 @@ var dialog = remote.require(&apos;dialog&apos;);
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -718,7 +712,7 @@ var dialog = remote.require(&apos;dialog&apos;);
         <div class="copyright">
   
   &copy; &nbsp;  2011 - 
-  2016
+  2017
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
