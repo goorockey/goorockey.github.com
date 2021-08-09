@@ -1,45 +1,462 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="由于某种原因，今天玩了一下Hadoop。正确来说，我是玩HOP，一个Hadoop的修改版本。  The Hadoop Online Prototype (HOP) is a modified version of Hadoop MapReduce that allows data to be pipelined between tasks and between jobs. This can en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩一下hadoop">
+<meta property="og:url" content="http://www.goorockey.com/2012/10/21/try-hadoop/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="由于某种原因，今天玩了一下Hadoop。正确来说，我是玩HOP，一个Hadoop的修改版本。  The Hadoop Online Prototype (HOP) is a modified version of Hadoop MapReduce that allows data to be pipelined between tasks and between jobs. This can en">
+<meta property="og:locale">
+<meta property="article:published_time" content="2012-10-21T15:47:00.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.705Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="programming">
+<meta property="article:tag" content="hadoop">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.goorockey.com/2012/10/21/try-hadoop/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>玩一下hadoop | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2012/10/21/try-hadoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          玩一下hadoop
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-10-21 23:47:00" itemprop="dateCreated datePublished" datetime="2012-10-21T23:47:00+08:00">2012-10-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hadoop/" itemprop="url" rel="index"><span itemprop="name">hadoop</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于某种原因，今天玩了一下<a target="_blank" rel="noopener" href="http://hadoop.apache.org/" title="Hadoop">Hadoop</a>。正确来说，我是玩<a target="_blank" rel="noopener" href="http://code.google.com/p/hop/" title="HOP">HOP</a>，一个Hadoop的修改版本。</p>
+<blockquote>
+<p>The Hadoop Online Prototype (HOP) is a modified version of Hadoop MapReduce that allows data to be pipelined between tasks and between jobs. This can enable better cluster utilization and increased parallelism, and allows new functionality: online aggregation (approximate answers as a job runs), and stream processing (MapReduce jobs that run continuously, processing new data as it arrives). </p>
+</blockquote>
+<p>就是多了pipeline（流水线）的Hadoop。分布式流水线可以有效加快各jobs在各节点的同步运算。</p>
+<span id="more"></span>
+
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>我是在linux上弄的，windows下用cygwin也行。</p>
+<p>下载HOP压缩包后，看里面的docs就够了，同时src/example还有一些例子。</p>
+<p>确保ssh,sshd,rsync,jdk都有了。同时要保证ssh localhost不要输入密码的认证步骤。具体docs/quickstart也有说，可以这样：</p>
+<pre><code>$ ssh-keygen -t dsa -P &#39;&#39; -f ~/.ssh/id_dsa
+$ cat ~/.ssh/id_dsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</code></pre>
+<p>然后是设置jdk的目录，修改conf/hadoop-env.sh中JAVA_HOME。一般为/usr/lib/jvm/下的某个java目录，我就直接写成/usr/lib/jvm/default-java了。</p>
+<p>这时候执行bin/hadoop就会出现帮助信息了。</p>
+<h2 id="跑例程"><a href="#跑例程" class="headerlink" title="跑例程"></a>跑例程</h2><p>Hadoop的文件系统叫<a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable/hdfs_design.html" title="HDFS">HDFS</a>（Hadoop distribution filesystem)，是一个分布式文件系统。每份数据都会在多个节点有备份，以容错、修复。所有数据都要先放进HDFS才能Hadoop处理。</p>
+<p>Hadoop的分布式体系中，有一个NameNode，是master的角色，负责主控各节点，有多个DataNode，是slave，负责真正存储数据。这些可以在conf/master和conf/slave设置。<br>同时还有一个JobTracker，负责调度jobs，默认就是NameNode这个主机一起充当NameNode，这个在conf/hadoop-site.xml设置。另外所有DataNode都是TaskTracker，负责执行jobs。具体更多对conf/hadoop-site.xml的配置参看docs/cluster_setup.html</p>
+<p>执行bin/hadoop namenode -format，会创造一个namenode。文件都已某种格式放在/tmp/hadoop-“hostname”那里。</p>
+<p>执行bin/start-all.sh会启动hadoop，默认通过<a target="_blank" rel="noopener" href="http://localhost:50070/%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AENameNode%EF%BC%8Chttp://localhost:50030/%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AEJobTracker%E3%80%82">http://localhost:50070/可以访问NameNode，http://localhost:50030/可以访问JobTracker。</a></p>
+<p>现在执行一个例子:</p>
+<pre><code>$ mkdir input
+$ cp conf/*.xml input/
+
+$ bin/hadoop fs -put intput input   # 把当前文件系统input目录复制为HDFS的input
+$ bin/hadoop jar hadoop-*-examples.jar grep input output &#39;dfs[a-z.]+&#39;  # 执行所有example.jar，后面的是参数
+
+# 一段时间后，执行完毕 #
+$ bin/hadoop fs -get output output # 把HDFS中的output目录复制为当前文件系统的ouput
+$ cat output/* # 打印结果
+
+# 或者直接对HDFS操作 #
+$ bin/hadoop fs -ls output
+$ bin/hadoop fs -cat output/*
+</code></pre>
+<h2 id="WordCount例子"><a href="#WordCount例子" class="headerlink" title="WordCount例子"></a>WordCount例子</h2><p><a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable/mapred_tutorial.html" title="WordCount">WordCount</a>是hadoop中的另一个例子</p>
+<p>Hadoop是通过<a target="_blank" rel="noopener" href="http://wiki.apache.org/hadoop/HadoopMapReduce" title="MapReduce">MapReduce</a>机制来处理大数据的。Map阶段分割输入的数据，并整合成&lt;key,value&gt;的对应关系。每对&lt;key,value&gt;对送到Combiner做每个key的整合，当整合出一定数量的&lt;key,value&gt;后，&lt;key,value&gt;会送到Reducer做处理输出最终的&lt;key,value&gt;。</p>
+<pre><code>(input) &lt;k1, v1&gt; -&gt; map -&gt; &lt;k2, v2&gt; -&gt; combine -&gt; &lt;k2, v2&gt; -&gt; reduce -&gt; &lt;k3, v3&gt; (output) 
+</code></pre>
+<p>按照<a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable/mapred_tutorial.html" title="WordCount">WordCount</a>中的代码编辑WordCount.java，然后编译打包生成wordcount.jar:</p>
+<pre><code>$ mkdir wordcount_classes
+$ javac -classpath hadoop-hop-0.2-core.jar -d wordcount_classes WordCount.java
+$ jar -cvf wordcount.jar -C wordcount_classes/ . 
+</code></pre>
+<p>然后自行构造一些要统计的文件，放在input目录下。这时候注意，在执行了上一次例子后，如果想把输入文件还是放在HDFS的input下，要先清空原来的文件:</p>
+<pre><code>$ bin/hadoop fs -rmr input/
+$ bin/hadoop fs -rmr output/
+
+$ bin/hadoop fs -put input input # 把输入文件目录input重新放到HDFS中
+$ bin/hadoop jar wordcount.jar org.myorg.WordCount input output  # 执行wordcount.jar
+
+# 执行一段时间后完毕 #
+
+$ bin/hadoop fs -cat output/*  # 打印结果
+</code></pre>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>尝试了一下Hadoop，还有更多有待研究</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/programming/" rel="tag"># programming</a>
+              <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2012/10/10/about-exploit-exercise-nebula-level01/" rel="prev" title="关于exploit exercise nebula level01">
+      <i class="fa fa-chevron-left"></i> 关于exploit exercise nebula level01
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2012/10/29/grap-html-to-pdf/" rel="next" title="抓网页保存为pdf">
+      抓网页保存为pdf <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%91%E4%BE%8B%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">跑例程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WordCount%E4%BE%8B%E5%AD%90"><span class="nav-number">3.</span> <span class="nav-text">WordCount例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,45 +1,462 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="好久好久没有更新blog了，markdown怎么用都忘了。。写blog总结还是很有用的。今天写一下答应过某人写自己firefox的状况。 ###使用感受 主流的浏览器都用过，坚持用firefox的原因主要是因为vimperator，纯键盘地上网很cool很快捷，而且我用的时候会把地址栏、add-on bar等等都去掉，最大化可视范围。虽然现在firefox在内存、响应速度上还是比不上chrome，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的firefox">
+<meta property="og:url" content="http://www.goorockey.com/2013/09/08/my-firefox-config/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="好久好久没有更新blog了，markdown怎么用都忘了。。写blog总结还是很有用的。今天写一下答应过某人写自己firefox的状况。 ###使用感受 主流的浏览器都用过，坚持用firefox的原因主要是因为vimperator，纯键盘地上网很cool很快捷，而且我用的时候会把地址栏、add-on bar等等都去掉，最大化可视范围。虽然现在firefox在内存、响应速度上还是比不上chrome，">
+<meta property="og:locale">
+<meta property="article:published_time" content="2013-09-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.701Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="firefox">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.goorockey.com/2013/09/08/my-firefox-config/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>我的firefox | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2013/09/08/my-firefox-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我的firefox
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-09-08 00:00:00" itemprop="dateCreated datePublished" datetime="2013-09-08T00:00:00+08:00">2013-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/others/" itemprop="url" rel="index"><span itemprop="name">others</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>好久好久没有更新blog了，markdown怎么用都忘了。。写blog总结还是很有用的。今天写一下答应过某人写自己firefox的状况。</p>
+<p>###使用感受</p>
+<p>主流的浏览器都用过，坚持用firefox的原因主要是因为<a target="_blank" rel="noopener" href="http://www.vimperator.org/" title="vimperator">vimperator</a>，纯键盘地上网很cool很快捷，而且我用的时候会把地址栏、add-on bar等等都去掉，最大化可视范围。<br>虽然现在firefox在内存、响应速度上还是比不上chrome，但谁叫chrome的vim化插件不好用呢～</p>
+<p>另外用firefox写web的时候也比较方便，现在自带的“Responsive Design View”很方便地调试移动端的web体验。firefox每次升级都会有针对developer的new feature，足以看出它很重视开发者的功能。</p>
+<span id="more"></span>
+
+<p>###插件</p>
+<p>装插件折腾自己的firefox是必须的。当我看到有的人用firefox基本就是原装的，我都觉得他不适合用firefox，倒不如用另外国产标配好的浏览器让自己用得舒服一点。</p>
+<ul>
+<li><s><strong>vimperator</strong>    神器</s></li>
+<li><strong>Pentadactyl</strong> 神器，vimperator的分支</li>
+<li><strong>firebug</strong>   神器</li>
+<li><strong>greasemonkey</strong>  神器，firefox插件的扩展</li>
+<li><strong>NoScript</strong> 神器，控制网站的js</li>
+<li><strong>adblock plus</strong>  去广告</li>
+<li><strong>Add to Search Bar</strong> 把一些常用的搜索加到搜索栏，如豆瓣。用它配合<strong>Context Search X</strong>使用</li>
+<li><strong>All-in-One Sidebar</strong>    侧边栏管理插件，下载等等</li>
+<li><strong>AutoPager</strong> 自动加载下一页</li>
+<li><strong>AutoProxy</strong> 科学上网</li>
+<li><strong>Context Search X</strong> 右击菜单选择指定搜索引擎来搜索鼠标选中的内容</li>
+<li><s><strong>DownThemAll</strong> 下载管理</s></li>
+<li><strong>feedly</strong>  rss reader</li>
+<li><strong>flashblock</strong> 默认禁止页面的flash，加快加载，页面体验也爽些</li>
+<li><s><strong>https finder</strong> 如果网页支持https，会自动用https</s></li>
+<li><strong>instasaver</strong> instapaper的插件</li>
+<li><strong>lastpass</strong> 密码管理</li>
+<li><strong>Lazarus: From Recovery</strong> 恢复Form里面的输入</li>
+<li><strong>memroy fox</strong> 优化firefox的内存</li>
+<li><strong>quickdrag</strong> 鼠标拖拽</li>
+<li><strong>refcontrol</strong> 修改refer，破防盗链</li>
+<li><strong>RSS Handler for Feedly</strong> 在RSS处理项加入Feedly</li>
+<li><strong>stumbleupon</strong> 发现好网站、消磨时间必备神器</li>
+<li><strong>tab mix plus</strong> 标签管理</li>
+<li><strong>UnMHT</strong> 平常是disabled的，有时候用来把网页保存为mht格式</li>
+<li><strong>View Source Chart</strong> 更有层次地看网站的源码</li>
+<li><s><strong>weibo_wc</strong>  重新定制新浪微博的样式，很整洁舒服</s></li>
+<li><strong>wiktionary and google translate</strong> 翻译</li>
+<li><strong>wiznote web clipper</strong> 为知插件</li>
+</ul>
+<p>###greasemonkey插件</p>
+<ul>
+<li><strong>新浪微博V5 还我漂漂版</strong> 取代weibo_wc</li>
+<li><strong>HTTP-to-HTTPS redirector</strong> 本来是用插件版的<strong>http everywhere</strong>和<strong>https finder</strong>的，但可惜前者不能在firefox sync同步，后者发现有时候转不了</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>主页设成空白页，这样每次打开都是自己主动获取信息，而不会在“自己以为有用的网站“上浪费时间和精力</li>
+<li>autoproxy+<a target="_blank" rel="noopener" href="https://code.google.com/p/greatagent" title="greatagent">greatagent</a>，配合https，科学上网</li>
+</ul>
+<p>###更新 2014.07.03</p>
+<p>firefox29更新界面之后，地址栏默认就不能去掉，虽然可以用<strong>classic theme restorer</strong>来回复以前的界面。现在没用vimperator，改用它的分支<strong>Pentadactyl</strong>。它更新比vimperator要频繁，它默认就能把地址栏去掉。</p>
+<p>vimperator的一个成员在<a target="_blank" rel="noopener" href="http://superuser.com/questions/261174/whats-the-difference-between-vimperator-and-pentadactyl">网上</a>回答vimperator和Pentadactyl的区别:</p>
+<ul>
+<li><p>vimperator致力于让用户更简单地用vim的操作使用firefox</p>
+</li>
+<li><p>Pentadactyl则更倾向于高级用户，有更强大的定制性</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/firefox/" rel="tag"># firefox</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2012/10/29/grap-html-to-pdf/" rel="prev" title="抓网页保存为pdf">
+      <i class="fa fa-chevron-left"></i> 抓网页保存为pdf
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/03/05/webharvest-4-tweibo/" rel="next" title="用Web-Harvest抓腾讯微博">
+      用Web-Harvest抓腾讯微博 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.</span> <span class="nav-text">其他</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

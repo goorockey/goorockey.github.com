@@ -1,45 +1,462 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这几天把博客从GAE+micolog转到了sourceforge+wordpress，主要是考虑到：  服务器：GAE现在对流量加大了限制，而sourceforge是没有流量或空间限制的  博客系统：wordpress的资源币micolog的要多很多   主要做了几件事：  sourceforge+wordpress建站  micolog数据导入到wordpress  优化wordpress：主题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="博客转移了（改用sourceforge+wordpress）">
+<meta property="og:url" content="http://www.goorockey.com/2012/01/28/move-blog-to-sourceforge-and-wordpress/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="这几天把博客从GAE+micolog转到了sourceforge+wordpress，主要是考虑到：  服务器：GAE现在对流量加大了限制，而sourceforge是没有流量或空间限制的  博客系统：wordpress的资源币micolog的要多很多   主要做了几件事：  sourceforge+wordpress建站  micolog数据导入到wordpress  优化wordpress：主题">
+<meta property="og:locale">
+<meta property="article:published_time" content="2012-01-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.700Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="blog">
+<meta property="article:tag" content="wordpress">
+<meta property="article:tag" content="sourceforge">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.goorockey.com/2012/01/28/move-blog-to-sourceforge-and-wordpress/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>博客转移了（改用sourceforge+wordpress） | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2012/01/28/move-blog-to-sourceforge-and-wordpress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          博客转移了（改用sourceforge+wordpress）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-01-28 00:00:00" itemprop="dateCreated datePublished" datetime="2012-01-28T00:00:00+08:00">2012-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index"><span itemprop="name">blog</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这几天把博客从GAE+micolog转到了sourceforge+wordpress，主要是考虑到：</p>
+<ul>
+<li><p>服务器：GAE现在对流量加大了限制，而sourceforge是没有流量或空间限制的</p>
+</li>
+<li><p>博客系统：wordpress的资源币micolog的要多很多</p>
+</li>
+</ul>
+<p>主要做了几件事：</p>
+<ul>
+<li><p>sourceforge+wordpress建站</p>
+</li>
+<li><p>micolog数据导入到wordpress</p>
+</li>
+<li><p>优化wordpress：主题、插件、google analytics</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<p>考虑到SEO的域名权重问题，就保留sourceforge的二级域名了。</p>
+<p>教程的话网上资源很多，值得记录的东西：</p>
+<ul>
+<li><p>安装wordpress，及其主题、插件等资源时，最好用ssh登录到sourceforge，从sourceforge那边wget下载，而不要从自己机子下载。因为资源多在国外的服务器，这样速度快多了。</p>
+</li>
+<li><p>注意关闭sourceforge项目管理中不必要的访问权限，以免博客里的文件被在sourceforge中能被访问。</p>
+</li>
+</ul>
+<p>感叹sourceforge真是太伟大了！ 感叹wordpress真的就两个字：折腾！！</p>
+<hr>
+<p>2012.1.29 更新：</p>
+<p>昨天还发现github+octopress这种免费建博客的形式。</p>
+<p>但建的是静态站点，即服务器存放的就只是html+css+js网页,没有php、asp等。</p>
+<p>优点：</p>
+<ul>
+<li><p>最重要的优点是git的分布式管理，保证博文等数据不容易丢失；</p>
+</li>
+<li><p>git的其他各种优点</p>
+</li>
+<li><p>静态站点的优点：响应速度快，对服务器端的负荷小</p>
+</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li><p>我觉得缺点主要是静态站点的后期维护成本高！  因为到了后期，文章等数据多了，服务器就会存有大量网页，大大增加修改、备份等维护的成本！！</p>
+</li>
+<li><p>折腾octopress的成本。octopress的官网说其是”a blog framework for <em>HACKERS</em>“，本身是ruby应用，即折腾它要玩ruby。要折腾octopress似乎比较适合程序猿。（ruby折腾迷略过此条。。）</p>
+</li>
+</ul>
+<p>考虑到静态站点的后期维护问题，我觉得还是SF+WP比较适合现在的我啦~~嘻嘻</p>
+<hr>
+<p>2012.2.5 更新：</p>
+<p>根据SF的官方规定，架在上面的服务的outbound connection会被禁止。详细请参看： <a target="_blank" rel="noopener" href="http://sourceforge.net/apps/trac/sourceforge/wiki/Project%20web%20and%20developer%20web%20platform#Outboundconnectivity">http://sourceforge.net/apps/trac/sourceforge/wiki/Project%20web%20and%20developer%20web%20platform#Outboundconnectivity</a></p>
+<p>而因为很多WP的功能、插件等都会用到向外发送请求，所以在SF上架WP的时候，很多功能和插件都用不了的。</p>
+<p>例如，WP内置的更新ping服务器，Akismet， google sitemap，微博同步等等。。</p>
+<p>现在还没找到什么办法，唉。。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/blog/" rel="tag"># blog</a>
+              <a href="/tags/wordpress/" rel="tag"># wordpress</a>
+              <a href="/tags/sourceforge/" rel="tag"># sourceforge</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2011/11/22/apache-and-tomcat/" rel="prev" title="Apache和Tomcat">
+      <i class="fa fa-chevron-left"></i> Apache和Tomcat
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2012/02/03/code-swarm/" rel="next" title="Code Swarm">
+      Code Swarm <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

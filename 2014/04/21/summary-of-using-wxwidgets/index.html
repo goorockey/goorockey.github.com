@@ -1,45 +1,425 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这几个月做的项目是把一个承载在MFC的软件从Windows移植到Mac，现在进入最后验收阶段了。当时网上调研了一下，决定用wxWidgets这个跨平台的开源库来帮助移植。总的来说，只要把原软件对Windows API的调用都改为对wxWidgets的调用，基本就完成了移植。但基于wxWidgets和MFC一些设计上的差异和原软件特殊的功能，还不是简单的全局替换就能了事的，甚至还得改wxWidget">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用wxWidgets做移植的总结">
+<meta property="og:url" content="http://www.goorockey.com/2014/04/21/summary-of-using-wxwidgets/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="这几个月做的项目是把一个承载在MFC的软件从Windows移植到Mac，现在进入最后验收阶段了。当时网上调研了一下，决定用wxWidgets这个跨平台的开源库来帮助移植。总的来说，只要把原软件对Windows API的调用都改为对wxWidgets的调用，基本就完成了移植。但基于wxWidgets和MFC一些设计上的差异和原软件特殊的功能，还不是简单的全局替换就能了事的，甚至还得改wxWidget">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-04-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.704Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="programming">
+<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="wxwidgets">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.goorockey.com/2014/04/21/summary-of-using-wxwidgets/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>用wxWidgets做移植的总结 | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2014/04/21/summary-of-using-wxwidgets/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用wxWidgets做移植的总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-04-21 00:00:00" itemprop="dateCreated datePublished" datetime="2014-04-21T00:00:00+08:00">2014-04-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这几个月做的项目是把一个承载在MFC的软件从Windows移植到Mac，现在进入最后验收阶段了。当时网上调研了一下，决定用<a target="_blank" rel="noopener" href="http://www.wxwidgets.org/" title="wxWidgets">wxWidgets</a>这个跨平台的开源库来帮助移植。总的来说，只要把原软件对Windows API的调用都改为对wxWidgets的调用，基本就完成了移植。但基于wxWidgets和MFC一些设计上的差异和原软件特殊的功能，还不是简单的全局替换就能了事的，甚至还得改wxWidgets的源码。</p>
+<p>wxWidgets库在总的结构上跟MFC相似，比如消息响应、相关类的命名。它现在已经出到了3.0，总体还是比较成熟了，但还是好些不完善的地方，这个在看它源码的时候就会发现挺多TODO comment。不过它的官方论坛和stackoverflow上相关问题还是挺活跃的，在上面提问很快就能得到一些资深程序员的答复。有一次我误以为发现了它的一个bug（其实是我理解错了），在上面提问，回复的人不仅有文字的讲解，还附上了自己写的测试用例，让我真心赞叹对方好负责任啊。</p>
+<p>现在总结一些项目移植过程中遇到的问题吧。</p>
+<span id="more"></span>
+
+<h2 id="wxRect和CRect"><a href="#wxRect和CRect" class="headerlink" title="wxRect和CRect"></a>wxRect和CRect</h2><p>Windows的CRect要替换成wxWidgets的wxRect真不能简单的替换，因为两者内部设计不一样。</p>
+<p>第一，两者对应接口的入参有不同，最经典的是两者的构造函数，CRect是传left,top,right,bottom，wxWidgets是传left,top,width,height，等于说所有构造CRect的地方都要把第三、第四个参数做减法。</p>
+<p>第二，wxRect定义自己所表示的矩形，范围是[left, right - 1]和[top, bottom - 1]，意思就是右边界和下边界是不属于矩形一部分的，这个从其源码能看到。官方说法是不承认width或height为1的矩形，那应该视为线段。这在移植一些矩形操作时，会跟CRect的有些差异。</p>
+<p>第三，也是我觉得最坑的，CRect内部直接保存left,top,right,bottom来定义矩形，而wxRect内部保存left,top,width,height来定义矩形，即wxWidgets要GetRight的时候，是返回left + width，SetRight的时候set的是width，其他的同理。这看着没什么问题。但如果我们先SetRight，再SetLeft，wxRect的行为就跟CRect的不一样了。</p>
+<p>例如对一个(left,top,right,bottom)=(1,1,5,5)的CRect，对应的wxRect是(left,top,width,height)=(1,1,4,4)，我们对其依次执行SetRight(10)和SetLeft(3)，得到CRect是(left,top,right,bottom)=(3,1,10,5)，wxRect是(left,top,width,height)=(3,1,9,4)，换算过来wxRect是(left,top,right,bottom)=(3,1,12,5)，跟得到的CRect不同！原因就是SetLeft的时候，wxRect只改left，没改width，但等于right还是改了，其实是使整个矩形做了偏移；CRect的行为则是修改左边界，右边界不会动，其实是使整个矩形做压缩。真是坑啊！注意到这一点之后，原软件每个连续SetLeft、SetRight，SetTop、SetBottom的地方，都要注意执行的顺序。</p>
+<p>鉴于wxRect和CRect以上的差异，其实移植的时候最好的做法是自己写一个封装了wxRect的MyRect类，把wxRect和CRect的差异在MyRect里面做转换。这其实是应用了Adaptor Pattern。</p>
+<h2 id="Mac下wxBitmap在剪切板wxClipboard取回时，Alpha信息丢失"><a href="#Mac下wxBitmap在剪切板wxClipboard取回时，Alpha信息丢失" class="headerlink" title="Mac下wxBitmap在剪切板wxClipboard取回时，Alpha信息丢失"></a>Mac下wxBitmap在剪切板wxClipboard取回时，Alpha信息丢失</h2><p>wxWidgets在从剪切板wxClipboard取回图片数据wxBitmapDataObject时，会丢失了透明信息，即Alpha channel。具体来看就是原来用RGBA表示的有透明信息的图片，通过剪切板传递之后，RGBA的A都变成255了。</p>
+<p>我通过查看wxWidgets的源码，发现确实是个bug，wxWidgets在Mac这边调用Cocoa接口从剪切板获取像素数据保存为图片时，没有关注Alpha channel。这个我通过修改它源码解决了。详见我提交到官方的这个<a target="_blank" rel="noopener" href="http://trac.wxwidgets.org/ticket/16198">ticket</a>。</p>
+<h2 id="wxDC在Unix下不是线程安全的"><a href="#wxDC在Unix下不是线程安全的" class="headerlink" title="wxDC在Unix下不是线程安全的"></a>wxDC在Unix下不是线程安全的</h2><p>wxDC是wxWidgets的绘制上下文，对应于Windows下的CDC。官方资料说了，wxDC在Unix平台下是非线程安全的。这里指的Unix平台具体是GTK(Linux)和OSX(Mac)。所以绘制的时候最好是下wxPaintEvent的响应函数里面做。在子线程做绘制不保证正确，即使是用wxWidgets的wxGuiEnter/wxGuiLeave加锁也是不行。</p>
+<h2 id="对话框资源的移植"><a href="#对话框资源的移植" class="headerlink" title="对话框资源的移植"></a>对话框资源的移植</h2><p>在MFC中，对话框资源都保存在rc文件中。而对应到wxWidgets，每个对话框以xml格式保存成各自的xrc文件，跟rc有一定区别。MFC大部分控件在wxWidgets都能找到。对于对话框资源的移植，我们是用脚本批量完成的，中间一个坑是转换时候对话框和控件的大小在MFC的rc和wxWidgets的xrc不是1:1的，要乘一个比例，1.5左右。</p>
+<h2 id="ALL-IN-ALL"><a href="#ALL-IN-ALL" class="headerlink" title="ALL IN ALL"></a>ALL IN ALL</h2><p>以上是暂时记得的问题。总的来说，wxWidgets是个强大的跨平台库，用着真心方便，常用的操作也都覆盖了，代码也整洁漂亮，社区也活跃，还是可以放心选用的。而且作为一个开源库，有什么问题都能自己定位自己修改解决，开源万岁～</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/programming/" rel="tag"># programming</a>
+              <a href="/tags/cpp/" rel="tag"># cpp</a>
+              <a href="/tags/wxwidgets/" rel="tag"># wxwidgets</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/03/05/webharvest-4-tweibo/" rel="prev" title="用Web-Harvest抓腾讯微博">
+      <i class="fa fa-chevron-left"></i> 用Web-Harvest抓腾讯微博
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/05/12/instapaper-review/" rel="next" title="用nodejs实现Instapaper回顾邮件自动发送">
+      用nodejs实现Instapaper回顾邮件自动发送 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#wxRect%E5%92%8CCRect"><span class="nav-number">1.</span> <span class="nav-text">wxRect和CRect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac%E4%B8%8BwxBitmap%E5%9C%A8%E5%89%AA%E5%88%87%E6%9D%BFwxClipboard%E5%8F%96%E5%9B%9E%E6%97%B6%EF%BC%8CAlpha%E4%BF%A1%E6%81%AF%E4%B8%A2%E5%A4%B1"><span class="nav-number">2.</span> <span class="nav-text">Mac下wxBitmap在剪切板wxClipboard取回时，Alpha信息丢失</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wxDC%E5%9C%A8Unix%E4%B8%8B%E4%B8%8D%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84"><span class="nav-number">3.</span> <span class="nav-text">wxDC在Unix下不是线程安全的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86%E8%B5%84%E6%BA%90%E7%9A%84%E7%A7%BB%E6%A4%8D"><span class="nav-number">4.</span> <span class="nav-text">对话框资源的移植</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ALL-IN-ALL"><span class="nav-number">5.</span> <span class="nav-text">ALL IN ALL</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

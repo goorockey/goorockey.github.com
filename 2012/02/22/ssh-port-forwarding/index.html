@@ -1,45 +1,489 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ssh端口转发是什么ssh端口转发也被叫ssh隧道，ssh代理。 所谓隧道，就是用X协议封装Y协议的数据包，靠X协议来进行Y协议通信。 总的来说ssh隧道提供了两个好处：  突破防火墙等，进行受限协议的通信。  使如telnet等不安全的协议传输经过ssh的加密通道，提高安全性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH端口转发">
+<meta property="og:url" content="http://www.goorockey.com/2012/02/22/ssh-port-forwarding/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="ssh端口转发是什么ssh端口转发也被叫ssh隧道，ssh代理。 所谓隧道，就是用X协议封装Y协议的数据包，靠X协议来进行Y协议通信。 总的来说ssh隧道提供了两个好处：  突破防火墙等，进行受限协议的通信。  使如telnet等不安全的协议传输经过ssh的加密通道，提高安全性。">
+<meta property="og:locale">
+<meta property="og:image" content="http://www.goorockey.com/uploads/2012/02/image002_thumb.jpg">
+<meta property="og:image" content="http://www.goorockey.com/uploads/2012/02/image_thumb.png">
+<meta property="og:image" content="http://www.goorockey.com/uploads/2012/02/image003_thumb.jpg">
+<meta property="og:image" content="http://www.goorockey.com/uploads/2012/02/image005_thumb.jpg">
+<meta property="article:published_time" content="2012-02-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.703Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="ssh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.goorockey.com/uploads/2012/02/image002_thumb.jpg">
+
+<link rel="canonical" href="http://www.goorockey.com/2012/02/22/ssh-port-forwarding/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>SSH端口转发 | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2012/02/22/ssh-port-forwarding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SSH端口转发
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-02-22 00:00:00" itemprop="dateCreated datePublished" datetime="2012-02-22T00:00:00+08:00">2012-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index"><span itemprop="name">network</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="ssh端口转发是什么"><a href="#ssh端口转发是什么" class="headerlink" title="ssh端口转发是什么"></a>ssh端口转发是什么</h2><p>ssh端口转发也被叫ssh隧道，ssh代理。</p>
+<p>所谓隧道，就是用X协议封装Y协议的数据包，靠X协议来进行Y协议通信。</p>
+<p>总的来说ssh隧道提供了两个好处：</p>
+<ul>
+<li><p>突破防火墙等，进行受限协议的通信。</p>
+</li>
+<li><p>使如telnet等不安全的协议传输经过ssh的加密通道，提高安全性。</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="三种ssh端口转发"><a href="#三种ssh端口转发" class="headerlink" title="三种ssh端口转发"></a>三种ssh端口转发</h2><p>ssh端口转发有三种：</p>
+<ul>
+<li><p>本地转发</p>
+</li>
+<li><p>远程转发</p>
+</li>
+<li><p>动态转发</p>
+</li>
+</ul>
+<h2 id="本地转发"><a href="#本地转发" class="headerlink" title="本地转发"></a>本地转发</h2><p>命令是：</p>
+<pre><code>$ ssh –L &lt;local port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;ssh host&gt;
+</code></pre>
+<p>考虑这样的场景：</p>
+<p><img src="http://www.goorockey.com/uploads/2012/02/image002_thumb.jpg" alt="本地转发"></p>
+<p>一个运行在服务器116.1.1.1的程序提供端口389的数据通信，但防火墙只允许其他计算机对服务器做ssh的通信。</p>
+<p>而客户端116.4.0.1为了完成通信，可以借助ssh的本地端口转发。</p>
+<p>在客户端执行：</p>
+<pre><code>$ ssh –L  7001:localhost:389     116.1.1.1
+</code></pre>
+<p>同时把客户端程序输出到本机的7001端口。注意命令中的localhost是相对于116.1.1.1来说的。</p>
+<p>那么整个数据流会是：</p>
+<ul>
+<li><p>客户端程序到数据输出到客户端的7001口</p>
+</li>
+<li><p>客户端的ssh一直检测7001口，但发现本机有数据包到达，则把数据包加密，并通过跟服务端116.1.1.1的ssh通路传输</p>
+</li>
+<li><p>服务端的sshd收到数据包后包解密，并转发到服务端的389口</p>
+</li>
+<li><p>服务端返回数据，并原路返回</p>
+</li>
+</ul>
+<p>另外，在ssh本地转发命令中的remote host可以使任意的机子，包括本机或其他计算机。</p>
+<p>例如，考虑这样的场景，用本地转发来进行远程桌面：</p>
+<p><img src="http://www.goorockey.com/uploads/2012/02/image_thumb.png" alt="远程桌面"></p>
+<p>现在要在机子A对机子C做远程桌面。但机子A和机子C都在不同的子网，不能直接通信，也都只能跟机子B用ssh通信。</p>
+<p>然后已知windows远程桌面的服务端端口是3389，这我们可以在机子A执行：</p>
+<pre><code>$ssh –L   13389:&lt;C hostname&gt;:3389     &lt;B hostname&gt;
+</code></pre>
+<p>命令中的13389是任意的，但要注意只有管理员才能用1~1024的端口。</p>
+<p>然后在A机子执行yuan远程桌面：</p>
+<pre><code>mstsc /v:13389
+</code></pre>
+<p>就能在A机子远程桌面控制C机子了。</p>
+<h2 id="远程转发"><a href="#远程转发" class="headerlink" title="远程转发"></a>远程转发</h2><p>其实远程转发跟本地转发是基本相同的。</p>
+<p>命令是：</p>
+<pre><code>$ ssh –R  &lt;local port&gt;:&lt;remote host&gt;:&lt;remote port&gt;    &lt;ssh host&gt;
+</code></pre>
+<p>考虑这样的场景：</p>
+<p><img src="http://www.goorockey.com/uploads/2012/02/image003_thumb.jpg" alt="远程转发"></p>
+<p>客户端A和服务端B的端口都还是7001和389。</p>
+<p>跟本地转发时候不同的是，ssh连接的sshd在客户端A，ssh在服务端B。</p>
+<p>所以，远程转发可以应用在客户端A只允许对其做ssh连接的时候。</p>
+<p>如果客户端和服务端都允许ssh连接，那选择本地转发还是远程转发都可以。</p>
+<h2 id="动态转发"><a href="#动态转发" class="headerlink" title="动态转发"></a>动态转发</h2><p>命令是：</p>
+<pre><code>$ ssh –D &lt;local port&gt;  &lt;ssh host&gt;
+</code></pre>
+<p><img src="http://www.goorockey.com/uploads/2012/02/image005_thumb.jpg" alt="动态转发"></p>
+<p>跟其他两种端口转发不同的是，动态转发在数据包经过ssh通过到达服务端后，sshd会根据把封装数据包的协议，转发到对应的主机和端口。</p>
+<p>这时候ssh隧道是充当了SOCKS代理的作用。这就可以用来翻X之类了。</p>
+<h2 id="Ending"><a href="#Ending" class="headerlink" title="Ending"></a>Ending</h2><p>总的来说，ssh是个好东西~~~</p>
+<h2 id="相关资料："><a href="#相关资料：" class="headerlink" title="相关资料："></a>相关资料：</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/">https://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://lesca.me/blog/2011/03/01/ssh-port-forwarding-priciple-and-praticle-application/">http://lesca.me/blog/2011/03/01/ssh-port-forwarding-priciple-and-praticle-application/</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/network/" rel="tag"># network</a>
+              <a href="/tags/ssh/" rel="tag"># ssh</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2012/02/07/wordpress-in-dotcloud/" rel="prev" title="在dotcloud上搭建wordpress">
+      <i class="fa fa-chevron-left"></i> 在dotcloud上搭建wordpress
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2012/02/29/use-linux-daily/" rel="next" title="再次用linux做宿主系统">
+      再次用linux做宿主系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">ssh端口转发是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8Dssh%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-number">2.</span> <span class="nav-text">三种ssh端口转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E8%BD%AC%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">本地转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E8%BD%AC%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">远程转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%BD%AC%E5%8F%91"><span class="nav-number">5.</span> <span class="nav-text">动态转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ending"><span class="nav-number">6.</span> <span class="nav-text">Ending</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">相关资料：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,45 +1,457 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="题一、有一个整数数组，请求出两两之差绝对值最小的值方法：先排序，再找差值最小的点对。 效率：时间复杂度O(nlogn) 题二、平面上N个点，每两个点都确定一条直线，求出斜率最大的那条直线所通过的两个点（斜率不存在的情况不考虑）方法：根据x排序，用图解枚举所有情况，能证明斜率最大的两点肯定是相邻的两点。 效率：时间复杂度O(nlogn) 题三、一棵排序二叉树，令 f&#x3D;(最大值+最小值)&#x2F;2，设计一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试趣题">
+<meta property="og:url" content="http://www.goorockey.com/2011/08/24/funny-questions-in-interview/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="题一、有一个整数数组，请求出两两之差绝对值最小的值方法：先排序，再找差值最小的点对。 效率：时间复杂度O(nlogn) 题二、平面上N个点，每两个点都确定一条直线，求出斜率最大的那条直线所通过的两个点（斜率不存在的情况不考虑）方法：根据x排序，用图解枚举所有情况，能证明斜率最大的两点肯定是相邻的两点。 效率：时间复杂度O(nlogn) 题三、一棵排序二叉树，令 f&#x3D;(最大值+最小值)&#x2F;2，设计一个">
+<meta property="og:locale">
+<meta property="article:published_time" content="2011-08-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.699Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="programming">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.goorockey.com/2011/08/24/funny-questions-in-interview/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>面试趣题 | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2011/08/24/funny-questions-in-interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试趣题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2011-08-24 00:00:00" itemprop="dateCreated datePublished" datetime="2011-08-24T00:00:00+08:00">2011-08-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="题一、有一个整数数组，请求出两两之差绝对值最小的值"><a href="#题一、有一个整数数组，请求出两两之差绝对值最小的值" class="headerlink" title="题一、有一个整数数组，请求出两两之差绝对值最小的值"></a>题一、有一个整数数组，请求出两两之差绝对值最小的值</h3><p>方法：先排序，再找差值最小的点对。</p>
+<p>效率：时间复杂度O(nlogn)</p>
+<h3 id="题二、平面上N个点，每两个点都确定一条直线，求出斜率最大的那条直线所通过的两个点（斜率不存在的情况不考虑）"><a href="#题二、平面上N个点，每两个点都确定一条直线，求出斜率最大的那条直线所通过的两个点（斜率不存在的情况不考虑）" class="headerlink" title="题二、平面上N个点，每两个点都确定一条直线，求出斜率最大的那条直线所通过的两个点（斜率不存在的情况不考虑）"></a>题二、平面上N个点，每两个点都确定一条直线，求出斜率最大的那条直线所通过的两个点（斜率不存在的情况不考虑）</h3><p>方法：根据x排序，用图解枚举所有情况，能证明斜率最大的两点肯定是相邻的两点。</p>
+<p>效率：时间复杂度O(nlogn)</p>
+<h3 id="题三、一棵排序二叉树，令-f-最大值-最小值-2，设计一个算法，找出距离f值最近、大于f值的结点"><a href="#题三、一棵排序二叉树，令-f-最大值-最小值-2，设计一个算法，找出距离f值最近、大于f值的结点" class="headerlink" title="题三、一棵排序二叉树，令 f=(最大值+最小值)/2，设计一个算法，找出距离f值最近、大于f值的结点"></a>题三、一棵排序二叉树，令 f=(最大值+最小值)/2，设计一个算法，找出距离f值最近、大于f值的结点</h3><p>方法：把f插入，中序排序</p>
+<p>效率：时间复杂度O(logn)</p>
+<span id="more"></span>
+
+<h3 id="题四、找出两个字符串中最大公共子字符串"><a href="#题四、找出两个字符串中最大公共子字符串" class="headerlink" title="题四、找出两个字符串中最大公共子字符串"></a>题四、找出两个字符串中最大公共子字符串</h3><p>如”abccade”,”dgcadde”的最大子串为”cad”</p>
+<p><em>方法一：</em></p>
+<p>从字符串一中遍历子串，并在字符串二中匹配。时间复杂度为O(n^3)。</p>
+<p><em>方法二：</em></p>
+<p>矩阵法：用矩阵表示两字符串，横竖字符相同的格置1，则在45度方向连续1最多的就是所求，时间复杂度O(n^2) 。</p>
+<h3 id="题五、检查单向链表中是否有环"><a href="#题五、检查单向链表中是否有环" class="headerlink" title="题五、检查单向链表中是否有环"></a>题五、检查单向链表中是否有环</h3><p>这算是经典的面试题了，记录一下好的解法和推广。</p>
+<p><em>方法一：</em></p>
+<p>操作：把链表反向，当游标指针回到首节点时表示有环，否则无环。</p>
+<p>解释：如果有环，把链表反向后，游标指针会从环内回到环外，最后回到首节点。</p>
+<p>效率：时间复杂度O(n)，空间复杂度O(1)。</p>
+<p>不足：破坏原链表的结构，需要再遍历一次链表来恢复链表结构。</p>
+<p><em>方法二:</em></p>
+<p>操作：</p>
+<p>两个游标指针,一个慢指针每次移动一个节点，一个快指针每次移动两个节点。如果在快指针遍历到链表结尾前遇到慢指针，则链表有环，否则无环。</p>
+<p>解释：</p>
+<p>如果有环，当慢指针刚进入环时，设快指针与慢指针的距离为n（距离指慢指针不动是，快指针要经过几次节点达到慢指针），由于快指针每次都追上慢指针一个节点，则两者经过n次后总会相遇。</p>
+<p>效率：时间复杂度O(n)， 空间复杂度O(1)。</p>
+<script src="//gist.github.com/3712175.js"></script>
+
+<h3 id="推广一：有环单向链表中环的节点数"><a href="#推广一：有环单向链表中环的节点数" class="headerlink" title="推广一：有环单向链表中环的节点数"></a>推广一：有环单向链表中环的节点数</h3><p>操作：</p>
+<p>还是用快慢指针，当快慢指针在环内相遇后，两指针继续移动，并对慢指针移动的节点计数。当两指针再次相遇时，计数的结果就是环的节点数。</p>
+<p>解释：</p>
+<p>还是题一中的思想。设环的节点数为n，当两指针第一次相遇时，可看做两指针的距离为n，则再慢指针再经过n个节点后，两指针会再次相遇，所以慢指针移动的节点数就是环的节点数。</p>
+<script src="//gist.github.com/3712217.js"></script>
+
+<h3 id="推广二、找到有环单向链表中环首节点"><a href="#推广二、找到有环单向链表中环首节点" class="headerlink" title="推广二、找到有环单向链表中环首节点"></a>推广二、找到有环单向链表中环首节点</h3><p>如以下有环单向链表：</p>
+<pre><code>1=&gt;2=&gt;3=&gt;4=&gt;5=&gt;6=&gt;7=&gt;9=&gt;4
+</code></pre>
+<p>即第9节点的next指针指向第4节点，则环的首节点为第4节点</p>
+<p>操作：</p>
+<pre><code>先计算环的节点数n。
+两个前后指针，前指针先移动n个节点，然后两指针一齐移动，每次都只移动一个的节点。
+当两指针相遇时，两指针指向的节点就是所求的环首节点。
+</code></pre>
+<p>解释：因为开始两指针相距n个节点，当后指针刚进入环时，肯定会与前指针在环的首节点相遇。</p>
+<h3 id="推广三、破坏有环单向链表的环"><a href="#推广三、破坏有环单向链表的环" class="headerlink" title="推广三、破坏有环单向链表的环"></a>推广三、破坏有环单向链表的环</h3><p>操作：</p>
+<p>在上面的基础上，当找到了环首节点和环内节点数n后，只要从环首节点移动n到达环的尾节点，修改环尾节点的next指针即可。</p>
+<script src="//gist.github.com/3712226.js"></script>
+
+<h3 id="题五、找到有序链表的中位值"><a href="#题五、找到有序链表的中位值" class="headerlink" title="题五、找到有序链表的中位值"></a>题五、找到有序链表的中位值</h3><p>常规方法：遍历一次链表得到链表长度length，再遍历一次链表到length/2的位置即为中位值</p>
+<p>更好的方法：用两个指针p1、p2，p1每次走两步，p2每次走一步，等到p1到链表尾时，p2所指即为中位值</p>
+<script src="//gist.github.com/3824662.js"></script>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/programming/" rel="tag"># programming</a>
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2011/08/22/dont-use-divide-operator-to-implement-divide/" rel="prev" title="不用除法运算符实现除法及其推广">
+      <i class="fa fa-chevron-left"></i> 不用除法运算符实现除法及其推广
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2011/09/02/note-for-windows-programming/" rel="next" title="《Windows核心编程》读书笔记1--内核对象">
+      《Windows核心编程》读书笔记1--内核对象 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E4%B8%80%E3%80%81%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%E6%95%B0%E7%BB%84%EF%BC%8C%E8%AF%B7%E6%B1%82%E5%87%BA%E4%B8%A4%E4%B8%A4%E4%B9%8B%E5%B7%AE%E7%BB%9D%E5%AF%B9%E5%80%BC%E6%9C%80%E5%B0%8F%E7%9A%84%E5%80%BC"><span class="nav-number">1.</span> <span class="nav-text">题一、有一个整数数组，请求出两两之差绝对值最小的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E4%BA%8C%E3%80%81%E5%B9%B3%E9%9D%A2%E4%B8%8AN%E4%B8%AA%E7%82%B9%EF%BC%8C%E6%AF%8F%E4%B8%A4%E4%B8%AA%E7%82%B9%E9%83%BD%E7%A1%AE%E5%AE%9A%E4%B8%80%E6%9D%A1%E7%9B%B4%E7%BA%BF%EF%BC%8C%E6%B1%82%E5%87%BA%E6%96%9C%E7%8E%87%E6%9C%80%E5%A4%A7%E7%9A%84%E9%82%A3%E6%9D%A1%E7%9B%B4%E7%BA%BF%E6%89%80%E9%80%9A%E8%BF%87%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%82%B9%EF%BC%88%E6%96%9C%E7%8E%87%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8D%E8%80%83%E8%99%91%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">题二、平面上N个点，每两个点都确定一条直线，求出斜率最大的那条直线所通过的两个点（斜率不存在的情况不考虑）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E4%B8%89%E3%80%81%E4%B8%80%E6%A3%B5%E6%8E%92%E5%BA%8F%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E4%BB%A4-f-%E6%9C%80%E5%A4%A7%E5%80%BC-%E6%9C%80%E5%B0%8F%E5%80%BC-2%EF%BC%8C%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%AE%97%E6%B3%95%EF%BC%8C%E6%89%BE%E5%87%BA%E8%B7%9D%E7%A6%BBf%E5%80%BC%E6%9C%80%E8%BF%91%E3%80%81%E5%A4%A7%E4%BA%8Ef%E5%80%BC%E7%9A%84%E7%BB%93%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">题三、一棵排序二叉树，令 f&#x3D;(最大值+最小值)&#x2F;2，设计一个算法，找出距离f值最近、大于f值的结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E5%9B%9B%E3%80%81%E6%89%BE%E5%87%BA%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">4.</span> <span class="nav-text">题四、找出两个字符串中最大公共子字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E4%BA%94%E3%80%81%E6%A3%80%E6%9F%A5%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF"><span class="nav-number">5.</span> <span class="nav-text">题五、检查单向链表中是否有环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E5%B9%BF%E4%B8%80%EF%BC%9A%E6%9C%89%E7%8E%AF%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%8E%AF%E7%9A%84%E8%8A%82%E7%82%B9%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">推广一：有环单向链表中环的节点数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E5%B9%BF%E4%BA%8C%E3%80%81%E6%89%BE%E5%88%B0%E6%9C%89%E7%8E%AF%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%8E%AF%E9%A6%96%E8%8A%82%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">推广二、找到有环单向链表中环首节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E5%B9%BF%E4%B8%89%E3%80%81%E7%A0%B4%E5%9D%8F%E6%9C%89%E7%8E%AF%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E7%8E%AF"><span class="nav-number">8.</span> <span class="nav-text">推广三、破坏有环单向链表的环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E4%BA%94%E3%80%81%E6%89%BE%E5%88%B0%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E7%9A%84%E4%B8%AD%E4%BD%8D%E5%80%BC"><span class="nav-number">9.</span> <span class="nav-text">题五、找到有序链表的中位值</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

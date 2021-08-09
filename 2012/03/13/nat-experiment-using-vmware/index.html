@@ -1,45 +1,487 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本着“干中学”的精神，看完资料，还是用VMWare来练习一下使用NAT，好加深认识。 实验涉及：NAT，iptables， 实验目标这次我要用iptables实现NAT功能（SNAT和DNAT）。 先上拓扑图（可能有点不规范）：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VMWare组网实验(NAT)">
+<meta property="og:url" content="http://www.goorockey.com/2012/03/13/nat-experiment-using-vmware/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="本着“干中学”的精神，看完资料，还是用VMWare来练习一下使用NAT，好加深认识。 实验涉及：NAT，iptables， 实验目标这次我要用iptables实现NAT功能（SNAT和DNAT）。 先上拓扑图（可能有点不规范）：">
+<meta property="og:locale">
+<meta property="og:image" content="http://www.goorockey.com/uploads/2012/03/image_thumb.png">
+<meta property="og:image" content="http://www.goorockey.com/uploads/2012/03/151306312_thumb.png">
+<meta property="article:published_time" content="2012-03-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.701Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="vmware">
+<meta property="article:tag" content="nat">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.goorockey.com/uploads/2012/03/image_thumb.png">
+
+<link rel="canonical" href="http://www.goorockey.com/2012/03/13/nat-experiment-using-vmware/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>VMWare组网实验(NAT) | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2012/03/13/nat-experiment-using-vmware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VMWare组网实验(NAT)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-03-13 00:00:00" itemprop="dateCreated datePublished" datetime="2012-03-13T00:00:00+08:00">2012-03-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index"><span itemprop="name">network</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本着“干中学”的精神，看完资料，还是用VMWare来练习一下使用NAT，好加深认识。</p>
+<p>实验涉及：NAT，iptables，</p>
+<h2 id="实验目标"><a href="#实验目标" class="headerlink" title="实验目标"></a>实验目标</h2><p>这次我要用iptables实现NAT功能（SNAT和DNAT）。</p>
+<p>先上拓扑图（可能有点不规范）：</p>
+<p><img src="http://www.goorockey.com/uploads/2012/03/image_thumb.png" alt="拓扑图"></p>
+<span id="more"></span>
+
+<p>如图分别有4台机子：A、B在内网，但在不同的网段中，C做网关，控制网段间的访问。D在外网。</p>
+<p>要达到：</p>
+<ul>
+<li><p>A、B能通信（内网不同网段的互访）</p>
+</li>
+<li><p>A、B能通过C与外网通信</p>
+</li>
+<li><p>D能通过C访问到A、B的服务</p>
+</li>
+</ul>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>用VMWare虚拟出这4台机子，VMWare的版本为8.0</p>
+<p>每台机子都跑CentOS 6.0</p>
+<h2 id="VMWare环境配置"><a href="#VMWare环境配置" class="headerlink" title="VMWare环境配置"></a>VMWare环境配置</h2><p>安装4个虚拟机，都装上CentOS，主机名分别定为hostA、hostB、hostC、hostD，对应A、B、C、D。</p>
+<p>VMWare新建几张网卡（菜单栏【edit】-【Virtual Network Editor】），要求一张为Bridged（NAT应该也行），两张为Host-only。</p>
+<p><img src="http://www.goorockey.com/uploads/2012/03/151306312_thumb.png" alt="VMWare网卡设置"></p>
+<p>设置A、B网卡分别为VMnet1和VMnet2，这是为了使它们原始都不能互访。</p>
+<p>外网的D网卡设为VMnet0</p>
+<p>C则有三张网卡VMnet0、VMnet1、VMnet2，这样C原始都能访问到A、B、D。</p>
+<p>然后进入每个虚拟机，为了方便，我都设置为静态ip（网段跟上图对应）：</p>
+<pre><code>A：192.168.149.128
+B：192.168.214.128
+C：192.168.4.233（eth0），192.168.149.130（eth1），192.168.214.130（eth2）
+D：192.168.4.234
+</code></pre>
+<p>CentOS里面配置网卡方法就是修改/etc/sysconfig/network-scripts/ifcfg-eth*，没有则自己创建一个。</p>
+<p>关键项就是ONBOOT，IPADDR，NETMASK，GATEWAY，DNS1，DNS2，PEERDNS</p>
+<p>要注意的是，有PEERDNS项，当它值为yes，则会把DNS1和DNS2覆盖地写入/etc/resolv.conf。</p>
+<p>这对于多网卡的C，如果ifcfg-eth0、ifcfg-eth1、ifcfg-eth2都设了PEERDNS，由于开机是按名字的顺序执行，则会把ifcfg-eth2的DNS写入/etc/resolv.conf，前两个文件的DNS会无效了的。所以我只在ifcfg-eth0配置PEERDNS=“yes“。</p>
+<p>好，初步网络环境配置完成。</p>
+<p>现在情况是：</p>
+<pre><code>ABD都不能互访，因为在不同的网段
+C则都能跟它们三个互访
+</code></pre>
+<h2 id="配置网关C的iptables，实现NAT"><a href="#配置网关C的iptables，实现NAT" class="headerlink" title="配置网关C的iptables，实现NAT"></a>配置网关C的iptables，实现NAT</h2><p>到关键也是好玩的地方了。</p>
+<p>接下来配置网关C的iptables，实现不同网络间地址的转换（NAT）。</p>
+<p>iptables内容比较多，详细可以参考：<a target="_blank" rel="noopener" href="http://www.frozentux.net/iptables-tutorial/cn/iptables-tutorial-cn-1.1.19.html">http://www.frozentux.net/iptables-tutorial/cn/iptables-tutorial-cn-1.1.19.html</a></p>
+<p>1.A、B通过C实现通信</p>
+<p>这个比较简单，没用到iptables，把A的网关设为C的对应网卡的ip（192.168.149.130），B的网关设为C对应网卡的ip（192.168.214.130）。</p>
+<p>然后打开C的ip转发，在C中执行：</p>
+<pre><code>$ echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+</code></pre>
+<p>这就把C作为了A、B的网关。A、B间通信的数据包会发到C，靠C的网卡间转发来完成通信。AB就可以相互ping通了。</p>
+<p>2.A、B通过C与外网通信（SNAT）</p>
+<p>现在A、B都不能跟D通信，因为现在A、B发到D的数据包源地址（192.168.149.128,192.168.214.128），D是无法知道的（D在C的同一个网络，网关设为相同的ip）。则包可以发到D，但D回复不了，因为它的网关不知道A、B。</p>
+<p>现在就通过SNAT把A、B发送的包在经过C时，把源地址改为C的外网ip（192.168.4.233），这个D是知道的，也就可以顺利回复了。</p>
+<p>具体在C中执行：</p>
+<pre><code>$ iptables –t nat –A POSTROUTING –o eth0 –j SNAT --to-source 192.168.4.233
+</code></pre>
+<p>这样A、B就能ping通了。</p>
+<p>SNAT可以看看我的博文。 嘻嘻……</p>
+<p>3.D通过C访问A、B的服务（DNAT）</p>
+<p>现在A、B可以跟D通信，但D不能主动访问A、B。还是因为D只知道C，不知道A、B。</p>
+<p>假如现在A开了19991口的sshd：</p>
+<p>在A的/etc/ssh/sshd_config中添加：</p>
+<pre><code>ListenAddress 0.0.0.0:19991
+</code></pre>
+<p>重启sshd</p>
+<pre><code>$ service sshd restart
+</code></pre>
+<p>在A中让iptables允许对19991口的访问</p>
+<pre><code>$ iptables –I INPUT -p tcp --dport 19991 -j ACCEPT 
+</code></pre>
+<p>现在D想ssh到A的19991，则可以在C中执行以下命令，实现DNAT：</p>
+<pre><code>$ iptables -t nat -A PREROUTING -p  tcp --dport 19991 -j DNAT --to-destination 192.168.149.128
+</code></pre>
+<p>现在D可以通过ssh到C的19991口来ssh到A了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>整个实验搞完，对iptables，NAT的原理还是深刻了不少。</p>
+<p>然后，就是VMWare是个好东西。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/network/" rel="tag"># network</a>
+              <a href="/tags/vmware/" rel="tag"># vmware</a>
+              <a href="/tags/nat/" rel="tag"># nat</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2012/03/11/note-for-nat/" rel="prev" title="NAT学习总结">
+      <i class="fa fa-chevron-left"></i> NAT学习总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2012/03/15/dns-tunnel-in-vmware/" rel="next" title="用VMWare组网，实验DNS隧道">
+      用VMWare组网，实验DNS隧道 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">实验目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VMWare%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">VMWare环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E5%85%B3C%E7%9A%84iptables%EF%BC%8C%E5%AE%9E%E7%8E%B0NAT"><span class="nav-number">4.</span> <span class="nav-text">配置网关C的iptables，实现NAT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

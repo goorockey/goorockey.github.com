@@ -1,45 +1,463 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="由于所在网络没有公网IP，不能弄DDNS，想要在外面控制家里的openwrt路由，想到用内网穿透神器ngrok。 ngrok跟Teamviewer等的原理类似，内网的机子主动跟外网的机子保持连接，从而使内网机子“暴露”出外网。 准备需要以下资源：  域名，可修改其DNS记录 openwrt路由 vps，有公网IP，如：10.0.10.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openwrt中使用ngrok">
+<meta property="og:url" content="http://www.goorockey.com/2016/07/26/try-ngrok-in-openwrt/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="由于所在网络没有公网IP，不能弄DDNS，想要在外面控制家里的openwrt路由，想到用内网穿透神器ngrok。 ngrok跟Teamviewer等的原理类似，内网的机子主动跟外网的机子保持连接，从而使内网机子“暴露”出外网。 准备需要以下资源：  域名，可修改其DNS记录 openwrt路由 vps，有公网IP，如：10.0.10.1">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-07-25T16:53:00.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.696Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="openwrt">
+<meta property="article:tag" content="ngrok">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.goorockey.com/2016/07/26/try-ngrok-in-openwrt/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>openwrt中使用ngrok | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2016/07/26/try-ngrok-in-openwrt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          openwrt中使用ngrok
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-07-26 00:53:00" itemprop="dateCreated datePublished" datetime="2016-07-26T00:53:00+08:00">2016-07-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于所在网络没有公网IP，不能弄DDNS，想要在外面控制家里的openwrt路由，想到用内网穿透神器<a target="_blank" rel="noopener" href="https://ngrok.com/">ngrok</a>。</p>
+<p>ngrok跟Teamviewer等的原理类似，内网的机子主动跟外网的机子保持连接，从而使内网机子“暴露”出外网。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>需要以下资源：</p>
+<ul>
+<li>域名，可修改其DNS记录</li>
+<li>openwrt路由</li>
+<li>vps，有公网IP，如：10.0.10.1</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="DNS设置"><a href="#DNS设置" class="headerlink" title="DNS设置"></a>DNS设置</h2><p>使用ngrok需要通过域名定位到对应的服务。假设我们使用ngrokd.goorockey.com，则需要在goorockey.com中增加两个DNS记录</p>
+<pre><code>ngrokd.goorockey.com A 10.0.10.1
+*.ngrokd.goorockey.com A 10.0.10.1
+</code></pre>
+<p>其中<code>10.0.10.1</code>为所拥有的vps的ip。注意需要添加第二条的泛解析，因为ngrok的http/https，需要子域名定位服务。</p>
+<h2 id="编译ngrok-for-openwrt"><a href="#编译ngrok-for-openwrt" class="headerlink" title="编译ngrok for openwrt"></a>编译ngrok for openwrt</h2><p>获取ngrok在openwrt的源码</p>
+<pre><code>git clone https://github.com/dosgo/ngrok-c
+</code></pre>
+<p>在openwrt官网下载<a target="_blank" rel="noopener" href="https://downloads.openwrt.org/">https://downloads.openwrt.org/</a>对应路由的SDK，如我的小米路由mini为：</p>
+<pre><code>wget -O openwrt-sdk.tar.bz2 https://downloads.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/OpenWrt-SDK-15.05.1-ramips-mt7620_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
+tar xvf openwrt-sdk.tar.bz2
+</code></pre>
+<p>复制ngrok-c里面的openssl目录到openwrt-sdk指定目录下</p>
+<pre><code>cp -r ngrok-c/include/openssl openwrt-sdk/staging_dir/toolchain-mipsel_24kec+dsp_gcc-4.8-linaro_uClibc-0.9.33.2/include
+</code></pre>
+<p>修改ngrok-c里面的<code>openwrtbuildv2.sh</code>，添加<code>openwrt-sdk/staging_dir/toolchain-mipsel_24kec+dsp_gcc-4.8-linaro_uClibc-0.9.33.2/bin</code>到PATH，修改<code>STAGING_DIR</code>为对应目录，查看openwrt的bin目录，修改对应的<code>CC</code>，如<code>mipsel-openwrt-linux-g++</code></p>
+<p>执行<code>openwrtbuildv2.sh</code>，在<code>build-mips</code>目录得到<code>ngrokc</code>，即为openwrt的ngrok客户端</p>
+<p>把ngrokc复制到路由内，可能还需要路由安装<code>libstdcpp</code></p>
+<h2 id="ngrok-server"><a href="#ngrok-server" class="headerlink" title="ngrok server"></a>ngrok server</h2><p>ubuntu下可以直接<code>apt-get install ngrok-server</code>，其他的可以到ngrok官网下载可执行版本，或者源码编译。源码编译可以修改ngrok服务端的ssl证书，安全性更好。</p>
+<h2 id="使用ngrok"><a href="#使用ngrok" class="headerlink" title="使用ngrok"></a>使用ngrok</h2><p>服务端执行:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ngrokd -domain=&quot;ngrokd.goorockey.com&quot; \</span><br><span class="line">       -httpAddr=&quot;:10001&quot; -httpsAddr=&quot;:10002&quot; \</span><br><span class="line">       -tunnelAddr=&quot;:10003&quot; -log=/var/log/ngrok.log</span><br></pre></td></tr></table></figure>
+
+<p>客户端执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ngrokc -SER[Shost:ngrokd.goorockey.com,Sport:10003] \</span><br><span class="line">       -AddTun[Type:http,Lhost:127.0.0.1,Lport:80,Sdname:test] \</span><br><span class="line">       -AddTun[Type:https,Lhost:127.0.0.1,Lport:443,Sdname:test2] \</span><br><span class="line">       -AddTun[Type:tcp,Lhost:127.0.0.1,Lport:22,Rport:10004]</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>10003</code>是服务端指定的ngrok服务监听端口，<code>10001</code>是服务端指定访问http服务时的端口，<code>10002</code>是服务端指定访问https服务时的端口<br><code>10004</code>是客户端指定tcp服务绑定到服务端的端口</p>
+<p>以上命令就可以达到：</p>
+<ul>
+<li>访问<code>http://test.ngrokd.goorockey.com:10001</code>，能访问到路由在80端口的http服务</li>
+<li>访问<code>https://test2.ngrokd.goorockey.com:10002</code>，能访问到路由在443端口的https服务</li>
+<li>访问<code>tcp://ngrokd.goorockey</code>，端口10004，能访问到路由在22端口的tcp服务，如路由22端口是ssh，则可以ssh ngrokd.goorockey.com -p 10004</li>
+</ul>
+<p>其他更多选项可参考<a target="_blank" rel="noopener" href="https://ngrok.com/">ngrok官网</a>和<a target="_blank" rel="noopener" href="https://github.com/dosgo/ngrok-c">ngrok-c的仓库</a></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>ngrok的服务端原生是不支持验证的，即ngrokd服务端外放后，其他人的ngrok客户端可以自由连接。</p>
+<p>暂时找到两个解决方案：</p>
+<ul>
+<li>修改源码，参考<a target="_blank" rel="noopener" href="https://github.com/inconshreveable/ngrok/issues/321">Issue #321</a></li>
+<li>使用官方付费的<a target="_blank" rel="noopener" href="https://ngrok.com/product/ngrok-link">ngrok-link</a></li>
+</ul>
+<h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://ngrok.com/">https://ngrok.com/</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/8428949d946c">http://www.jianshu.com/p/8428949d946c</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/dosgo/ngrok-c/blob/master/README.md">https://github.com/dosgo/ngrok-c/blob/master/README.md</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/openwrt/" rel="tag"># openwrt</a>
+              <a href="/tags/ngrok/" rel="tag"># ngrok</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/11/01/use-n-to-manage-node/" rel="prev" title="使用n管理nodejs">
+      <i class="fa fa-chevron-left"></i> 使用n管理nodejs
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/07/27/flash-rom-in-redmi2/" rel="next" title="红米2刷第三方rom小记">
+      红米2刷第三方rom小记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">DNS设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91ngrok-for-openwrt"><span class="nav-number">3.</span> <span class="nav-text">编译ngrok for openwrt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngrok-server"><span class="nav-number">4.</span> <span class="nav-text">ngrok server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ngrok"><span class="nav-number">5.</span> <span class="nav-text">使用ngrok</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">参考资源</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

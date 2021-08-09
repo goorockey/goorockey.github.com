@@ -1,45 +1,452 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %} {{ page.title }} // {{ config.title }} {% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="最近一个网站尝试用Angular2，小记一下。 Angular 1 vs 2Angular2对比1，做了很大的调整，代码更加组件化，结构会更清晰，通过官方教程很快能入手。 同时使用Typescript作为开发语言，支持静态类型检查、js新标准等优点，截止现在使用2.0.2版本的ts。 截止现在，angular2最新版本为rc.7，还在快速更新中，我开发的时候就经历了rc.4到rc.5比较大的改动。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular2初试小记">
+<meta property="og:url" content="http://www.goorockey.com/2016/09/13/angular2-note/index.html">
+<meta property="og:site_name" content="Goorockey&#39;s Blog">
+<meta property="og:description" content="最近一个网站尝试用Angular2，小记一下。 Angular 1 vs 2Angular2对比1，做了很大的调整，代码更加组件化，结构会更清晰，通过官方教程很快能入手。 同时使用Typescript作为开发语言，支持静态类型检查、js新标准等优点，截止现在使用2.0.2版本的ts。 截止现在，angular2最新版本为rc.7，还在快速更新中，我开发的时候就经历了rc.4到rc.5比较大的改动。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-09-13T09:21:34.000Z">
+<meta property="article:modified_time" content="2021-08-09T15:53:17.696Z">
+<meta property="article:author" content="goorockey">
+<meta property="article:tag" content="angular2">
+<meta property="article:tag" content="angular-cli">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.goorockey.com/2016/09/13/angular2-note/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>Angular2初试小记 | Goorockey's Blog</title>
+  
 
-    {% if page.comments %}
-      <div class="comments" id="comments">
-        {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}
-          <div class="ds-thread" data-thread-key="{{ page.path }}"
-               data-title="{{ page.title }}" data-url="{{ page.permalink }}">
-          </div>
-        {% elseif config.disqus_shortname %}
-          <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Goorockey's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">create something special</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
 
-{% block comment_system %}
-  {% include '_scripts/comments/duoshuo.swig' %}
-  {% include '_scripts/comments/disqus.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2016/09/13/angular2-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="goorockey">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Goorockey's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular2初试小记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-09-13 17:21:34" itemprop="dateCreated datePublished" datetime="2016-09-13T17:21:34+08:00">2016-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近一个网站尝试用<a target="_blank" rel="noopener" href="https://angular.io/">Angular2</a>，小记一下。</p>
+<h2 id="Angular-1-vs-2"><a href="#Angular-1-vs-2" class="headerlink" title="Angular 1 vs 2"></a>Angular 1 vs 2</h2><p>Angular2对比1，做了很大的调整，代码更加组件化，结构会更清晰，通过<a target="_blank" rel="noopener" href="https://angular.io/docs/ts/latest/quickstart.html">官方教程</a>很快能入手。</p>
+<p>同时使用Typescript作为开发语言，支持静态类型检查、js新标准等优点，截止现在使用2.0.2版本的ts。</p>
+<p>截止现在，angular2最新版本为rc.7，还在快速更新中，我开发的时候就经历了rc.4到rc.5比较大的改动。幸好angular自己和相关工具的github repo都比较活跃，每天都有人发现问题，提交代码，讨论解决方案。</p>
+<p>更多介绍参考<a target="_blank" rel="noopener" href="https://angular.io/features.html">官方</a>，<a target="_blank" rel="noopener" href="https://github.com/angular/angular">Github</a></p>
+<span id="more"></span>
+
+<h2 id="Angular-cli"><a href="#Angular-cli" class="headerlink" title="Angular-cli"></a>Angular-cli</h2><p><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli">Angular-cli</a>是官方维护的很强大的工具，生成出来的项目结构很清晰，能帮助我们以最佳实践构建项目。</p>
+<p>cli现在慢慢从SytemJS过渡到用webpack做为构建工具，build效率提升不少，配置也简单，所以推荐用webpack分支(npm -g install angular-cli@webpack)或者直接用github的master分支。</p>
+<h2 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h2><ul>
+<li><p>Nginx部署</p>
+<p>  需要把请求都指向<code>index.html</code>，从而使用angular内部的路由。</p>
+<pre><code>server &#123;
+  listen 80;
+  listen [::]:80;
+
+  root /path/to/project;
+
+  index index.html index.htm;
+
+  server_name www.project.com;
+
+  error_page 404 =200 /index.html;
+
+  location / &#123;
+    try_files $uri $uri/ =404;
+  &#125;
+&#125;
+</code></pre>
+</li>
+<li><p>Pre-bootstrap</p>
+<p>  angular2有个比较诟病的地方，是体积略大。即使是新建的项目，编译出来的main.js也有1M多。这使得第一次访问、浏览器没有缓存的时候，首屏时间会比较糟糕。原因还是angular2的库即使压缩后还是太大了。所以建议还是在<code>index.html</code>增加Loading的动画，提高用户体验。</p>
+</li>
+</ul>
+<h2 id="使用感觉"><a href="#使用感觉" class="headerlink" title="使用感觉"></a>使用感觉</h2><p>因为还是rc版，angular2的一些语法、性能都在不断的调整优化。原生Pipe还比较少，很多需要自己写。社区确实很活跃，问题基本都能找到解答。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>Angular官网: <a target="_blank" rel="noopener" href="https://angular.io/">https://angular.io</a></li>
+<li>Angular Github: <a target="_blank" rel="noopener" href="https://github.com/angular/angular">https://github.com/angular/angular</a></li>
+<li>Angular-cli: <a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli">https://github.com/angular/angular-cli</a></li>
+<li>Angular快速入门: <a target="_blank" rel="noopener" href="http://angular-2-training-book.rangle.io/">http://angular-2-training-book.rangle.io</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/angular2/" rel="tag"># angular2</a>
+              <a href="/tags/angular-cli/" rel="tag"># angular-cli</a>
+              <a href="/tags/typescript/" rel="tag"># typescript</a>
+              <a href="/tags/js/" rel="tag"># js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/07/27/flash-rom-in-redmi2/" rel="prev" title="红米2刷第三方rom小记">
+      <i class="fa fa-chevron-left"></i> 红米2刷第三方rom小记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/02/02/shrink-virtualbox-disk/" rel="next" title="回收Virtualbox硬盘空间">
+      回收Virtualbox硬盘空间 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-1-vs-2"><span class="nav-number">1.</span> <span class="nav-text">Angular 1 vs 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-cli"><span class="nav-number">2.</span> <span class="nav-text">Angular-cli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">生产环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%84%9F%E8%A7%89"><span class="nav-number">4.</span> <span class="nav-text">使用感觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">goorockey</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">goorockey</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
