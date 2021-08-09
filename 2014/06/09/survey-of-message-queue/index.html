@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="programming,nodejs,redis,queue," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="programming,nodejs,redis,queue,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/06/09/survey-of-message-queue/#comments" >
+            <a href="/2014/06/09/survey-of-message-queue/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/09/survey-of-message-queue/"></span>
             </a>
           </span>
@@ -186,7 +186,7 @@
       
         <p>最近在做的系统准备加个消息队列，重构成“master-queue-workers”的结构.</p>
 <p>感觉现在好多系统都是这个结构。这样master就专心接受用户的请求，把任务放进队列，让workers去处理。master就可以立刻回复用户，而不用等待处理完整个业务才回复。</p>
-<p>主流的消息队列方案可以看<a href="http://queues.io/" target="_blank" rel="external">这里</a>。</p>
+<p>主流的消息队列方案可以看<a href="http://queues.io/" target="_blank" rel="noopener">这里</a>。</p>
 <p>我主要考虑的方案有rabbitMQ、redis、celery、mongodb。</p>
 <a id="more"></a>
 <ul>
@@ -207,7 +207,7 @@
 <p>  <strong>缺点</strong>：当并发量大的时候，速度不理想</p>
 </li>
 </ul>
-<p>我最后选择了用redis。因为系统是用node.js写的，所有用到了node的<a href="https://github.com/LearnBoost/kue" target="_blank" rel="external">kue</a>库。</p>
+<p>我最后选择了用redis。因为系统是用node.js写的，所有用到了node的<a href="https://github.com/LearnBoost/kue" target="_blank" rel="noopener">kue</a>库。</p>
 
       
     </div>
@@ -291,7 +291,7 @@
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -354,7 +354,7 @@
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

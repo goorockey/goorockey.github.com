@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="python," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="python,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2012/09/30/python-send-mail/#comments" >
+            <a href="/2012/09/30/python-send-mail/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/09/30/python-send-mail/"></span>
             </a>
           </span>
@@ -187,7 +187,7 @@
         <p>项目组有每天值日搞卫生和发工作日报的规定，由于不提醒容易忘记，则想到通过内部邮件定时提醒，练练手。</p>
 <p>整个“任务”可以分为发邮件+定时两部分。</p>
 <p>##发邮件##</p>
-<p>由于服务器是windows系统，google得知，windows下有<a href="http://www.blat.net" target="_blank" rel="external">blat</a>这发邮件的大杀器，所以刚开始是想用blat+批处理做的。</p>
+<p>由于服务器是windows系统，google得知，windows下有<a href="http://www.blat.net" target="_blank" rel="noopener">blat</a>这发邮件的大杀器，所以刚开始是想用blat+批处理做的。</p>
 <p>执行<code>blat -h</code>或者看官网上的帮助，使用blat发邮件还是很简单的（所以官网特别提醒不要用blat来发SPAM。。)</p>
 <pre><code>blat &lt;邮件正文文件&gt; -from &lt;发送地址&gt; -to &lt;接受地址&gt; -subject &lt;邮件标题&gt; 
         -server &lt;smtp服务器地址&gt; -username &lt;登录服务器用户名&gt; -password &lt;密码&gt;
@@ -200,13 +200,13 @@ blat - -body &lt;邮件正文&gt; -from &lt;发送地址&gt; -to &lt;接受地�
 <p>问题在于在计算要提醒的人时，要根据今天离开始值日的天数，来从数组获取成员，而这求天数在windows用批处理可不好搞，因为要考虑每月不同天数和闰年啊。</p>
 <p>当然也不是不能完成，网上也有方法:</p>
 <ul>
-<li><a href="http://bbs.bathome.net/thread-11128-1-1.html" target="_blank" rel="external">http://bbs.bathome.net/thread-11128-1-1.html</a></li>
-<li><a href="http://bbs.bathome.net/viewthread.php?tid=5659&amp;highlight=%2Bbatman" target="_blank" rel="external">http://bbs.bathome.net/viewthread.php?tid=5659&amp;highlight=%2Bbatman</a></li>
-<li><a href="http://bbs.bathome.net/viewthread.php?tid=5682&amp;highlight=%2Bbatman" target="_blank" rel="external">http://bbs.bathome.net/viewthread.php?tid=5682&amp;highlight=%2Bbatman</a></li>
+<li><a href="http://bbs.bathome.net/thread-11128-1-1.html" target="_blank" rel="noopener">http://bbs.bathome.net/thread-11128-1-1.html</a></li>
+<li><a href="http://bbs.bathome.net/viewthread.php?tid=5659&amp;highlight=%2Bbatman" target="_blank" rel="noopener">http://bbs.bathome.net/viewthread.php?tid=5659&amp;highlight=%2Bbatman</a></li>
+<li><a href="http://bbs.bathome.net/viewthread.php?tid=5682&amp;highlight=%2Bbatman" target="_blank" rel="noopener">http://bbs.bathome.net/viewthread.php?tid=5682&amp;highlight=%2Bbatman</a></li>
 </ul>
 <p>嫌麻烦，我还是决定找有现成库的方法来做，所以就想到用有各种库的python实现了。</p>
 <a id="more"></a>
-<p>python有<a href="http://docs.python.org/library/smtplib.html" title="smtplib" target="_blank" rel="external">smtplib</a>库实现smtp发邮件，核心代码也很简单：</p>
+<p>python有<a href="http://docs.python.org/library/smtplib.html" title="smtplib" target="_blank" rel="noopener">smtplib</a>库实现smtp发邮件，核心代码也很简单：</p>
 <pre><code>import smtplib
 # some code ...
 smtp = smtplib.SMTP()
@@ -404,7 +404,7 @@ if __name__ == &apos;__main__&apos;:
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -467,7 +467,7 @@ if __name__ == &apos;__main__&apos;:
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

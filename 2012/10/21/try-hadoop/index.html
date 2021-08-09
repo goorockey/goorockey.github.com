@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="programming,hadoop," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="programming,hadoop,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2012/10/21/try-hadoop/#comments" >
+            <a href="/2012/10/21/try-hadoop/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/10/21/try-hadoop/"></span>
             </a>
           </span>
@@ -184,7 +184,7 @@
       
 
       
-        <p>由于某种原因，今天玩了一下<a href="http://hadoop.apache.org/" title="Hadoop" target="_blank" rel="external">Hadoop</a>。正确来说，我是玩<a href="http://code.google.com/p/hop/" title="HOP" target="_blank" rel="external">HOP</a>，一个Hadoop的修改版本。</p>
+        <p>由于某种原因，今天玩了一下<a href="http://hadoop.apache.org/" title="Hadoop" target="_blank" rel="noopener">Hadoop</a>。正确来说，我是玩<a href="http://code.google.com/p/hop/" title="HOP" target="_blank" rel="noopener">HOP</a>，一个Hadoop的修改版本。</p>
 <blockquote>
 <p>The Hadoop Online Prototype (HOP) is a modified version of Hadoop MapReduce that allows data to be pipelined between tasks and between jobs. This can enable better cluster utilization and increased parallelism, and allows new functionality: online aggregation (approximate answers as a job runs), and stream processing (MapReduce jobs that run continuously, processing new data as it arrives). </p>
 </blockquote>
@@ -197,10 +197,10 @@
 $ cat ~/.ssh/id_dsa.pub &gt;&gt; ~/.ssh/authorized_keys
 </code></pre><p>然后是设置jdk的目录，修改conf/hadoop-env.sh中JAVA_HOME。一般为/usr/lib/jvm/下的某个java目录，我就直接写成/usr/lib/jvm/default-java了。</p>
 <p>这时候执行bin/hadoop就会出现帮助信息了。</p>
-<h2 id="跑例程"><a href="#跑例程" class="headerlink" title="跑例程"></a>跑例程</h2><p>Hadoop的文件系统叫<a href="http://hadoop.apache.org/docs/stable/hdfs_design.html" title="HDFS" target="_blank" rel="external">HDFS</a>（Hadoop distribution filesystem)，是一个分布式文件系统。每份数据都会在多个节点有备份，以容错、修复。所有数据都要先放进HDFS才能Hadoop处理。</p>
+<h2 id="跑例程"><a href="#跑例程" class="headerlink" title="跑例程"></a>跑例程</h2><p>Hadoop的文件系统叫<a href="http://hadoop.apache.org/docs/stable/hdfs_design.html" title="HDFS" target="_blank" rel="noopener">HDFS</a>（Hadoop distribution filesystem)，是一个分布式文件系统。每份数据都会在多个节点有备份，以容错、修复。所有数据都要先放进HDFS才能Hadoop处理。</p>
 <p>Hadoop的分布式体系中，有一个NameNode，是master的角色，负责主控各节点，有多个DataNode，是slave，负责真正存储数据。这些可以在conf/master和conf/slave设置。<br>同时还有一个JobTracker，负责调度jobs，默认就是NameNode这个主机一起充当NameNode，这个在conf/hadoop-site.xml设置。另外所有DataNode都是TaskTracker，负责执行jobs。具体更多对conf/hadoop-site.xml的配置参看docs/cluster_setup.html</p>
 <p>执行bin/hadoop namenode -format，会创造一个namenode。文件都已某种格式放在/tmp/hadoop-“hostname”那里。</p>
-<p>执行bin/start-all.sh会启动hadoop，默认通过<a href="http://localhost:50070/可以访问NameNode，http://localhost:50030/可以访问JobTracker。" target="_blank" rel="external">http://localhost:50070/可以访问NameNode，http://localhost:50030/可以访问JobTracker。</a></p>
+<p>执行bin/start-all.sh会启动hadoop，默认通过<a href="http://localhost:50070/可以访问NameNode，http://localhost:50030/可以访问JobTracker。" target="_blank" rel="noopener">http://localhost:50070/可以访问NameNode，http://localhost:50030/可以访问JobTracker。</a></p>
 <p>现在执行一个例子:</p>
 <pre><code>$ mkdir input
 $ cp conf/*.xml input/
@@ -215,10 +215,10 @@ $ cat output/* # 打印结果
 # 或者直接对HDFS操作 #
 $ bin/hadoop fs -ls output
 $ bin/hadoop fs -cat output/*
-</code></pre><h2 id="WordCount例子"><a href="#WordCount例子" class="headerlink" title="WordCount例子"></a>WordCount例子</h2><p><a href="http://hadoop.apache.org/docs/stable/mapred_tutorial.html" title="WordCount" target="_blank" rel="external">WordCount</a>是hadoop中的另一个例子</p>
-<p>Hadoop是通过<a href="http://wiki.apache.org/hadoop/HadoopMapReduce" title="MapReduce" target="_blank" rel="external">MapReduce</a>机制来处理大数据的。Map阶段分割输入的数据，并整合成\<key,value\>的对应关系。每对\<key,value\>对送到Combiner做每个key的整合，当整合出一定数量的\<key,value\>后，\<key,value\>会送到Reducer做处理输出最终的\<key,value\>。</key,value\></key,value\></key,value\></key,value\></key,value\></p>
+</code></pre><h2 id="WordCount例子"><a href="#WordCount例子" class="headerlink" title="WordCount例子"></a>WordCount例子</h2><p><a href="http://hadoop.apache.org/docs/stable/mapred_tutorial.html" title="WordCount" target="_blank" rel="noopener">WordCount</a>是hadoop中的另一个例子</p>
+<p>Hadoop是通过<a href="http://wiki.apache.org/hadoop/HadoopMapReduce" title="MapReduce" target="_blank" rel="noopener">MapReduce</a>机制来处理大数据的。Map阶段分割输入的数据，并整合成\&lt;key,value>的对应关系。每对\&lt;key,value>对送到Combiner做每个key的整合，当整合出一定数量的\&lt;key,value>后，\&lt;key,value>会送到Reducer做处理输出最终的\&lt;key,value>。</p>
 <pre><code>(input) &lt;k1, v1&gt; -&gt; map -&gt; &lt;k2, v2&gt; -&gt; combine -&gt; &lt;k2, v2&gt; -&gt; reduce -&gt; &lt;k3, v3&gt; (output) 
-</code></pre><p>按照<a href="http://hadoop.apache.org/docs/stable/mapred_tutorial.html" title="WordCount" target="_blank" rel="external">WordCount</a>中的代码编辑WordCount.java，然后编译打包生成wordcount.jar:</p>
+</code></pre><p>按照<a href="http://hadoop.apache.org/docs/stable/mapred_tutorial.html" title="WordCount" target="_blank" rel="noopener">WordCount</a>中的代码编辑WordCount.java，然后编译打包生成wordcount.jar:</p>
 <pre><code>$ mkdir wordcount_classes
 $ javac -classpath hadoop-hop-0.2-core.jar -d wordcount_classes WordCount.java
 $ jar -cvf wordcount.jar -C wordcount_classes/ . 
@@ -312,7 +312,7 @@ $ bin/hadoop fs -cat output/*  # 打印结果
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -375,7 +375,7 @@ $ bin/hadoop fs -cat output/*  # 打印结果
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

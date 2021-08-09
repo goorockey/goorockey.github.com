@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="programming,electron,nodejs," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="programming,electron,nodejs,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/10/12/try-electron/#comments" >
+            <a href="/2015/10/12/try-electron/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/12/try-electron/"></span>
             </a>
           </span>
@@ -184,16 +184,16 @@
       
 
       
-        <p>帮人做个简单的文件整理程序，尝试用<a href="http://electron.atom.io/" target="_blank" rel="external">electron</a>来实现，总结一下。</p>
+        <p>帮人做个简单的文件整理程序，尝试用<a href="http://electron.atom.io/" target="_blank" rel="noopener">electron</a>来实现，总结一下。</p>
 <h2 id="主进程和渲染进程"><a href="#主进程和渲染进程" class="headerlink" title="主进程和渲染进程"></a>主进程和渲染进程</h2><p>electron的程序运行时，分为主进程和渲染进程。主进程即为<code>var app = require(&#39;app&#39;);</code>所在一侧，也是程序的入口。通过<code>BrowserWindow</code>实例<code>loadUrl</code>访问网页时，会创建出渲染进程。</p>
 <p>某些包是只有主进程才能包含的，如常用的<code>dialog</code>。想在渲染进程的逻辑中调用这些包，有两个方法，一个是使用<code>remote</code>包，如：</p>
 <pre><code>var remote = require(&apos;remote&apos;);
 var dialog = remote.require(&apos;dialog&apos;);
 </code></pre><p>另一个方法是使用<code>ipc</code>，即进程通信，发消息给主进程，由主进程调用后，把结果再通过<code>ipc</code>返回渲染进程。</p>
 <a id="more"></a>
-<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><p>用<a href="https://github.com/maxogden/electron-packager" target="_blank" rel="external">electron-packager</a>打包生成各平台的程序，还是很方便的，但是有些坑。</p>
+<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><p>用<a href="https://github.com/maxogden/electron-packager" target="_blank" rel="noopener">electron-packager</a>打包生成各平台的程序，还是很方便的，但是有些坑。</p>
 <h3 id="速度慢"><a href="#速度慢" class="headerlink" title="速度慢"></a>速度慢</h3><p>对某个平台第一次打包的时候，packager需要下载对应的electron包，那速度真是慢啊！</p>
-<p>幸好淘宝有electron<a href="http://npm.taobao.org/mirrors" target="_blank" rel="external">镜像</a>。通过设置<code>ELECTRON_MIRROR</code>环境变量，可以大大加快速度。</p>
+<p>幸好淘宝有electron<a href="http://npm.taobao.org/mirrors" target="_blank" rel="noopener">镜像</a>。通过设置<code>ELECTRON_MIRROR</code>环境变量，可以大大加快速度。</p>
 <pre><code>ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/ electron-packager ...
 </code></pre><h3 id="体积大"><a href="#体积大" class="headerlink" title="体积大"></a>体积大</h3><p>electron打包出来的程序，一般至少100M，对于一个小程序来说有点太大了，体积问题感觉是很多跨平台工具的通病。</p>
 <p>为了减少体积，记得使用packager的ignore参数，排除掉例如electron等程序运行不必要的包，如果指定了packager的输出路径在程序的目录，记得也排除掉，不然会越打包越大。</p>
@@ -202,10 +202,10 @@ var dialog = remote.require(&apos;dialog&apos;);
 </code></pre><p>把命令写在<code>package.json</code>的<code>scripts</code>里，比如<code>package</code>命令，则打包时运行：</p>
 <pre><code>ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/ npm run package
 </code></pre><h2 id="electron一些资源"><a href="#electron一些资源" class="headerlink" title="electron一些资源"></a>electron一些资源</h2><ul>
-<li><a href="http://electron.atom.io/docs/latest/" target="_blank" rel="external">官方文档</a></li>
-<li><a href="https://github.com/ilyavorobiev/atom-docs/blob/master/atom-shell/Architecture.md" target="_blank" rel="external">electron内部结构</a></li>
-<li><a href="https://github.com/sindresorhus/awesome-electron" target="_blank" rel="external">awesome-electron</a></li>
-<li><a href="https://github.com/hokein/electron-sample-apps" target="_blank" rel="external">electron-sample-apps</a></li>
+<li><a href="http://electron.atom.io/docs/latest/" target="_blank" rel="noopener">官方文档</a></li>
+<li><a href="https://github.com/ilyavorobiev/atom-docs/blob/master/atom-shell/Architecture.md" target="_blank" rel="noopener">electron内部结构</a></li>
+<li><a href="https://github.com/sindresorhus/awesome-electron" target="_blank" rel="noopener">awesome-electron</a></li>
+<li><a href="https://github.com/hokein/electron-sample-apps" target="_blank" rel="noopener">electron-sample-apps</a></li>
 </ul>
 <p>用得还不够深入，之后遇到更多问题再补充。</p>
 
@@ -289,7 +289,7 @@ var dialog = remote.require(&apos;dialog&apos;);
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -352,7 +352,7 @@ var dialog = remote.require(&apos;dialog&apos;);
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

@@ -1,30 +1,30 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -171,7 +171,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/06/09/survey-of-message-queue/#comments" >
+            <a href="/2014/06/09/survey-of-message-queue/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/09/survey-of-message-queue/"></span>
             </a>
           </span>
@@ -189,7 +189,7 @@
         
           <p>最近在做的系统准备加个消息队列，重构成“master-queue-workers”的结构.</p>
 <p>感觉现在好多系统都是这个结构。这样master就专心接受用户的请求，把任务放进队列，让workers去处理。master就可以立刻回复用户，而不用等待处理完整个业务才回复。</p>
-<p>主流的消息队列方案可以看<a href="http://queues.io/">这里</a>。</p>
+<p>主流的消息队列方案可以看<a href="http://queues.io/" target="_blank" rel="noopener">这里</a>。</p>
 <p>我主要考虑的方案有rabbitMQ、redis、celery、mongodb。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/06/09/survey-of-message-queue/#more">
@@ -267,7 +267,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/05/12/instapaper-review/#comments" >
+            <a href="/2014/05/12/instapaper-review/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/05/12/instapaper-review/"></span>
             </a>
           </span>
@@ -283,11 +283,11 @@
 
       
         
-          <p>最近在搞nodejs，刚好有个点子，想实现一个对自己这个月在<a href="http://www.instapaper.com" title="Instapaper">Instapaper</a>的已读文章做回顾，通过邮件形式发到自己的邮箱，起到复习的作用。然后上周末就用了两个通宵把这搞出来了，代码放在<a href="https://github.com/goorockey/instapaper-review">Github</a>上面。</p>
+          <p>最近在搞nodejs，刚好有个点子，想实现一个对自己这个月在<a href="http://www.instapaper.com" title="Instapaper" target="_blank" rel="noopener">Instapaper</a>的已读文章做回顾，通过邮件形式发到自己的邮箱，起到复习的作用。然后上周末就用了两个通宵把这搞出来了，代码放在<a href="https://github.com/goorockey/instapaper-review" target="_blank" rel="noopener">Github</a>上面。</p>
 <p>###总的情况</p>
 <ul>
-<li>整个服务跑在<a href="http://www.appfog.com" title="Appfog">Appfog</a>上</li>
-<li>用<a href="http://sendgrid.com" title="SendGrid">SendGrid</a>服务发送邮件</li>
+<li>整个服务跑在<a href="http://www.appfog.com" title="Appfog" target="_blank" rel="noopener">Appfog</a>上</li>
+<li>用<a href="http://sendgrid.com" title="SendGrid" target="_blank" rel="noopener">SendGrid</a>服务发送邮件</li>
 <li>nodejs实现, 用到了cheerio、request、cron、sugar、ejs、sendgrid等几个模块</li>
 </ul>
           <div class="post-more-link text-center">
@@ -364,7 +364,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/04/21/summary-of-using-wxwidgets/#comments" >
+            <a href="/2014/04/21/summary-of-using-wxwidgets/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/04/21/summary-of-using-wxwidgets/"></span>
             </a>
           </span>
@@ -380,7 +380,7 @@
 
       
         
-          <p>这几个月做的项目是把一个承载在MFC的软件从Windows移植到Mac，现在进入最后验收阶段了。当时网上调研了一下，决定用<a href="http://www.wxwidgets.org" title="wxWidgets">wxWidgets</a>这个跨平台的开源库来帮助移植。总的来说，只要把原软件对Windows API的调用都改为对wxWidgets的调用，基本就完成了移植。但基于wxWidgets和MFC一些设计上的差异和原软件特殊的功能，还不是简单的全局替换就能了事的，甚至还得改wxWidgets的源码。</p>
+          <p>这几个月做的项目是把一个承载在MFC的软件从Windows移植到Mac，现在进入最后验收阶段了。当时网上调研了一下，决定用<a href="http://www.wxwidgets.org" title="wxWidgets" target="_blank" rel="noopener">wxWidgets</a>这个跨平台的开源库来帮助移植。总的来说，只要把原软件对Windows API的调用都改为对wxWidgets的调用，基本就完成了移植。但基于wxWidgets和MFC一些设计上的差异和原软件特殊的功能，还不是简单的全局替换就能了事的，甚至还得改wxWidgets的源码。</p>
 <p>wxWidgets库在总的结构上跟MFC相似，比如消息响应、相关类的命名。它现在已经出到了3.0，总体还是比较成熟了，但还是好些不完善的地方，这个在看它源码的时候就会发现挺多TODO comment。不过它的官方论坛和stackoverflow上相关问题还是挺活跃的，在上面提问很快就能得到一些资深程序员的答复。有一次我误以为发现了它的一个bug（其实是我理解错了），在上面提问，回复的人不仅有文字的讲解，还附上了自己写的测试用例，让我真心赞叹对方好负责任啊。</p>
 <p>现在总结一些项目移植过程中遇到的问题吧。</p>
           <div class="post-more-link text-center">
@@ -457,7 +457,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/03/05/webharvest-4-tweibo/#comments" >
+            <a href="/2014/03/05/webharvest-4-tweibo/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/03/05/webharvest-4-tweibo/"></span>
             </a>
           </span>
@@ -549,7 +549,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2013/09/08/my-firefox-config/#comments" >
+            <a href="/2013/09/08/my-firefox-config/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/09/08/my-firefox-config/"></span>
             </a>
           </span>
@@ -567,7 +567,7 @@
         
           <p>好久好久没有更新blog了，markdown怎么用都忘了。。写blog总结还是很有用的。今天写一下答应过某人写自己firefox的状况。</p>
 <p>###使用感受</p>
-<p>主流的浏览器都用过，坚持用firefox的原因主要是因为<a href="http://www.vimperator.org" title="vimperator">vimperator</a>，纯键盘地上网很cool很快捷，而且我用的时候会把地址栏、add-on bar等等都去掉，最大化可视范围。<br>虽然现在firefox在内存、响应速度上还是比不上chrome，但谁叫chrome的vim化插件不好用呢～</p>
+<p>主流的浏览器都用过，坚持用firefox的原因主要是因为<a href="http://www.vimperator.org" title="vimperator" target="_blank" rel="noopener">vimperator</a>，纯键盘地上网很cool很快捷，而且我用的时候会把地址栏、add-on bar等等都去掉，最大化可视范围。<br>虽然现在firefox在内存、响应速度上还是比不上chrome，但谁叫chrome的vim化插件不好用呢～</p>
 <p>另外用firefox写web的时候也比较方便，现在自带的“Responsive Design View”很方便地调试移动端的web体验。firefox每次升级都会有针对developer的new feature，足以看出它很重视开发者的功能。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2013/09/08/my-firefox-config/#more">
@@ -626,7 +626,7 @@
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -689,7 +689,7 @@
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

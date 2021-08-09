@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="Android,redmi2," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="Android,redmi2,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/07/27/flash-rom-in-redmi2/#comments" >
+            <a href="/2016/07/27/flash-rom-in-redmi2/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/27/flash-rom-in-redmi2/"></span>
             </a>
           </span>
@@ -186,7 +186,7 @@
       
         <p>由于洁癖，相对于MIUI，更喜欢原生的Android系统，更干净更安全。</p>
 <p>今天手贱更新opengapps的时候，把手机刷无限重启了，recovery也进不了，只能重新线刷。借此机会记录一下。</p>
-<h2 id="rom选择"><a href="#rom选择" class="headerlink" title="rom选择"></a>rom选择</h2><p>到国外最流行的Android发烧友论坛<a href="http://forum.xda-developers.com" target="_blank" rel="external">xdadevelopers</a>找到对应版块，如红米2的 <a href="http://forum.xda-developers.com/redmi-2/development" target="_blank" rel="external">http://forum.xda-developers.com/redmi-2/development</a></p>
+<h2 id="rom选择"><a href="#rom选择" class="headerlink" title="rom选择"></a>rom选择</h2><p>到国外最流行的Android发烧友论坛<a href="http://forum.xda-developers.com" target="_blank" rel="noopener">xdadevelopers</a>找到对应版块，如红米2的 <a href="http://forum.xda-developers.com/redmi-2/development" target="_blank" rel="noopener">http://forum.xda-developers.com/redmi-2/development</a></p>
 <p>浏览一下rom的更新时间、遗留问题、最后几页的讨论，选择自己觉得比较稳妥的rom，毕竟换不同类型的rom是要清SD卡，重新安装配置软件，很麻烦，谁也不想经常这样。</p>
 <a id="more"></a>
 <h2 id="recovery"><a href="#recovery" class="headerlink" title="recovery"></a>recovery</h2><p>找到适合自己机型的recovery，对于卡刷需要签名的recovery，fastboot刷则不需要。</p>
@@ -194,14 +194,14 @@
 <p>刷recovery时，如果能进原有的recovery，可以卡刷，即把要刷的recovery包放到手机里，然后进recovery选择包来安装。</p>
 <p>还可以在fastboot模式，刷recovery。一般手机进fastboot是同时按<code>音量减键</code>和<code>开机键</code>开机进入。</p>
 <p>进入fastboot模式后，手机连PC，用android工具集（即adb所在的）的fastboot执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fastboot devices  # 查看fastboot模式的设备</div><div class="line">fastboot flash recovery xxx.img  # 刷recovery</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fastboot devices  # 查看fastboot模式的设备</span><br><span class="line">fastboot flash recovery xxx.img  # 刷recovery</span><br></pre></td></tr></table></figure>
 <h2 id="第三方rom"><a href="#第三方rom" class="headerlink" title="第三方rom"></a>第三方rom</h2><p>进recovery，把rom复制进手机并选择安装，然后清cache和dalvik，重启即可。</p>
 <p>对于在已有rom基础上，重新刷另外类型的rom，刷rom之前最好还请data、system。重新刷同样的rom（只是版本升级），可以不用。</p>
 <h2 id="opengapps"><a href="#opengapps" class="headerlink" title="opengapps"></a>opengapps</h2><p>现在很多rom里面都会去掉google服务，如果需要，则可以在刷完rom后，刷opengapps</p>
-<p>到<a href="http://opengapps.org/" target="_blank" rel="external">http://opengapps.org/</a>找到对应机型和rom android版本的opengapps。</p>
+<p>到<a href="http://opengapps.org/" target="_blank" rel="noopener">http://opengapps.org/</a>找到对应机型和rom android版本的opengapps。</p>
 <p>一般选择micro足以，包含最基本的服务。谨慎刷nano和pico，刷后不一定能保证机子能正常启动。</p>
 <p>跟刷rom一样，进recovery选择opengapps包安装，清cache和dalvik即可。</p>
-<p>今天刷pico的opengapps后启动会一直报<code>setup wizard has stopped working</code>，网上找到<a href="https://www.reddit.com/r/cyanogenmod/comments/3wv9t4/setup_wizard_has_stopped_loop/" target="_blank" rel="external">解决方法</a>:</p>
+<p>今天刷pico的opengapps后启动会一直报<code>setup wizard has stopped working</code>，网上找到<a href="https://www.reddit.com/r/cyanogenmod/comments/3wv9t4/setup_wizard_has_stopped_loop/" target="_blank" rel="noopener">解决方法</a>:</p>
 <ul>
 <li>adb执行：<code>adb shell pm grant &quot;com.google.android.setupwizard&quot; android.permission.READ_PHONE_STATE</code></li>
 <li>到<code>setting - apps</code>，给google service的相关app授权</li>
@@ -287,7 +287,7 @@
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -350,7 +350,7 @@
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

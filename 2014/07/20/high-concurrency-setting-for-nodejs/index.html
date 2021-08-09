@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="programming,nodejs,high concurrency," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="programming,nodejs,high concurrency,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/07/20/high-concurrency-setting-for-nodejs/#comments" >
+            <a href="/2014/07/20/high-concurrency-setting-for-nodejs/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/07/20/high-concurrency-setting-for-nodejs/"></span>
             </a>
           </span>
@@ -230,14 +230,14 @@ net.ipv4.tcp_max_tw_buckets = 65535
 <pre><code>soft nofile 65536
 hard nofile 65536
 </code></pre><p>###socket池</p>
-<p>nodejs的http模块内置socket池，默认<a href="http://nodejs.org/api/http.html#http_agent_maxsockets" target="_blank" rel="external">最多建立5个socket</a></p>
+<p>nodejs的http模块内置socket池，默认<a href="http://nodejs.org/api/http.html#http_agent_maxsockets" target="_blank" rel="noopener">最多建立5个socket</a></p>
 <pre><code>require(&apos;http&apos;).globalAgent.maxSockets = 40000 # 也可以设成Infinity，无限制
 require(&apos;https&apos;).globalAgent.maxSockets = 40000
 </code></pre><p>###垃圾回收</p>
 <p>nodejs会周期性地向V8发出垃圾回收请求，在并发大的时候经常这样会过多地占用CPU。可以通过启动node时加入<code>--nouse-idle-notification</code>选项，关闭这个动作。如:</p>
 <pre><code>node --nouse-idle-notification app.js
 </code></pre><p>###多进程</p>
-<p>nodejs虽然异步可以处理轻松地处理大量请求，但单进程单线程的模型在多核下还没有完全利用硬件资源。幸好nodejs原生的<a href="http://nodejs.org/api/cluster.html" target="_blank" rel="external">cluster模块</a>可以很简单地让程序编程多进程。</p>
+<p>nodejs虽然异步可以处理轻松地处理大量请求，但单进程单线程的模型在多核下还没有完全利用硬件资源。幸好nodejs原生的<a href="http://nodejs.org/api/cluster.html" target="_blank" rel="noopener">cluster模块</a>可以很简单地让程序编程多进程。</p>
 <p>cluster是prefork模型的，即前面一个master负责总的接受请求，然后均匀地把请求分发给worker，每个worker是一个独立的进程。<br>例如对于express的应用，在程序入口添加以下代码即可：</p>
 <pre><code>var express = require(&apos;express&apos;);
 ...
@@ -265,16 +265,16 @@ if (cluster.isMaster) {
 // worker
 var app = express();
 ...
-</code></pre><p>另外还有如<a href="https://github.com/Unitech/pm2" target="_blank" rel="external">PM2</a>等外部工具可以让原来单进程的程序变成多进程</p>
+</code></pre><p>另外还有如<a href="https://github.com/Unitech/pm2" target="_blank" rel="noopener">PM2</a>等外部工具可以让原来单进程的程序变成多进程</p>
 <p>###参考资料</p>
 <ul>
-<li><p><a href="http://www.oschina.net/translate/optimising-nginx-node-js-and-networking-for-heavy-workloads" target="_blank" rel="external">http://www.oschina.net/translate/optimising-nginx-node-js-and-networking-for-heavy-workloads</a></p>
+<li><p><a href="http://www.oschina.net/translate/optimising-nginx-node-js-and-networking-for-heavy-workloads" target="_blank" rel="noopener">http://www.oschina.net/translate/optimising-nginx-node-js-and-networking-for-heavy-workloads</a></p>
 </li>
-<li><p><a href="http://blog.caustik.com/2012/04/08/scaling-node-js-to-100k-concurrent-connections/" target="_blank" rel="external">http://blog.caustik.com/2012/04/08/scaling-node-js-to-100k-concurrent-connections/</a></p>
+<li><p><a href="http://blog.caustik.com/2012/04/08/scaling-node-js-to-100k-concurrent-connections/" target="_blank" rel="noopener">http://blog.caustik.com/2012/04/08/scaling-node-js-to-100k-concurrent-connections/</a></p>
 </li>
-<li><p><a href="http://engineering.linkedin.com/nodejs/blazing-fast-nodejs-10-performance-tips-linkedin-mobile" target="_blank" rel="external">http://engineering.linkedin.com/nodejs/blazing-fast-nodejs-10-performance-tips-linkedin-mobile</a></p>
+<li><p><a href="http://engineering.linkedin.com/nodejs/blazing-fast-nodejs-10-performance-tips-linkedin-mobile" target="_blank" rel="noopener">http://engineering.linkedin.com/nodejs/blazing-fast-nodejs-10-performance-tips-linkedin-mobile</a></p>
 </li>
-<li><p><a href="https://rtcamp.com/tutorials/linux/sysctl-conf/" target="_blank" rel="external">https://rtcamp.com/tutorials/linux/sysctl-conf/</a></p>
+<li><p><a href="https://rtcamp.com/tutorials/linux/sysctl-conf/" target="_blank" rel="noopener">https://rtcamp.com/tutorials/linux/sysctl-conf/</a></p>
 </li>
 </ul>
 
@@ -358,7 +358,7 @@ var app = express();
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -421,7 +421,7 @@ var app = express();
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

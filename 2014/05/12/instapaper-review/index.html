@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="nodejs,Instapaper,email," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="nodejs,Instapaper,email,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/05/12/instapaper-review/#comments" >
+            <a href="/2014/05/12/instapaper-review/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/05/12/instapaper-review/"></span>
             </a>
           </span>
@@ -184,11 +184,11 @@
       
 
       
-        <p>最近在搞nodejs，刚好有个点子，想实现一个对自己这个月在<a href="http://www.instapaper.com" title="Instapaper" target="_blank" rel="external">Instapaper</a>的已读文章做回顾，通过邮件形式发到自己的邮箱，起到复习的作用。然后上周末就用了两个通宵把这搞出来了，代码放在<a href="https://github.com/goorockey/instapaper-review" target="_blank" rel="external">Github</a>上面。</p>
+        <p>最近在搞nodejs，刚好有个点子，想实现一个对自己这个月在<a href="http://www.instapaper.com" title="Instapaper" target="_blank" rel="noopener">Instapaper</a>的已读文章做回顾，通过邮件形式发到自己的邮箱，起到复习的作用。然后上周末就用了两个通宵把这搞出来了，代码放在<a href="https://github.com/goorockey/instapaper-review" target="_blank" rel="noopener">Github</a>上面。</p>
 <p>###总的情况</p>
 <ul>
-<li>整个服务跑在<a href="http://www.appfog.com" title="Appfog" target="_blank" rel="external">Appfog</a>上</li>
-<li>用<a href="http://sendgrid.com" title="SendGrid" target="_blank" rel="external">SendGrid</a>服务发送邮件</li>
+<li>整个服务跑在<a href="http://www.appfog.com" title="Appfog" target="_blank" rel="noopener">Appfog</a>上</li>
+<li>用<a href="http://sendgrid.com" title="SendGrid" target="_blank" rel="noopener">SendGrid</a>服务发送邮件</li>
 <li>nodejs实现, 用到了cheerio、request、cron、sugar、ejs、sendgrid等几个模块</li>
 </ul>
 <a id="more"></a>
@@ -197,7 +197,7 @@
 <p>nodejs抓网页，可以用cheerio，说比传统的JSDOM要快、要方便，用着确实方便。</p>
 <p>###Appfog</p>
 <p>Appfog是我挺喜欢的一个PaaS，它是基于Cloudary提供服务的，支持语言多，部署简单。</p>
-<p>这次因为要定时发邮件，在Appfog上面要定时执行，需要部署一个<a href="http://blog.appfog.com/task-scheduling-support-on-appfog-with-standalone-apps/" target="_blank" rel="external">standalone app</a>。</p>
+<p>这次因为要定时发邮件，在Appfog上面要定时执行，需要部署一个<a href="http://blog.appfog.com/task-scheduling-support-on-appfog-with-standalone-apps/" target="_blank" rel="noopener">standalone app</a>。</p>
 <p>nodejs这边要实现定时，要node-cron很方便就搞定了。</p>
 <p>###发邮件</p>
 <p>Appfog上面提供SendGrid的插件。SendGrid在全球提供发邮件服务，为了防止垃圾邮件，其申请时的审核挺严格的。不过在Appfog上面想用SendGrid就简单得多，把插件启动了就好了，赞！</p>
@@ -285,7 +285,7 @@
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -348,7 +348,7 @@
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

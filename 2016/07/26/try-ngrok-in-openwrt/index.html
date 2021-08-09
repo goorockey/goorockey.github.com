@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="openwrt,ngrok,linux," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="linux,openwrt,ngrok,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/07/26/try-ngrok-in-openwrt/#comments" >
+            <a href="/2016/07/26/try-ngrok-in-openwrt/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/26/try-ngrok-in-openwrt/"></span>
             </a>
           </span>
@@ -184,7 +184,7 @@
       
 
       
-        <p>由于所在网络没有公网IP，不能弄DDNS，想要在外面控制家里的openwrt路由，想到用内网穿透神器<a href="https://ngrok.com/" target="_blank" rel="external">ngrok</a>。</p>
+        <p>由于所在网络没有公网IP，不能弄DDNS，想要在外面控制家里的openwrt路由，想到用内网穿透神器<a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a>。</p>
 <p>ngrok跟Teamviewer等的原理类似，内网的机子主动跟外网的机子保持连接，从而使内网机子“暴露”出外网。</p>
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>需要以下资源：</p>
 <ul>
@@ -199,7 +199,7 @@
 </code></pre><p>其中<code>10.0.10.1</code>为所拥有的vps的ip。注意需要添加第二条的泛解析，因为ngrok的http/https，需要子域名定位服务。</p>
 <h2 id="编译ngrok-for-openwrt"><a href="#编译ngrok-for-openwrt" class="headerlink" title="编译ngrok for openwrt"></a>编译ngrok for openwrt</h2><p>获取ngrok在openwrt的源码</p>
 <pre><code>git clone https://github.com/dosgo/ngrok-c
-</code></pre><p>在openwrt官网下载<a href="https://downloads.openwrt.org/" target="_blank" rel="external">https://downloads.openwrt.org/</a>对应路由的SDK，如我的小米路由mini为：</p>
+</code></pre><p>在openwrt官网下载<a href="https://downloads.openwrt.org/" target="_blank" rel="noopener">https://downloads.openwrt.org/</a>对应路由的SDK，如我的小米路由mini为：</p>
 <pre><code>wget -O openwrt-sdk.tar.bz2 https://downloads.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/OpenWrt-SDK-15.05.1-ramips-mt7620_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
 tar xvf openwrt-sdk.tar.bz2
 </code></pre><p>复制ngrok-c里面的openssl目录到openwrt-sdk指定目录下</p>
@@ -209,9 +209,9 @@ tar xvf openwrt-sdk.tar.bz2
 <p>把ngrokc复制到路由内，可能还需要路由安装<code>libstdcpp</code></p>
 <h2 id="ngrok-server"><a href="#ngrok-server" class="headerlink" title="ngrok server"></a>ngrok server</h2><p>ubuntu下可以直接<code>apt-get install ngrok-server</code>，其他的可以到ngrok官网下载可执行版本，或者源码编译。源码编译可以修改ngrok服务端的ssl证书，安全性更好。</p>
 <h2 id="使用ngrok"><a href="#使用ngrok" class="headerlink" title="使用ngrok"></a>使用ngrok</h2><p>服务端执行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ngrokd -domain=&quot;ngrokd.goorockey.com&quot; \</div><div class="line">       -httpAddr=&quot;:10001&quot; -httpsAddr=&quot;:10002&quot; \</div><div class="line">       -tunnelAddr=&quot;:10003&quot; -log=/var/log/ngrok.log</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ngrokd -domain=&quot;ngrokd.goorockey.com&quot; \</span><br><span class="line">       -httpAddr=&quot;:10001&quot; -httpsAddr=&quot;:10002&quot; \</span><br><span class="line">       -tunnelAddr=&quot;:10003&quot; -log=/var/log/ngrok.log</span><br></pre></td></tr></table></figure>
 <p>客户端执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ngrokc -SER[Shost:ngrokd.goorockey.com,Sport:10003] \</div><div class="line">       -AddTun[Type:http,Lhost:127.0.0.1,Lport:80,Sdname:test] \</div><div class="line">       -AddTun[Type:https,Lhost:127.0.0.1,Lport:443,Sdname:test2] \</div><div class="line">       -AddTun[Type:tcp,Lhost:127.0.0.1,Lport:22,Rport:10004]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ngrokc -SER[Shost:ngrokd.goorockey.com,Sport:10003] \</span><br><span class="line">       -AddTun[Type:http,Lhost:127.0.0.1,Lport:80,Sdname:test] \</span><br><span class="line">       -AddTun[Type:https,Lhost:127.0.0.1,Lport:443,Sdname:test2] \</span><br><span class="line">       -AddTun[Type:tcp,Lhost:127.0.0.1,Lport:22,Rport:10004]</span><br></pre></td></tr></table></figure>
 <p>其中<code>10003</code>是服务端指定的ngrok服务监听端口，<code>10001</code>是服务端指定访问http服务时的端口，<code>10002</code>是服务端指定访问https服务时的端口<br><code>10004</code>是客户端指定tcp服务绑定到服务端的端口</p>
 <p>以上命令就可以达到：</p>
 <ul>
@@ -219,17 +219,17 @@ tar xvf openwrt-sdk.tar.bz2
 <li>访问<code>https://test2.ngrokd.goorockey.com:10002</code>，能访问到路由在443端口的https服务</li>
 <li>访问<code>tcp://ngrokd.goorockey</code>，端口10004，能访问到路由在22端口的tcp服务，如路由22端口是ssh，则可以ssh ngrokd.goorockey.com -p 10004</li>
 </ul>
-<p>其他更多选项可参考<a href="https://ngrok.com/" target="_blank" rel="external">ngrok官网</a>和<a href="https://github.com/dosgo/ngrok-c" target="_blank" rel="external">ngrok-c的仓库</a></p>
+<p>其他更多选项可参考<a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok官网</a>和<a href="https://github.com/dosgo/ngrok-c" target="_blank" rel="noopener">ngrok-c的仓库</a></p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>ngrok的服务端原生是不支持验证的，即ngrokd服务端外放后，其他人的ngrok客户端可以自由连接。</p>
 <p>暂时找到两个解决方案：</p>
 <ul>
-<li>修改源码，参考<a href="https://github.com/inconshreveable/ngrok/issues/321" target="_blank" rel="external">Issue #321</a></li>
-<li>使用官方付费的<a href="https://ngrok.com/product/ngrok-link" target="_blank" rel="external">ngrok-link</a></li>
+<li>修改源码，参考<a href="https://github.com/inconshreveable/ngrok/issues/321" target="_blank" rel="noopener">Issue #321</a></li>
+<li>使用官方付费的<a href="https://ngrok.com/product/ngrok-link" target="_blank" rel="noopener">ngrok-link</a></li>
 </ul>
 <h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><ul>
-<li><a href="https://ngrok.com/" target="_blank" rel="external">https://ngrok.com/</a></li>
-<li><a href="http://www.jianshu.com/p/8428949d946c" target="_blank" rel="external">http://www.jianshu.com/p/8428949d946c</a></li>
-<li><a href="https://github.com/dosgo/ngrok-c/blob/master/README.md" target="_blank" rel="external">https://github.com/dosgo/ngrok-c/blob/master/README.md</a></li>
+<li><a href="https://ngrok.com/" target="_blank" rel="noopener">https://ngrok.com/</a></li>
+<li><a href="http://www.jianshu.com/p/8428949d946c" target="_blank" rel="noopener">http://www.jianshu.com/p/8428949d946c</a></li>
+<li><a href="https://github.com/dosgo/ngrok-c/blob/master/README.md" target="_blank" rel="noopener">https://github.com/dosgo/ngrok-c/blob/master/README.md</a></li>
 </ul>
 
       
@@ -239,11 +239,11 @@ tar xvf openwrt-sdk.tar.bz2
       
         <div class="post-tags">
           
+            <a href="/tags/linux/"> #linux </a>
+          
             <a href="/tags/openwrt/"> #openwrt </a>
           
             <a href="/tags/ngrok/"> #ngrok </a>
-          
-            <a href="/tags/linux/"> #linux </a>
           
         </div>
       
@@ -312,7 +312,7 @@ tar xvf openwrt-sdk.tar.bz2
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -375,7 +375,7 @@ tar xvf openwrt-sdk.tar.bz2
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         

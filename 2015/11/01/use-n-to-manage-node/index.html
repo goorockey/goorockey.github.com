@@ -1,32 +1,32 @@
 <!doctype html>
 <html class="theme-next use-motion theme-next-mist">
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5">
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="programming,nodejs,n," />
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+  <meta name="keywords" content="programming,nodejs,n,">
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml">
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2">
 
 
 
@@ -73,7 +73,7 @@
       
       <li class="menu-item menu-item-home">
         <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
+          <i class="menu-item-icon icon-home"></i> <br>
           home
         </a>
       </li>
@@ -81,7 +81,7 @@
       
       <li class="menu-item menu-item-archives">
         <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
+          <i class="menu-item-icon icon-archives"></i> <br>
           archives
         </a>
       </li>
@@ -89,7 +89,7 @@
       
       <li class="menu-item menu-item-categories">
         <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
+          <i class="menu-item-icon icon-categories"></i> <br>
           categories
         </a>
       </li>
@@ -97,7 +97,7 @@
       
       <li class="menu-item menu-item-tags">
         <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
+          <i class="menu-item-icon icon-tags"></i> <br>
           tags
         </a>
       </li>
@@ -105,7 +105,7 @@
       
       <li class="menu-item menu-item-projects">
         <a href="/projects">
-          <i class="menu-item-icon icon-projects"></i> <br />
+          <i class="menu-item-icon icon-projects"></i> <br>
           projects
         </a>
       </li>
@@ -113,7 +113,7 @@
       
       <li class="menu-item menu-item-links">
         <a href="/links">
-          <i class="menu-item-icon icon-links"></i> <br />
+          <i class="menu-item-icon icon-links"></i> <br>
           links
         </a>
       </li>
@@ -169,7 +169,7 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/11/01/use-n-to-manage-node/#comments" >
+            <a href="/2015/11/01/use-n-to-manage-node/#comments">
               <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/11/01/use-n-to-manage-node/"></span>
             </a>
           </span>
@@ -185,7 +185,7 @@
 
       
         <p>n和nvm都是大家常用的nodejs版本管理工具，最先接触的是n，所以我一般用n。(BTW, n还是TJ大神的项目咧~)</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>以前需要先安装npm才能安装n，现在n有了独立的安装工具<a href="https://github.com/mklement0/n-install" target="_blank" rel="external">n-install</a>，可以通过以下命令安装:</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>以前需要先安装npm才能安装n，现在n有了独立的安装工具<a href="https://github.com/mklement0/n-install" target="_blank" rel="noopener">n-install</a>，可以通过以下命令安装:</p>
 <pre><code>curl -L http://git.io/n-install | bash
 </code></pre><p>另外还可以用<code>n-update</code>更新n，<code>n-uninstall</code>卸载n(其实就是删除n的目录和环境变量设置)</p>
 <a id="more"></a>
@@ -193,10 +193,10 @@
 <p>n支持<code>n project</code>命令，通过设置<code>PROJECT_NAME</code>和<code>PROJECT_URL</code>环境变量，指定下载nodejs包的源。国内从原始官方下载真的太慢了。通过以下命令使用淘宝镜像加速：</p>
 <pre><code>PROJECT_NAME=&quot;node&quot; PROJECT_URL=&quot;https://npm.taobao.org/mirrors/node/&quot; n project stable
 PROJECT_NAME=&quot;io&quot; PROJECT_URL=&quot;https://npm.taobao.org/mirrors/iojs/&quot; n project stable
-</code></pre><p>中间可能会遇到提示<code>Invalid version XXX</code>的问题，如这个<a href="https://github.com/tj/n/issues/314" target="_blank" rel="external">Issue</a>。原始是n脚本在下载包前，用curl或wget先测试链接时候有效:</p>
-<p><a href="https://github.com/tj/n/blob/1388dd0926abfa5c21228acbdb33795bee7c5d9d/bin/n#L502" target="_blank" rel="external">502行</a>:</p>
+</code></pre><p>中间可能会遇到提示<code>Invalid version XXX</code>的问题，如这个<a href="https://github.com/tj/n/issues/314" target="_blank" rel="noopener">Issue</a>。原始是n脚本在下载包前，用curl或wget先测试链接时候有效:</p>
+<p><a href="https://github.com/tj/n/blob/1388dd0926abfa5c21228acbdb33795bee7c5d9d/bin/n#L502" target="_blank" rel="noopener">502行</a>:</p>
 <pre><code>is_ok $url || abort &quot;invalid version $version&quot;
-</code></pre><p><a href="https://github.com/tj/n/blob/1388dd0926abfa5c21228acbdb33795bee7c5d9d/bin/n#L360" target="_blank" rel="external">360行</a>:</p>
+</code></pre><p><a href="https://github.com/tj/n/blob/1388dd0926abfa5c21228acbdb33795bee7c5d9d/bin/n#L360" target="_blank" rel="noopener">360行</a>:</p>
 <pre><code>is_ok() {
   if command -v curl &gt; /dev/null; then
     $GET -Is $1 | head -n 1 | grep 200 &gt; /dev/null
@@ -286,7 +286,7 @@ PROJECT_NAME=&quot;io&quot; PROJECT_URL=&quot;https://npm.taobao.org/mirrors/ioj
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey">
           <p class="site-author-name">goorockey</p>
         </div>
         <p class="site-description motion-element"></p>
@@ -349,7 +349,7 @@ PROJECT_NAME=&quot;io&quot; PROJECT_URL=&quot;https://npm.taobao.org/mirrors/ioj
         
           <div class="cc-license motion-element">
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
             </a>
           </div>
         
