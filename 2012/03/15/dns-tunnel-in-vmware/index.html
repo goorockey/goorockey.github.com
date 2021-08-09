@@ -1,0 +1,1064 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="network,vmware,隧道," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> 用VMWare组网，实验DNS隧道 // Goorockey's Blog </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Goorockey's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    <!--增加swiftype搜索功能-->
+    <!--form class="menu-item menu-item-">
+      <input type="text" id="st-search-input" class="st-default-search-input" style="width:80px;"  />
+    </form-->
+    
+    <script type="text/javascript">
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+     (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+     e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+     })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+    _st('install','W8NNP1sZaY6a224zSHEB','2.0.0');
+    </script>
+    <!--增加swiftype搜索功能end-->
+    
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          home
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          archives
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          categories
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          tags
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-projects">
+        <a href="/projects">
+          <i class="menu-item-icon icon-projects"></i> <br />
+          projects
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-links">
+        <a href="/links">
+          <i class="menu-item-icon icon-links"></i> <br />
+          links
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              用VMWare组网，实验DNS隧道
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2012-03-14
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/network/">network</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2012/03/15/dns-tunnel-in-vmware/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/03/15/dns-tunnel-in-vmware/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>继续用VMWare来组网，这次要测试我想试很久的DNS隧道，之前碍于没有找到有独立ip的方法（当然是要免费的~~），现在用VMWare就可以了。</p>
+<p>DNS隧道是什么就不解释了。google一下DNS隧道能搜到风河、云风两个大牛相关的blog。这次我用iodine来实现DNS隧道。</p>
+<a id="more"></a>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>现在情况是，用户只能跟外界有DNS通路，想借此进行平常的http、ftp等通信。</p>
+<p>据说平常的CMCC等开放热点，虽然http等要账号和密码，但DNS是通的，然后你懂的了。</p>
+<p>简单的拓扑图如下：</p>
+<p><img src="http://www.goorockey.com/uploads/2012/03/image_thumb2.png" alt="拓扑图"></p>
+<p>整个回路就是：</p>
+<ul>
+<li><p>用户把要想跟外网进行通信的数据包用DNS协议封装</p>
+</li>
+<li><p>得到的DNS包发送给DNS服务器，要求做DNS解析</p>
+</li>
+<li><p>DNS服务器根据域名，解析出DNS代理的ip，并把数据包发给它</p>
+</li>
+<li><p>DNS代理把数据包解封，并转发给外网的目标地址</p>
+</li>
+<li><p>外网回复的数据包原路返回，这样就完成通讯了。</p>
+</li>
+</ul>
+<h2 id="VMWare环境模拟"><a href="#VMWare环境模拟" class="headerlink" title="VMWare环境模拟"></a>VMWare环境模拟</h2><p>这次我用了三台机子，系统还是CentOS 6.0：</p>
+<p> 主机名 角色 网卡ip</p>
+<pre><code>HostA   用户 192.168.149.128 (Host-only)
+HostB   DNS代理 192.168.126.130 (NAT)
+HostC   DNS服务器 192.168.149.130 (Host-only)、192.168.126.233 (NAT)
+</code></pre><p>要模拟的初始状态就是：</p>
+<pre><code>HostA（用户）可以跟HostC做DNS解析，但不能访问外网 。     （所以虚拟网卡用Host-only模式）
+HostB（DNS代理）可以跟外网通信。            （用NAT和Bridged都可以，这次我选用NAT）
+HostC（DNS服务器）可以跟HostA进行DNS解析，且能跟HostB通信。   （所以用两张网卡，为了分别跟HostA和HostB通信）
+HostA的iptables不允许HostA和HostB之间互访
+</code></pre><h2 id="DNS服务器配置"><a href="#DNS服务器配置" class="headerlink" title="DNS服务器配置"></a>DNS服务器配置</h2><p>刚开始看教程好像很繁琐，感觉conf文件好多啊，而且配置项也多~~</p>
+<p>静下心来看，其实要实现最基本的的DNS解析很简单，主要就是修改两个文件。</p>
+<p>1.安装</p>
+<p>需要在HostC执行以下命令，安装DNS服务器所需的bind和caching-nameserver：</p>
+<pre><code>$ yum install –y bind bind-utils bind-chroot caching-nameserver
+</code></pre><p>2.修改named的conf文件（/etc/named.conf）</p>
+<p>添加域名goorockey.go域名的配置：</p>
+<pre><code>zone “goorockey.go” IN {
+    type   master;
+    file      “goorockey.go.zone”;
+    allow-update {none; };
+}
+</code></pre><p>大概解释：</p>
+<ul>
+<li><p>zone “ goorockey.go”： 指示要添加goorockey.go这个域名的正向解析。正向解析就是指域名到ip的解析，反向解析是指ip到域名的解析。例如想通过查询DNS服务器，知道192.168.0.1判定了多少域名，则在DNS服务器上配置zone “1.0.168.192.in-addr-arpa”的项。</p>
+</li>
+<li><p>type master：对于goorockey.go这个域名，当前DNS服务器是它的主DNS服务器。type可以还可以使hint和slave。只有zone “.”可以配置type hint。type slave是指对于这个域名，当前DNS服务器是辅助DNS服务器，即它的DNS记录是从主服务器拷贝过来的，目的是为了达到DNS解析的分布式、负载均衡。</p>
+</li>
+<li><p>file “goorockey.go.zone”：这个域名的DNS记录文件在goorockey.go.zone，文件所在目录在/etc/named.conf的options项中的directory来定义。默认是/var/named</p>
+</li>
+<li><p>allow-update：定义时候允许更新</p>
+</li>
+</ul>
+<p>要注意的是，/etc/named.conf中的options项是所有域名的全局配置。默认时，有：</p>
+<ul>
+<li><p><code>allow-query   {   localhost;   };</code> 意思是只允许本机做DNS查询，当然要把它注释掉。</p>
+</li>
+<li><p><code>listen-port    53    {  127.0.0.1;   };</code> 意思是服务端口为53，但监听的ip是127.0.0.1，这样就不能让别的机子访问DNS解析服务了。所以可以把这句话注释掉，或者把ip改为0.0.0.0或指定ip。</p>
+</li>
+</ul>
+<p>3.编辑goorockey.go的DNS记录文件</p>
+<p>根据我们在/etc/named.conf的配置，文件是/var/named/goorockey.go.zone。</p>
+<p>创建此文件，并编辑内容为：</p>
+<pre><code>@  IN SOA localhost. root.localhost. (20120315 3600 1800 36000 3600)
+   IN NS localhost.
+goorockey.go IN A 192.168.126.130
+</code></pre><p>大概解释：</p>
+<ul>
+<li><p>第一行是一条SOA记录。@指代当前域名，就是/etc/named中的goorockey.go。SOA记录是域名有效性的相关属性。localhost.是主服务器的地址。root.localhost.是邮箱。主要DNS记录文件的地址都用FQDN，每个地址最后的句号“.”表示结束。如果没有句号“.”，会自动追加域名，例如没有句号的localhost会解释成”localhost.goorockey.go“。后面就是具体属性项。</p>
+</li>
+<li><p>第二行开始是两个空格，第一个空格表示继续上一条的内容，这里指”@“，第二个空格就是分割@和IN的。这一行表示域名goorockey.go的域名服务器是本机。</p>
+</li>
+<li><p>第三行是一条A记录，A for address。意思就是域名goorockey.go会解析成ip 192.168.126.130。可以看出，搞这么久，就是为了找到这句话。所以说A记录是DNS服务器的核心，就是它标明DNS解析的。</p>
+</li>
+</ul>
+<p>DNS记录类型还会有：</p>
+<ul>
+<li><p>PTR用在反向解析</p>
+</li>
+<li><p>MX用在邮件服务器</p>
+</li>
+<li><p>TXT就是纯文本，对DNS服务器做标注</p>
+</li>
+</ul>
+<p>4.运行DNS服务</p>
+<p>在HostC执行： <code>$ service  named   start</code> 或者 <code>$ /etc/init.d/named start</code>,这就可以运行DNS服务了。</p>
+<p>对HostC的/etc/resolv.conf添加 <code>nameserver 127.0.0.1</code></p>
+<p>则在HostC用nslookup能成功返回DNS信息：</p>
+<p><img src="http://www.goorockey.com/uploads/2012/03/20594453_thumb.png" alt="DNS信息"></p>
+<p>但还要配置iptables，使其他机子可以访问DNS服务的端口。</p>
+<p>对于默认的53端口，在HostC运行：</p>
+<pre><code>$ iptables –I INPUT -p tcp --dport 53 -j ACCEPT
+$ iptables –I INPUT -p udp --dport 53 -j ACCEPT
+</code></pre><p>要解释一下的是，DNS包有可能以tcp或者udp方式传输。一般首选是udp方式。但因为udp包长度只能是512字节，也不能分包，所以如果当DNS包长度大于512时，就会选择tcp方式。所以这里要对tcp和udp都设置ACCEPT。</p>
+<p>在HostA和HostB的/etc/resolv.conf添加HostA的ip后，就能正确解析goorockey.go了。</p>
+<h2 id="iodine"><a href="#iodine" class="headerlink" title="iodine"></a>iodine</h2><p>iodine是外国人写的开源DNS隧道工具，有linux版、windows版和Mac版的。教程看它的ReadMe或者HowToSetup都比较清楚。</p>
+<p>下载并安装对应自己版本的iodine后就能使用了。</p>
+<p>在DNS隧道的服务器端(HostB)，先执行：</p>
+<pre><code>$ iodined -f 10.0.0.1 goorockey.go
+</code></pre><p>输入密码后，服务端就运行了。注意服务端运行的是iodined，有”d“。</p>
+<p>在客户端（HostA)，执行：</p>
+<pre><code>$ iodine -f -c 192.168.126.130 goorockey.go
+</code></pre><p>其中192.168.126.130是服务端（HostB）的ip。</p>
+<p>然后还要配置一下，HostA，HostB，HostC的iptables，使它们的DNS包可以通过就可以了。</p>
+<p>这时候，HostA的虚拟网卡ip是10.0.0.2，HostB的虚拟网卡ip是10.0.0.1。两台机子已经建立了VPN。</p>
+<p>本来两台不能互访的机子就可以访问了。</p>
+<p>例如在HostA就可以ssh HostB了 ：</p>
+<pre><code>$ ssh 10.0.0.1
+</code></pre><p> 然后就可以用ssh隧道过去来做代理了~~</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>那时候看到DNS隧道，真是非常的兴奋，感觉太爽、太妙了。其实协议都可以这样做隧道，只是那时候没有意识到而已。</p>
+<p>之后还继续想实验一下ICMP隧道，看一下iodine的代码。O(∩_∩)O哈哈~</p>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><ul>
+<li><p>【风河的博文】<a href="http://www.nsbeta.info/archives/96" target="_blank" rel="external">http://www.nsbeta.info/archives/96</a></p>
+</li>
+<li><p>【云风的博文】<a href="http://blog.codingnow.com/2011/06/dns_tunnel.html" target="_blank" rel="external">http://blog.codingnow.com/2011/06/dns_tunnel.html</a></p>
+</li>
+<li><p>【iodine】<a href="http://code.kryo.se/iodine/" target="_blank" rel="external">http://code.kryo.se/iodine/</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/network/"> #network </a>
+          
+            <a href="/tags/vmware/"> #vmware </a>
+          
+            <a href="/tags/隧道/"> #隧道 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2012/09/09/try-octopress/">从Wordpress转到Octopress</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012/03/13/nat-experiment-using-vmware/">VMWare组网实验(NAT)</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <p class="site-author-name">goorockey</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">categories</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/goorockey" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/444891215" target="_blank">Weibo</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.douban.com/people/goorockey" target="_blank">DouBan</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.zhihu.com/people/goorockey" target="_blank">ZhiHu</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VMWare环境模拟"><span class="nav-number">2.</span> <span class="nav-text">VMWare环境模拟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS服务器配置"><span class="nav-number">3.</span> <span class="nav-text">DNS服务器配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iodine"><span class="nav-number">4.</span> <span class="nav-text">iodine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">6.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2011 - 
+  2021
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">goorockey</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+  
+
+  
+
+    
+      
+    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'goorockeyslife';
+      var disqus_identifier = '2012/03/15/dns-tunnel-in-vmware/';
+      var disqus_url = 'http://www.goorockey.com/2012/03/15/dns-tunnel-in-vmware/';
+
+      (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    </script>
+  
+
+
+
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-28958629-1');ga('send','pageview');
+  </script>
+
+
+</body>
+</html>

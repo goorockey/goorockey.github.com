@@ -1,0 +1,1154 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="programming,windows," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Goorockey's Blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> 《Windows核心编程》读书笔记2--进程、作业、线程 // Goorockey's Blog </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Goorockey's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    <!--增加swiftype搜索功能-->
+    <!--form class="menu-item menu-item-">
+      <input type="text" id="st-search-input" class="st-default-search-input" style="width:80px;"  />
+    </form-->
+    
+    <script type="text/javascript">
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+     (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+     e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+     })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+    _st('install','W8NNP1sZaY6a224zSHEB','2.0.0');
+    </script>
+    <!--增加swiftype搜索功能end-->
+    
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          home
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          archives
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          categories
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          tags
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-projects">
+        <a href="/projects">
+          <i class="menu-item-icon icon-projects"></i> <br />
+          projects
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-links">
+        <a href="/links">
+          <i class="menu-item-icon icon-links"></i> <br />
+          links
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              《Windows核心编程》读书笔记2--进程、作业、线程
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2011-09-02
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; In
+            
+              <a href="/categories/windows/">windows</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2011/09/03/note-for-windows-programming-2/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2011/09/03/note-for-windows-programming-2/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <h2 id="一、摘要："><a href="#一、摘要：" class="headerlink" title="一、摘要："></a>一、摘要：</h2><ul>
+<li><p>进程只是线程的容器，存放数据和代码，但不执行代码。</p>
+</li>
+<li><p>线程才是执行代码的实体。</p>
+</li>
+<li><p>作业是对一个或多个进程的统一管理，能添加一般无法添加的限制。</p>
+</li>
+</ul>
+<h2 id="二、进程"><a href="#二、进程" class="headerlink" title="二、进程"></a>二、进程</h2><p>1.概念</p>
+<p><strong>进程只是线程的容器</strong>，为线程执行代码提供资源、营造运行环境。</p>
+<a id="more"></a>
+<p>2.进程的构成</p>
+<ul>
+<li>关键：</li>
+</ul>
+<blockquote>
+<p>一块内存地址空间，用以存放代码和数据；<br>一个内核对象句柄表，记录使用中的内核对象。</p>
+</blockquote>
+<ul>
+<li>更详尽的构成</li>
+</ul>
+<p>(来自MSDN <a href="http://msdn.microsoft.com/zh-cn/library/ms681917(v=vs.85).aspx" target="_blank" rel="external">http://msdn.microsoft.com/zh-cn/library/ms681917(v=vs.85).aspx</a>):</p>
+<pre><code>a virtual address space,
+executable code,
+open handles to system objects,
+a security context,
+a unique process identifier,
+environment variables,
+a priority class,
+minimum and maximum working set sizes,
+at least one thread of execution.
+</code></pre><p>3.进程的终止</p>
+<ul>
+<li><p>全部线程都结束。即使主线程退出了，如果还有线程存在，该进程仍然不会销毁。</p>
+</li>
+<li><p>ExitProcess，有可能造成内存泄露，因为C/C++ Runtime Library没有被清空，则全局变量等资源就不会被释放。</p>
+</li>
+<li><p>TerminateProcess，跟ExitProcess一样是可能造成内存泄露的。另外它是异步的，即只是通知要终止目标进程，返回后并不代表它已结束。</p>
+</li>
+</ul>
+<h2 id="三、作业"><a href="#三、作业" class="headerlink" title="三、作业"></a>三、作业</h2><p>1.基本概念</p>
+<ul>
+<li><p><strong>作业是进程的容器</strong>，对一个或多个进程附加一定的限制，进行统一管理。</p>
+</li>
+<li><p>即使作业只包含了一个进程也是有用的，因为这样能做一些普通不能进行的限制</p>
+</li>
+</ul>
+<p>2.主要的API:</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CreateJobObject</td>
+<td>创建作业内核对象</td>
+</tr>
+<tr>
+<td>OpenJobObject</td>
+<td>根据Handle打开作业内核对象</td>
+</tr>
+<tr>
+<td>IsProcessInJob</td>
+<td>验证某一个进程是否存在于作业中</td>
+</tr>
+<tr>
+<td>SetInformationJobObject</td>
+<td>给作业加上各种限制</td>
+</tr>
+<tr>
+<td>QueryInformationJobObject</td>
+<td>查询作业对象的信息</td>
+</tr>
+<tr>
+<td>AssignProcessToJobObject</td>
+<td>将进程放入作业</td>
+</tr>
+<tr>
+<td>TerminateJobObject</td>
+<td>终止作业内所有进程</td>
+</tr>
+</tbody>
+</table>
+<p>3.用于作业对象的基本用户界面限制的位标志</p>
+<table>
+<thead>
+<tr>
+<th>标志</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JOB_OBJECT_UILIMIT_EXITWINDOWS</td>
+<td>用于防止进程通过ExitWindowsEx函数退出、关闭、重新引导或关闭系统电源</td>
+</tr>
+<tr>
+<td>JOB_OBJECT_UILIMIT_READCLIPBOARD</td>
+<td>防止进程读取剪贴板的内容</td>
+</tr>
+<tr>
+<td>JOB_OBJECT_UILIMIT_WRITECLIPBOARD</td>
+<td>防止进程删除剪贴板的内容</td>
+</tr>
+<tr>
+<td>JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS</td>
+<td>防止进程通过SystemParametersInfor函数来改变系统参数</td>
+</tr>
+<tr>
+<td>JOB_OBJECT_UILIMIT_DISPLAYSETTINGS</td>
+<td>防止进程通过ChangeDisplaySettings函数来改变显示设置</td>
+</tr>
+<tr>
+<td>JOB_OBJECT_UILIMIT_GLOBALATOMS</td>
+<td>为作业赋予它自己的基本结构表，使作业中的进程只能访问该作业的表</td>
+</tr>
+<tr>
+<td>JOB_OBJECT_UILIMIT_DESKTOP</td>
+<td>防止进程使用CreateDesktop或SwitchDesktop函数创建或转换桌面</td>
+</tr>
+<tr>
+<td>JOB_OBJECT_UILIMIT_HANDLES</td>
+<td>防止作业中的进程使用同一作业外部的进程创建的USER对象（如HWND）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="四、线程"><a href="#四、线程" class="headerlink" title="四、线程"></a>四、线程</h2><p>1.基本概念</p>
+<ul>
+<li><p>进程不执行代码的，<strong>是线程在进程地址空间内执行代码</strong>，并对进程地址空间内的数据做操作。</p>
+</li>
+<li><p>多个线程共享进程内的地址空间，包括进程的内核对象句柄表，因为句柄表的存在依赖于进程，而不是线程。</p>
+</li>
+</ul>
+<p>2.线程的构成</p>
+<ul>
+<li><p>关键：</p>
+<p>  一个堆栈、<br>  一些用于保护线程的寄存器、<br>  一个指令寄存器（IP）、<br>  堆栈指针寄存器（SP）</p>
+</li>
+<li><p>更详尽的构成</p>
+</li>
+</ul>
+<p>（来自MSDN <a href="http://msdn.microsoft.com/zh-cn/library/ms681917(v=vs.85).aspx" target="_blank" rel="external">http://msdn.microsoft.com/zh-cn/library/ms681917(v=vs.85).aspx</a>）：</p>
+<pre><code>All threads of a process share its virtual address space and system resources.
+In addition, each thread maintains exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until it is scheduled.
+The thread context includes the thread&apos;s set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread&apos;s process.
+Threads can also have their own security context, which can be used for impersonating clients.
+</code></pre><p>3.线程的启动</p>
+<ul>
+<li>初始化线程时会把 线程函数的入参(pvParam)、线程函数的指针(pfnStartAddrj) 压栈。</li>
+</ul>
+<p><img src="http://www.goorockey.com/uploads/2011/09/clip_image0011.png" alt="线程堆栈"></p>
+<ul>
+<li>每个线程还有一个指令寄存器（IP）和堆栈指针寄存器（SP）。IP初始指向BaseThreadStart函数，它包含在Kernel32.dll中。</li>
+</ul>
+<p>它主要是调用线程函数，并把函数返回值传给ExitThread：</p>
+<pre><code>VOID BaseThreadStart(PTHREAD_START_ROUTINE pfnStartAddr,PVOID pvParam)
+{
+    __try
+    {
+        ExitThread((pfnStartAddr)(pvParam));
+    }
+    __except(UnhandledExceptionFilter(GetExceptionInformation()))
+    {
+        ExitProcess(GetExceptionCode());
+    }
+    //NOTE: We never get here. 
+}
+</code></pre><ul>
+<li>之所以pfnStartAddr和pvParam压栈，就是因为线程开始运行时，CPU跳到IP指向BaseThreadStart，然后把pfnStartAddr和pvParam出栈，就把它们当做形参传给BaseThreadStart了。</li>
+</ul>
+<h2 id="五、其他"><a href="#五、其他" class="headerlink" title="五、其他"></a>五、其他</h2><p>1.C/C++ Runtime Library的多线程版本</p>
+<ul>
+<li><p>在C/C++ Runtime Library中，有一些全局变量。它们有可能同时被多个线程访问，使它们的值无法确定。</p>
+</li>
+<li><p>C/C++ Runtime Library为了适应多线程，出现多线程(MT)版本，改变一些全局变量和函数的特性。</p>
+</li>
+<li><p>主要思路是为每个线程关联一个数据结构<strong>tiddata块</strong>，里面都有各全局变量对于这个线程的副本。即每个线程访问的是属于自己的“全局变量”，有属于自己的独立环境。</p>
+</li>
+<li><p>而相关的函数对这些全局变量的操作也会改为对于<strong>tiddata块</strong>对于值的操作。</p>
+</li>
+</ul>
+<p>例如：</p>
+<pre><code>_beginthreadex就是在调用CreateThread来创建线程的基础上，在线程初始化时创建线程关联的**tiddata块**，并把这些全局变量拷贝到里面。所以_beginthreadex比CreateThread要安全。
+_endthreadex则是对应多做了清空关联数据结构的操作。
+</code></pre><ul>
+<li><p>如果在多线程版本的C/C++ Runtime Library中，用了CreateThread来创建线程，则线程初始化时不会有<strong>tiddata块</strong>。而当函数要访问<strong>tiddata块</strong>的时候，开始会访问失败，然后会自动生成一个，并把它与线程关联起来。但在一些情况下调用CreateThread就可能出现错误。</p>
+</li>
+<li><p>_beginthread比_beginthreadex、以及_endthread比_endthreadex的参数要少，少了对线程安全访问权的控制。</p>
+</li>
+</ul>
+<p>2.伪句柄</p>
+<ul>
+<li><p>用GetCurrentThread和GetCurrentProcess得到句柄是自己句柄的引用，并不会使线程进程的使用计数加1，它们返回的句柄叫伪句柄。</p>
+</li>
+<li><p>用CloseHandle关闭伪句柄时，会返回FALSE。</p>
+</li>
+</ul>
+<p>3.纤程</p>
+<ul>
+<li><p>UNIX服务器应用程序属于单线程程序（Windows定义），但其内部仿真了多线程工作。为了方便把UNIX服务器应用程序移植到Windows，就推出了纤程。</p>
+</li>
+<li><p>ConvertThreadToFiber 把线程转换为纤程。</p>
+</li>
+<li><p>纤程不应该返回，返回会使线程和该线程所有的纤程都撤销。</p>
+</li>
+<li><p>在单个线程里，每次只能运行一个纤程。可以用SwtichToFiber来切换纤程</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/programming/"> #programming </a>
+          
+            <a href="/tags/windows/"> #windows </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2011/09/05/note-for-windows-programming-3/">《Windows核心编程》读书笔记3--线程同步</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2011/09/02/note-for-windows-programming/">《Windows核心编程》读书笔记1--内核对象</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/avatar.jpg" alt="goorockey" />
+          <p class="site-author-name">goorockey</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">categories</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/goorockey" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/444891215" target="_blank">Weibo</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.douban.com/people/goorockey" target="_blank">DouBan</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.zhihu.com/people/goorockey" target="_blank">ZhiHu</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、摘要："><span class="nav-number">1.</span> <span class="nav-text">一、摘要：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、进程"><span class="nav-number">2.</span> <span class="nav-text">二、进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、作业"><span class="nav-number">3.</span> <span class="nav-text">三、作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、线程"><span class="nav-number">4.</span> <span class="nav-text">四、线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、其他"><span class="nav-number">5.</span> <span class="nav-text">五、其他</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2011 - 
+  2021
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">goorockey</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+  
+
+  
+
+    
+      
+    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'goorockeyslife';
+      var disqus_identifier = '2011/09/03/note-for-windows-programming-2/';
+      var disqus_url = 'http://www.goorockey.com/2011/09/03/note-for-windows-programming-2/';
+
+      (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    </script>
+  
+
+
+
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-28958629-1');ga('send','pageview');
+  </script>
+
+
+</body>
+</html>
