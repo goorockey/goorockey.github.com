@@ -1,53 +1,60 @@
-<!doctype html>
-<html class="theme-next {% if theme.use_motion %}use-motion{% endif %} {% if theme.scheme %}theme-next-{{ theme.scheme | lower }}{% endif %}">
+<!DOCTYPE html>
+<html lang="{{ config.language }}">
 <head>
-  {% include '_partials/head.swig' %}
+  {{ partial('_partials/head/head.swig', {}, {cache: theme.cache.enable}) }}
+  {% include '_partials/head/head-unique.swig' %}
+  {{- next_inject('head') }}
   <title>{% block title %}{% endblock %}</title>
+  {{ partial('_third-party/analytics/index.swig', {}, {cache: theme.cache.enable}) }}
+  {{ partial('_scripts/noscript.swig', {}, {cache: theme.cache.enable}) }}
 </head>
 
-<body>
-  <div class="container one-column {% block page_class %}{% endblock %}">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container{%- if theme.motion.enable %} use-motion{%- endif %}">
     <div class="headband"></div>
 
-    <div id="header" class="header">
-      <div class="header-inner">
-        {% include '_partials/header.swig' %}
-      </div>
-    </div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">{% include '_partials/header/index.swig' %}</div>
+    </header>
 
-    <div id="main" class="main">
+    {{ partial('_partials/widgets.swig', {}, {cache: theme.cache.enable}) }}
+
+    <main class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          {% block content %}{% endblock %}
+        <div class="content-wrap">
+          {% include '_partials/header/sub-menu.swig' %}
+          <div class="content {% block class %}{% endblock %}">
+            {% block content %}{% endblock %}
+          </div>
+          {% include '_partials/comments.swig' %}
         </div>
+        {%- if theme.sidebar.display !== 'remove' %}
+          {% block sidebar %}{% endblock %}
+        {%- endif %}
       </div>
+    </main>
 
-      {% block sidebar %}{% endblock %}
-    </div>
-
-    <div id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        {% include '_partials/footer.swig' %}
+        {% include '_partials/languages.swig' %}
+        {{ partial('_partials/footer.swig', {}, {cache: theme.cache.enable}) }}
+        {{ partial('_third-party/statistics/index.swig', {}, {cache: theme.cache.enable}) }}
       </div>
-    </div>
-
-    <div class="back-to-top"></div>
+    </footer>
   </div>
 
-  <script type="text/javascript" src="{{ url_for(theme.vendors) }}/jquery/index.js?v=2.1.3"></script>
+  {{ partial('_scripts/index.swig', {}, {cache: theme.cache.enable}) }}
+  {{ partial('_third-party/index.swig', {}, {cache: theme.cache.enable}) }}
 
-  {# This block is used to set options before any other scripts run #}
-  {% block script_extra_before %}{% endblock %}
+  {%- if theme.pjax %}
+    <div id="pjax">
+  {%- endif %}
+  {% include '_third-party/math/index.swig' %}
+  {% include '_third-party/quicklink.swig' %}
 
-  {% include '_scripts/fancy-box.swig' %}
-  {% include '_scripts/helpers.swig' %}
-  {% include '_scripts/motion.swig' %}
-
-  {% block script_extra %}{% endblock %}
-
-  {% include '_scripts/mathjax.swig' %}
-  {% block comment_system %}{% endblock %}
-
-  {% include '_scripts/analytics/google-analytics.swig' %}
+  {{- next_inject('bodyEnd') }}
+  {%- if theme.pjax %}
+    </div>
+  {%- endif %}
 </body>
 </html>

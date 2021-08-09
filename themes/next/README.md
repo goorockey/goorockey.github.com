@@ -1,233 +1,154 @@
-# NexT
+<div align="right">
+  Language:
+  🇺🇸
+  <a title="Chinese" href="docs/zh-CN/README.md">🇨🇳</a>
+  <a title="Russian" href="docs/ru/README.md">🇷🇺</a>
+</div>
 
-> 精于心，简于形
+# <div align="center"><a title="NexT website repository" href="https://github.com/theme-next/theme-next.org"><img align="center" width="56" height="56" src="https://raw.githubusercontent.com/theme-next/hexo-theme-next/master/source/images/logo.svg?sanitize=true"></a> e x T</div>
 
-[在线预览](http://notes.iissnan.com) |  [English Documentation](README.en.md)
+<p align="center">
+  «NexT» is a high quality elegant <a href="https://hexo.io">Hexo</a> theme. It is crafted from scratch with love.
+<br>
+<br>
+  <a href="https://www.npmjs.com/package/hexo-theme-next"><img src="https://img.shields.io/github/package-json/v/theme-next/hexo-theme-next?style=flat-square"></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-%3E=10.9.0-green?style=flat-square"></a>
+  <a href="https://hexo.io"><img src="https://img.shields.io/badge/hexo-%3E=4.0.0-blue?style=flat-square&logo=hexo"></a>
+  <a href="https://github.com/theme-next/hexo-theme-next/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-%20AGPL-orange?style=flat-square&logo=gnu"></a>
+<br>
+  <a href="https://bestpractices.coreinfrastructure.org/projects/2625"><img src="https://img.shields.io/cii/level/2625?style=flat-square" title="Core Infrastructure Initiative Best Practices"></a>
+  <a href="https://travis-ci.org/theme-next/hexo-theme-next?branch=master"><img src="https://img.shields.io/travis/theme-next/hexo-theme-next/master?style=flat-square&logo=travis%20ci" title="Travis CI [Linux]"></a>
+  <a href="https://app.codacy.com/manual/theme-next/hexo-theme-next/dashboard"><img src="https://img.shields.io/codacy/grade/72f7fe7609c2438a92069f448e5a341a/master?style=flat-square&logo=codacy" title="Project Grade"></a>
+  <img src="https://img.shields.io/snyk/vulnerabilities/github/theme-next/hexo-theme-next?style=flat-square" title="Vulnerabilities">
+<br>
+  <img src="https://user-images.githubusercontent.com/16272760/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b.png">
+</p>
 
-## 预览
+## Live Preview
 
-> NexT - 默认主题
+<p align="center">
+  💟 <a href="https://muse.theme-next.org">Muse</a> | 🔯 <a href="https://mist.theme-next.org">Mist</a> | ♓️ <a href="https://pisces.theme-next.org">Pisces</a> | ♊️ <a href="https://theme-next.org">Gemini</a>
+<br>
+<br>
+  More «NexT» examples <a href="https://github.com/theme-next/awesome-next#live-preview">here</a>.
+</p>
 
-![NexT Preview](http://iissnan.com/nexus/next/desktop-preview.png)
+## Installation
 
-> Mist - Compact of NexT
+The simplest way to install is to clone the entire repository:
 
-![Mist Preview](http://iissnan.com/nexus/next/mist-desktop-preview.png)
-
-## 安装
-
-1. 从 GitHub 下载
-
-        $ cd your-hexo-site
-        $ git clone https://github.com/iissnan/hexo-theme-next themes/next
-
-2. 更改**站点** `_config.yml` 中的 `theme` 字段设置为 `next`
-
-        theme: next
-
-或者，你可以下载稳定的[发布版本](https://github.com/iissnan/hexo-theme-next/releases)。
-
-## 更新
-
-```shell
-cd themes/next
-git pull
+```sh
+$ cd hexo
+$ git clone https://github.com/theme-next/hexo-theme-next themes/next
 ```
 
-因为主题在不断的更新，所以你可能会遇到冲突，需要手动解决。在更新之前，建议备份下当前的配置。
+Or you can see [detailed installation instructions][docs-installation-url] if you want any other variant.
 
+## Plugins
 
-## 特性
+NexT supports a large number of third-party plugins, which can be easily configured.
 
-特性概览：
-
-- [支持自定义 LOGO 以及主题图标](https://github.com/iissnan/hexo-theme-next/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89LOGO%E4%BB%A5%E5%8F%8A%E4%B8%BB%E9%A2%98%E5%9B%BE%E6%A0%87)
-- [支持多语言：英语 / 简体中文 / 繁体中文 / 法语](https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E8%AF%AD%E8%A8%80)
-- [支持 多说 / DISQUS 评论系统](https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E5%A4%9A%E8%AF%B4-DISQUS%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F)
-- [支持 标签云 页面](https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2)
-- [支持 分类 页面](https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2)
-- [支持 RSS 链接](https://github.com/iissnan/hexo-theme-next/wiki/%E6%98%BE%E7%A4%BA-feed-%E9%93%BE%E6%8E%A5)
-- [支持 About 页面](https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA-%22%E5%85%B3%E4%BA%8E%E6%88%91%22-%E9%A1%B5%E9%9D%A2)
-- [支持 5 款代码高亮主题](https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E5%AE%9A%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E4%B8%BB%E9%A2%98)
-- [支持 Google / 百度统计](https://github.com/iissnan/hexo-theme-next/wiki/%E6%B7%BB%E5%8A%A0-Google---%E7%99%BE%E5%BA%A6-%E7%BB%9F%E8%AE%A1)
-- [支持 Google Webmaster tools](https://github.com/iissnan/hexo-theme-next/wiki/%E6%B7%BB%E5%8A%A0-Google-Webmaster-tools-%E9%AA%8C%E8%AF%81)
-- [支持 Creative Commons](https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE-Creative-Commons-%E5%8D%8F%E8%AE%AE)
-- [支持指定站点建立时间](https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E5%AE%9A%E7%AB%99%E7%82%B9%E5%BB%BA%E7%AB%8B%E6%97%B6%E9%97%B4)
-- [支持数学公式显示（借助 MathJax）](https://github.com/iissnan/hexo-theme-next/wiki/%E5%BC%80%E5%90%AF%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%98%BE%E7%A4%BA)
-- [设置侧边栏头像](https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%A4%B4%E5%83%8F)
-- [设置侧边栏社交链接](https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E4%BE%A7%E8%BE%B9%E6%A0%8F%E7%A4%BE%E4%BA%A4%E9%93%BE%E6%8E%A5)
-
-- [Swiftype 站内搜索](https://github.com/iissnan/hexo-theme-next/wiki/Swiftype%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2)
-
-
-## 配置
-
-> NexT 坚持将复杂的细节隐藏，提供尽量少并且简便的设置，保持最大限度的易用性。
-
-为了尽量避免更新主题的时候，避免发生冲突，建议将配置写在**站点**的 `_config.yml` 中。
-
-### 放置在站点配置中的选项
-
-以下选项建议放置在站点级别的配置中，这些选项你在下个主题中可能也可以使用：）
+For example, if you want to enable `pjax` on your site, just set `pjax` to `true` in NexT config file:
 
 ```yml
-# =============================================================================
-# NexT Theme configuration
-# =============================================================================
-
-# 多说帐号
-duoshuo_shortname: your-duoshuo-shortname
-
-# DISQUS 帐号 （如果已经设置 多说 帐号，此选项将被跳过）
-disqus_shortname: your-disqus-shortname
-
-
-# 社交链接，将在侧栏中显示
-social:
-  GitHub: your-github-url
-  Twitter: your-twitter-url
-  Weibo: your-weibo-url
-  DouBan: your-douban-url
-  ZhiHu: your-zhihu-url
-  # 等等
-
-
-# Creative Commons 4.0 International License.
-# http://creativecommons.org/
-# Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
-creative_commons: by-nc-sa
-
-
-# Google 站长工具验证，请选择 `HTML Meta` 验证方式
-# See: https://www.google.com/webmasters/
-google_site_verification: VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0
-
-
-# Google 分析 ID
-google_analytics:
-
-
-# 百度统计 ID，此 ID 是百度统计提供脚本中 hm.js? 后面那串字符，非百度统计帐号
-baidu_analytics: 50c15455e37f70aea674ff4a663eef27
-
-# 站点起始时间
-since: 2011
-
-# =============================================================================
-# End NexT Theme configuration
-# =============================================================================
+# Easily enable fast Ajax navigation on your website.
+# Dependencies: https://github.com/theme-next/theme-next-pjax
+pjax: true
 ```
 
-### 主题配置
+Then visit the «Dependencies» link to get the installation instructions of this module.
+
+### Configure CDN
+
+If you want to specify a CDN link for any plugins, you need to set / update the CDN link.
+
+For example, if you want to use `mediumzoom` and load the plugin via CDN, go to NexT config and see:
 
 ```yml
-# 菜单配置
-menu:
-  home: /
-  archives: /archives
-  #categories: /categories
-  tags: /tags
-  #about: /about
-
-# Favicon
-# 从`Next 0.2`起，favicon将不再放置于主题之内。
-# 请将你的favicon放置在`hexo-site/source/`目录下。
-favicon: /favicon.ico
-
-# 设置为`false`不显示`rss`链接
-# 留空，并且通过`hexo-site-feed`插件配置使用默认的feed
-# 设置成特定的`url`，适用于通过第三方服务定制feed的情况。
-rss: false
-
-
-# 图标字体
-# NexT内建四种图标: default | linecons | fifty-shades | feather
-icon_font: default
-#icon_font: fifty-shades
-#icon_font: feather
-#icon_font: linecons
-
-
-# 代码高亮主题
-# available: normal | night | night eighties | night blue | night bright
-highlight_theme: normal
-
-# MathJax support
-# 开启数学公式渲染支持，默认关闭。设置为 `true` 开启。
-mathjax:
-
-
-# Mist
-#scheme: Mist
-
-
-# `阅读全文` 按钮跳转之后是否自动滚动页面到设置 `<!-- more -->` 的地方。
-scroll_to_more: true
-
-# 是否为侧边栏文章的目录自动添加索引，默认开启。设置为 `false` 关闭。
-toc_list_number: true
+vendors:
+  # ...
+  # Some contents...
+  # ...
+  mediumzoom: # Set or update mediumzoom CDN URL.
 ```
 
-## 主题内建样式
+## Update
 
-`.blockquote-center`
+NexT releases new versions every month. You can update to latest master branch by the following command:
 
-> 带上下分割线的引用，引用内文本将自动居中。适用于单行引用文本的场景。
-
-### 示例
-
-![Blockquote Center](http://iissnan.com/nexus/next/blockquote-center.png)
-
-### 使用方式：
-
-```html
-<blockquote class="blockquote-center">blah blah blah</blockquote>
+```sh
+$ cd themes/next
+$ git pull
 ```
 
-`.full-image`
+And if you see any error message during update (something like **«Commit your changes or stash them before you can merge»**), recommended to learn [Hexo data files][docs-data-files-url] feature.\
+However, you can bypass update errors by using the `Commit`, `Stash` or `Reset` commands for local changes. See [here](https://stackoverflow.com/a/15745424/5861495) how to do it.
 
-> 图片将自动扩展 26%，突破文章宽度。
+**If you want to update from v5.1.x to the latest version, read [this][docs-update-5-1-x-url].**
 
-### 示例
+## Feedback
 
-![Full Image](http://iissnan.com/nexus/next/full-image.png)
+* Visit the [Awesome NexT][awesome-next-url] list to share plugins and tutorials with other users.
+* Join our [Telegram][t-chat-url] / [Gitter][gitter-url] / [Riot][riot-url] chats.
+* [Add or improve translation][i18n-url] in few seconds.
+* Report a bug in [GitHub Issues][issues-bug-url].
+* Request a new feature on [GitHub][issues-feat-url].
+* Vote for [popular feature requests][feat-req-vote-url].
 
-### 使用方式：
+## Contributing
 
-```html
-<img src="/image-url" class="full-image" />
-```
+We welcome you to join the development of NexT. Please see [contributing document][contributing-document-url]. 🤗
 
+Also, we welcome Issue or PR to our [official-plugins][official-plugins-url].
 
-## 浏览器支持
+## Contributors
 
-![Browser support](http://iissnan.com/nexus/next/browser-support.png)
+[![][contributors-image]][contributors-url]
 
+## Thanks
 
-## 贡献
+<p align="center">
+  «NexT» send special thanks to these great services that sponsor our core infrastructure:
+<br>
+<br>
+  <a href="https://github.com"><img align="center" width="100" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png"></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://www.netlify.com"><img align="center" width="150" src="https://cdn.netlify.com/15ecf59b59c9d04b88097c6b5d2c7e8a7d1302d0/1b6d6/img/press/logos/full-logo-light.svg"></a>
+<br>
+<br>
+  <sub>GitHub allows us to host the Git repository, Netlify allows us to distribute the documentation.</sub>
+<br>
+<br>
+  <a href="https://crowdin.com"><img align="center" width="180" src="https://support.crowdin.com/assets/logos/crowdin-logo1-small.png"></a>
+<br>
+<br>
+  <sub>Crowdin allows us to translate conveniently the documentation.</sub>
+<br>
+<br>
+  <a href="https://codacy.com"><img align="center" width="155" src="https://user-images.githubusercontent.com/16944225/55026017-623f8f00-5002-11e9-88bf-0d6a5884c6c2.png"></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://travis-ci.com"><img align="center" width="140" src="https://raw.githubusercontent.com/travis-ci/travis-web/master/public/images/logos/TravisCI-Full-Color.png"></a>
+<br>
+<br>
+  <sub>Codacy allows us to monitor code quality, Travis CI allows us to run the test suite.</sub>
+</p>
 
-接受各种形式的贡献，包括不限于提交问题与需求，修复代码。等待您的`PR`。
+[docs-installation-url]: https://github.com/theme-next/hexo-theme-next/blob/master/docs/INSTALLATION.md
+[docs-data-files-url]: https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md
+[docs-update-5-1-x-url]: https://github.com/theme-next/hexo-theme-next/blob/master/docs/UPDATE-FROM-5.1.X.md
 
+[t-news-url]: https://t.me/theme_next_news
+[t-chat-url]: https://t.me/theme_next
+[gitter-url]: https://gitter.im/theme-next
+[riot-url]: https://riot.im/app/#/room/#theme-next:matrix.org
+[i18n-url]: https://i18n.theme-next.org
 
-## 开发
+[awesome-next-url]: https://github.com/theme-next/awesome-next
+[issues-bug-url]: https://github.com/theme-next/hexo-theme-next/issues/new?assignees=&labels=Bug&template=bug-report.md
+[issues-feat-url]: https://github.com/theme-next/hexo-theme-next/issues/new?assignees=&labels=Feature+Request&template=feature-request.md
+[feat-req-vote-url]: https://github.com/theme-next/hexo-theme-next/issues?q=is%3Aopen+is%3Aissue+label%3A%22Feature+Request%22
 
-> NexT is built for easily use with elegant appearance.
-
-First things first, always keep things simple.
-
-## [Changelog](https://github.com/iissnan/hexo-theme-next/wiki/Changelog)
-
-[![views](https://sourcegraph.com/api/repos/github.com/iissnan/hexo-theme-next/.counters/views.svg)](https://sourcegraph.com/github.com/iissnan/hexo-theme-next)
-[![hexo-image]][hexo-url]
-[![bower-image]][bower-url]
-[![jquery-image]][jquery-url]
-[![velocity-image]][velocity-url]
-
-[hexo-image]: http://img.shields.io/badge/Hexo-2.4+-2BAF2B.svg?style=flat-square
-[hexo-url]: http://hexo.io
-[bower-image]: http://img.shields.io/badge/Bower-*-2BAF2B.svg?style=flat-square
-[bower-url]: http://bower.io
-[jquery-image]: https://img.shields.io/badge/jquery-2.1-2BAF2B.svg?style=flat-square
-[jquery-url]: http://jquery.com/
-[velocity-image]: https://img.shields.io/badge/Velocity-1.2-2BAF2B.svg?style=flat-square
-[velocity-url]: http://julian.com/research/velocity/
+[contributing-document-url]: https://github.com/theme-next/hexo-theme-next/blob/master/.github/CONTRIBUTING.md
+[official-plugins-url]: https://github.com/theme-next
+[contributors-image]: https://opencollective.com/theme-next/contributors.svg?width=890
+[contributors-url]: https://github.com/theme-next/hexo-theme-next/graphs/contributors

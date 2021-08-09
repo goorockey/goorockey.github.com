@@ -1,26 +1,41 @@
-{% macro render(post) %}
+{% macro render(posts) %}
+{%- set current_year = '1970' %}
+{%- for post in posts.toArray() %}
 
-  <div class="post post-type-{{ post.type | default('normal') }}">
-    <div class="post-header">
+  {%- set year = date(post.date, 'YYYY') %}
 
-      <div class="post-title">
-        {% if post.link %}{# Link posts #}
-          <a class="post-title-link post-title-link-external" target="_blank" href="{{ url_for(post.link) }}">
-            {{ post.title or post.link }}
-            <i class="icon-external-link"></i>
-          </a>
-        {% else %}
-            <a class="post-title-link" href="{{ url_for(post.path) }}">
-              {{ post.title | default(__('post.untitled')) }}
-            </a>
-        {% endif %}
-      </div>
+  {%- if year !== current_year %}
+    {%- set current_year = year %}
+    <div class="collection-year">
+      <span class="collection-header">{{ current_year }}</span>
+    </div>
+  {%- endif %}
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
       <div class="post-meta">
-        <span class="post-time"> {{ post.date | date('m-d') }} </span>
+        <time itemprop="dateCreated"
+              datetime="{{ moment(post.date).format() }}"
+              content="{{ date(post.date, config.date_format) }}">
+          {{ date(post.date, 'MM-DD') }}
+        </time>
       </div>
 
-    </div>
-  </div>
+      <div class="post-title">
+        {%- if post.link %}{# Link posts #}
+          {%- set postTitleIcon = '<i class="fa fa-external-link-alt"></i>' %}
+          {%- set postText = post.title or post.link %}
+          {{ next_url(post.link, postText + postTitleIcon, {class: 'post-title-link post-title-link-external', itemprop: 'url'}) }}
+        {% else %}
+          <a class="post-title-link" href="{{ url_for(post.path) }}" itemprop="url">
+            <span itemprop="name">{{ post.title or __('post.untitled') }}</span>
+          </a>
+        {%- endif %}
+      </div>
 
+    </header>
+  </article>
+
+{%- endfor %}
 {% endmacro %}
