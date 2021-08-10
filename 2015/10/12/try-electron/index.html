@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"goorockey.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="帮人做个简单的文件整理程序，尝试用electron来实现，总结一下。 主进程和渲染进程electron的程序运行时，分为主进程和渲染进程。主进程即为var app &#x3D; require(&#39;app&#39;);所在一侧，也是程序的入口。通过BrowserWindow实例loadUrl访问网页时，会创建出渲染进程。 某些包是只有主进程才能包含的，如常用的dialog。想在渲染进程的逻辑中调用这些">
 <meta property="og:type" content="article">
 <meta property="og:title" content="electron使用总结">
-<meta property="og:url" content="http://www.goorockey.com/2015/10/12/try-electron/index.html">
+<meta property="og:url" content="http://goorockey.github.io/2015/10/12/try-electron/index.html">
 <meta property="og:site_name" content="Goorockey&#39;s Blog">
 <meta property="og:description" content="帮人做个简单的文件整理程序，尝试用electron来实现，总结一下。 主进程和渲染进程electron的程序运行时，分为主进程和渲染进程。主进程即为var app &#x3D; require(&#39;app&#39;);所在一侧，也是程序的入口。通过BrowserWindow实例loadUrl访问网页时，会创建出渲染进程。 某些包是只有主进程才能包含的，如常用的dialog。想在渲染进程的逻辑中调用这些">
 <meta property="og:locale">
@@ -35,7 +35,7 @@
 <meta property="article:tag" content="nodejs">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.goorockey.com/2015/10/12/try-electron/">
+<link rel="canonical" href="http://goorockey.github.io/2015/10/12/try-electron/">
 
 
 <script id="page-configurations">
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2015/10/12/try-electron/">
+    <link itemprop="mainEntityOfPage" href="http://goorockey.github.io/2015/10/12/try-electron/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

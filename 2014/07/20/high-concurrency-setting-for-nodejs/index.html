@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"goorockey.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="node.js的异步模型让它很擅长实现IO密集型的系统，但是测试发现，当并发真的上到几W的时候，会有处理不过来的情况。除了从整个系统的设计上改进，还需要修改一些配置。这里总结一下为了让node.js应对高并发，需要做的配置。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node.js高并发配置">
-<meta property="og:url" content="http://www.goorockey.com/2014/07/20/high-concurrency-setting-for-nodejs/index.html">
+<meta property="og:url" content="http://goorockey.github.io/2014/07/20/high-concurrency-setting-for-nodejs/index.html">
 <meta property="og:site_name" content="Goorockey&#39;s Blog">
 <meta property="og:description" content="node.js的异步模型让它很擅长实现IO密集型的系统，但是测试发现，当并发真的上到几W的时候，会有处理不过来的情况。除了从整个系统的设计上改进，还需要修改一些配置。这里总结一下为了让node.js应对高并发，需要做的配置。">
 <meta property="og:locale">
@@ -35,7 +35,7 @@
 <meta property="article:tag" content="high concurrency">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.goorockey.com/2014/07/20/high-concurrency-setting-for-nodejs/">
+<link rel="canonical" href="http://goorockey.github.io/2014/07/20/high-concurrency-setting-for-nodejs/">
 
 
 <script id="page-configurations">
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2014/07/20/high-concurrency-setting-for-nodejs/">
+    <link itemprop="mainEntityOfPage" href="http://goorockey.github.io/2014/07/20/high-concurrency-setting-for-nodejs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

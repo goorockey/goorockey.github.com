@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"goorockey.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="1.普通的成员函数   编译器会自动为其添加一个this指针作为入参   该成员函数能修改成员变量   2.在成员函数后面加const(注意是后面！)   编译器会自动为其添加一个const *this指针作为入参   该成员函数不能修改成员变量   3.成员函数加static  编译器不会加this指针  该成员函数不能直接访问成员变量，只能访问静态成员变量   所以在成员函数加static和后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不能同时用static和const修饰一个成员函数">
-<meta property="og:url" content="http://www.goorockey.com/2011/08/02/cannot-use-static-and-const-in-the-same-time/index.html">
+<meta property="og:url" content="http://goorockey.github.io/2011/08/02/cannot-use-static-and-const-in-the-same-time/index.html">
 <meta property="og:site_name" content="Goorockey&#39;s Blog">
 <meta property="og:description" content="1.普通的成员函数   编译器会自动为其添加一个this指针作为入参   该成员函数能修改成员变量   2.在成员函数后面加const(注意是后面！)   编译器会自动为其添加一个const *this指针作为入参   该成员函数不能修改成员变量   3.成员函数加static  编译器不会加this指针  该成员函数不能直接访问成员变量，只能访问静态成员变量   所以在成员函数加static和后">
 <meta property="og:locale">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.goorockey.com/2011/08/02/cannot-use-static-and-const-in-the-same-time/">
+<link rel="canonical" href="http://goorockey.github.io/2011/08/02/cannot-use-static-and-const-in-the-same-time/">
 
 
 <script id="page-configurations">
@@ -169,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2011/08/02/cannot-use-static-and-const-in-the-same-time/">
+    <link itemprop="mainEntityOfPage" href="http://goorockey.github.io/2011/08/02/cannot-use-static-and-const-in-the-same-time/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

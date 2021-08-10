@@ -3,11 +3,11 @@
   <title>Goorockey&#39;s Blog</title>
   
   <subtitle>create something special</subtitle>
-  <link href="http://www.goorockey.com/atom.xml" rel="self"/>
+  <link href="http://goorockey.github.io/atom.xml" rel="self"/>
   
-  <link href="http://www.goorockey.com/"/>
+  <link href="http://goorockey.github.io/"/>
   <updated>2021-08-09T15:53:17.697Z</updated>
-  <id>http://www.goorockey.com/</id>
+  <id>http://goorockey.github.io/</id>
   
   <author>
     <name>goorockey</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>回收Virtualbox硬盘空间</title>
-    <link href="http://www.goorockey.com/2017/02/02/shrink-virtualbox-disk/"/>
-    <id>http://www.goorockey.com/2017/02/02/shrink-virtualbox-disk/</id>
+    <link href="http://goorockey.github.io/2017/02/02/shrink-virtualbox-disk/"/>
+    <id>http://goorockey.github.io/2017/02/02/shrink-virtualbox-disk/</id>
     <published>2017-02-02T07:07:54.000Z</published>
     <updated>2021-08-09T15:53:17.697Z</updated>
     
@@ -31,19 +31,19 @@
     
     
     
-    <category term="linux" scheme="http://www.goorockey.com/categories/linux/"/>
+    <category term="linux" scheme="http://goorockey.github.io/categories/linux/"/>
     
     
-    <category term="linux" scheme="http://www.goorockey.com/tags/linux/"/>
+    <category term="linux" scheme="http://goorockey.github.io/tags/linux/"/>
     
-    <category term="Virtualbox" scheme="http://www.goorockey.com/tags/Virtualbox/"/>
+    <category term="Virtualbox" scheme="http://goorockey.github.io/tags/Virtualbox/"/>
     
   </entry>
   
   <entry>
     <title>Angular2初试小记</title>
-    <link href="http://www.goorockey.com/2016/09/13/angular2-note/"/>
-    <id>http://www.goorockey.com/2016/09/13/angular2-note/</id>
+    <link href="http://goorockey.github.io/2016/09/13/angular2-note/"/>
+    <id>http://goorockey.github.io/2016/09/13/angular2-note/</id>
     <published>2016-09-13T09:21:34.000Z</published>
     <updated>2021-08-09T15:53:17.696Z</updated>
     
@@ -58,23 +58,23 @@
     
     
     
-    <category term="programming" scheme="http://www.goorockey.com/categories/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/categories/programming/"/>
     
     
-    <category term="angular2" scheme="http://www.goorockey.com/tags/angular2/"/>
+    <category term="angular2" scheme="http://goorockey.github.io/tags/angular2/"/>
     
-    <category term="angular-cli" scheme="http://www.goorockey.com/tags/angular-cli/"/>
+    <category term="angular-cli" scheme="http://goorockey.github.io/tags/angular-cli/"/>
     
-    <category term="typescript" scheme="http://www.goorockey.com/tags/typescript/"/>
+    <category term="typescript" scheme="http://goorockey.github.io/tags/typescript/"/>
     
-    <category term="js" scheme="http://www.goorockey.com/tags/js/"/>
+    <category term="js" scheme="http://goorockey.github.io/tags/js/"/>
     
   </entry>
   
   <entry>
     <title>红米2刷第三方rom小记</title>
-    <link href="http://www.goorockey.com/2016/07/27/flash-rom-in-redmi2/"/>
-    <id>http://www.goorockey.com/2016/07/27/flash-rom-in-redmi2/</id>
+    <link href="http://goorockey.github.io/2016/07/27/flash-rom-in-redmi2/"/>
+    <id>http://goorockey.github.io/2016/07/27/flash-rom-in-redmi2/</id>
     <published>2016-07-27T13:39:29.000Z</published>
     <updated>2021-08-09T15:53:17.696Z</updated>
     
@@ -88,19 +88,19 @@
     
     
     
-    <category term="Android" scheme="http://www.goorockey.com/categories/Android/"/>
+    <category term="Android" scheme="http://goorockey.github.io/categories/Android/"/>
     
     
-    <category term="Android" scheme="http://www.goorockey.com/tags/Android/"/>
+    <category term="Android" scheme="http://goorockey.github.io/tags/Android/"/>
     
-    <category term="redmi2" scheme="http://www.goorockey.com/tags/redmi2/"/>
+    <category term="redmi2" scheme="http://goorockey.github.io/tags/redmi2/"/>
     
   </entry>
   
   <entry>
     <title>openwrt中使用ngrok</title>
-    <link href="http://www.goorockey.com/2016/07/26/try-ngrok-in-openwrt/"/>
-    <id>http://www.goorockey.com/2016/07/26/try-ngrok-in-openwrt/</id>
+    <link href="http://goorockey.github.io/2016/07/26/try-ngrok-in-openwrt/"/>
+    <id>http://goorockey.github.io/2016/07/26/try-ngrok-in-openwrt/</id>
     <published>2016-07-25T16:53:00.000Z</published>
     <updated>2021-08-09T15:53:17.696Z</updated>
     
@@ -118,21 +118,21 @@
     
     
     
-    <category term="linux" scheme="http://www.goorockey.com/categories/linux/"/>
+    <category term="linux" scheme="http://goorockey.github.io/categories/linux/"/>
     
     
-    <category term="linux" scheme="http://www.goorockey.com/tags/linux/"/>
+    <category term="linux" scheme="http://goorockey.github.io/tags/linux/"/>
     
-    <category term="openwrt" scheme="http://www.goorockey.com/tags/openwrt/"/>
+    <category term="openwrt" scheme="http://goorockey.github.io/tags/openwrt/"/>
     
-    <category term="ngrok" scheme="http://www.goorockey.com/tags/ngrok/"/>
+    <category term="ngrok" scheme="http://goorockey.github.io/tags/ngrok/"/>
     
   </entry>
   
   <entry>
     <title>使用n管理nodejs</title>
-    <link href="http://www.goorockey.com/2015/11/01/use-n-to-manage-node/"/>
-    <id>http://www.goorockey.com/2015/11/01/use-n-to-manage-node/</id>
+    <link href="http://goorockey.github.io/2015/11/01/use-n-to-manage-node/"/>
+    <id>http://goorockey.github.io/2015/11/01/use-n-to-manage-node/</id>
     <published>2015-10-31T16:11:30.000Z</published>
     <updated>2021-08-09T15:53:17.696Z</updated>
     
@@ -147,21 +147,21 @@
     
     
     
-    <category term="nodejs" scheme="http://www.goorockey.com/categories/nodejs/"/>
+    <category term="nodejs" scheme="http://goorockey.github.io/categories/nodejs/"/>
     
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="nodejs" scheme="http://www.goorockey.com/tags/nodejs/"/>
+    <category term="nodejs" scheme="http://goorockey.github.io/tags/nodejs/"/>
     
-    <category term="n" scheme="http://www.goorockey.com/tags/n/"/>
+    <category term="n" scheme="http://goorockey.github.io/tags/n/"/>
     
   </entry>
   
   <entry>
     <title>electron使用总结</title>
-    <link href="http://www.goorockey.com/2015/10/12/try-electron/"/>
-    <id>http://www.goorockey.com/2015/10/12/try-electron/</id>
+    <link href="http://goorockey.github.io/2015/10/12/try-electron/"/>
+    <id>http://goorockey.github.io/2015/10/12/try-electron/</id>
     <published>2015-10-12T14:38:57.000Z</published>
     <updated>2021-08-09T15:53:17.696Z</updated>
     
@@ -178,21 +178,21 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="nodejs" scheme="http://www.goorockey.com/categories/nodejs/"/>
+    <category term="nodejs" scheme="http://goorockey.github.io/categories/nodejs/"/>
     
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="electron" scheme="http://www.goorockey.com/tags/electron/"/>
+    <category term="electron" scheme="http://goorockey.github.io/tags/electron/"/>
     
-    <category term="nodejs" scheme="http://www.goorockey.com/tags/nodejs/"/>
+    <category term="nodejs" scheme="http://goorockey.github.io/tags/nodejs/"/>
     
   </entry>
   
   <entry>
     <title>Python按位运算结果跟Js不同</title>
-    <link href="http://www.goorockey.com/2015/09/30/python-bitwise-difference-with-javascript/"/>
-    <id>http://www.goorockey.com/2015/09/30/python-bitwise-difference-with-javascript/</id>
+    <link href="http://goorockey.github.io/2015/09/30/python-bitwise-difference-with-javascript/"/>
+    <id>http://goorockey.github.io/2015/09/30/python-bitwise-difference-with-javascript/</id>
     <published>2015-09-30T09:54:00.000Z</published>
     <updated>2021-08-09T15:53:17.695Z</updated>
     
@@ -209,19 +209,19 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="programming" scheme="http://www.goorockey.com/categories/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/categories/programming/"/>
     
     
-    <category term="js" scheme="http://www.goorockey.com/tags/js/"/>
+    <category term="js" scheme="http://goorockey.github.io/tags/js/"/>
     
-    <category term="python" scheme="http://www.goorockey.com/tags/python/"/>
+    <category term="python" scheme="http://goorockey.github.io/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>查看所有子域名</title>
-    <link href="http://www.goorockey.com/2015/09/21/list-dns-subdomain/"/>
-    <id>http://www.goorockey.com/2015/09/21/list-dns-subdomain/</id>
+    <link href="http://goorockey.github.io/2015/09/21/list-dns-subdomain/"/>
+    <id>http://goorockey.github.io/2015/09/21/list-dns-subdomain/</id>
     <published>2015-09-21T12:39:53.000Z</published>
     <updated>2021-08-09T15:53:17.695Z</updated>
     
@@ -237,17 +237,17 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="others" scheme="http://www.goorockey.com/categories/others/"/>
+    <category term="others" scheme="http://goorockey.github.io/categories/others/"/>
     
     
-    <category term="dns" scheme="http://www.goorockey.com/tags/dns/"/>
+    <category term="dns" scheme="http://goorockey.github.io/tags/dns/"/>
     
   </entry>
   
   <entry>
     <title>美剧自动保存到百度盘</title>
-    <link href="http://www.goorockey.com/2015/09/08/drama-downloader/"/>
-    <id>http://www.goorockey.com/2015/09/08/drama-downloader/</id>
+    <link href="http://goorockey.github.io/2015/09/08/drama-downloader/"/>
+    <id>http://goorockey.github.io/2015/09/08/drama-downloader/</id>
     <published>2015-09-08T03:45:07.000Z</published>
     <updated>2021-08-09T15:53:17.695Z</updated>
     
@@ -260,23 +260,23 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="python" scheme="http://www.goorockey.com/categories/python/"/>
+    <category term="python" scheme="http://goorockey.github.io/categories/python/"/>
     
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="python" scheme="http://www.goorockey.com/tags/python/"/>
+    <category term="python" scheme="http://goorockey.github.io/tags/python/"/>
     
-    <category term="美剧" scheme="http://www.goorockey.com/tags/%E7%BE%8E%E5%89%A7/"/>
+    <category term="美剧" scheme="http://goorockey.github.io/tags/%E7%BE%8E%E5%89%A7/"/>
     
-    <category term="百度盘" scheme="http://www.goorockey.com/tags/%E7%99%BE%E5%BA%A6%E7%9B%98/"/>
+    <category term="百度盘" scheme="http://goorockey.github.io/tags/%E7%99%BE%E5%BA%A6%E7%9B%98/"/>
     
   </entry>
   
   <entry>
     <title>Node.js高并发配置</title>
-    <link href="http://www.goorockey.com/2014/07/20/high-concurrency-setting-for-nodejs/"/>
-    <id>http://www.goorockey.com/2014/07/20/high-concurrency-setting-for-nodejs/</id>
+    <link href="http://goorockey.github.io/2014/07/20/high-concurrency-setting-for-nodejs/"/>
+    <id>http://goorockey.github.io/2014/07/20/high-concurrency-setting-for-nodejs/</id>
     <published>2014-07-19T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.700Z</updated>
     
@@ -287,21 +287,21 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="programming" scheme="http://www.goorockey.com/categories/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/categories/programming/"/>
     
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="nodejs" scheme="http://www.goorockey.com/tags/nodejs/"/>
+    <category term="nodejs" scheme="http://goorockey.github.io/tags/nodejs/"/>
     
-    <category term="high concurrency" scheme="http://www.goorockey.com/tags/high-concurrency/"/>
+    <category term="high concurrency" scheme="http://goorockey.github.io/tags/high-concurrency/"/>
     
   </entry>
   
   <entry>
     <title>消息队列方案粗略调研</title>
-    <link href="http://www.goorockey.com/2014/06/09/survey-of-message-queue/"/>
-    <id>http://www.goorockey.com/2014/06/09/survey-of-message-queue/</id>
+    <link href="http://goorockey.github.io/2014/06/09/survey-of-message-queue/"/>
+    <id>http://goorockey.github.io/2014/06/09/survey-of-message-queue/</id>
     <published>2014-06-08T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.704Z</updated>
     
@@ -315,23 +315,23 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="programming" scheme="http://www.goorockey.com/categories/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/categories/programming/"/>
     
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="nodejs" scheme="http://www.goorockey.com/tags/nodejs/"/>
+    <category term="nodejs" scheme="http://goorockey.github.io/tags/nodejs/"/>
     
-    <category term="redis" scheme="http://www.goorockey.com/tags/redis/"/>
+    <category term="redis" scheme="http://goorockey.github.io/tags/redis/"/>
     
-    <category term="queue" scheme="http://www.goorockey.com/tags/queue/"/>
+    <category term="queue" scheme="http://goorockey.github.io/tags/queue/"/>
     
   </entry>
   
   <entry>
     <title>用nodejs实现Instapaper回顾邮件自动发送</title>
-    <link href="http://www.goorockey.com/2014/05/12/instapaper-review/"/>
-    <id>http://www.goorockey.com/2014/05/12/instapaper-review/</id>
+    <link href="http://goorockey.github.io/2014/05/12/instapaper-review/"/>
+    <id>http://goorockey.github.io/2014/05/12/instapaper-review/</id>
     <published>2014-05-11T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.700Z</updated>
     
@@ -348,21 +348,21 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="programming" scheme="http://www.goorockey.com/categories/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/categories/programming/"/>
     
     
-    <category term="nodejs" scheme="http://www.goorockey.com/tags/nodejs/"/>
+    <category term="nodejs" scheme="http://goorockey.github.io/tags/nodejs/"/>
     
-    <category term="Instapaper" scheme="http://www.goorockey.com/tags/Instapaper/"/>
+    <category term="Instapaper" scheme="http://goorockey.github.io/tags/Instapaper/"/>
     
-    <category term="email" scheme="http://www.goorockey.com/tags/email/"/>
+    <category term="email" scheme="http://goorockey.github.io/tags/email/"/>
     
   </entry>
   
   <entry>
     <title>用wxWidgets做移植的总结</title>
-    <link href="http://www.goorockey.com/2014/04/21/summary-of-using-wxwidgets/"/>
-    <id>http://www.goorockey.com/2014/04/21/summary-of-using-wxwidgets/</id>
+    <link href="http://goorockey.github.io/2014/04/21/summary-of-using-wxwidgets/"/>
+    <id>http://goorockey.github.io/2014/04/21/summary-of-using-wxwidgets/</id>
     <published>2014-04-20T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.704Z</updated>
     
@@ -375,21 +375,21 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="programming" scheme="http://www.goorockey.com/categories/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/categories/programming/"/>
     
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="cpp" scheme="http://www.goorockey.com/tags/cpp/"/>
+    <category term="cpp" scheme="http://goorockey.github.io/tags/cpp/"/>
     
-    <category term="wxwidgets" scheme="http://www.goorockey.com/tags/wxwidgets/"/>
+    <category term="wxwidgets" scheme="http://goorockey.github.io/tags/wxwidgets/"/>
     
   </entry>
   
   <entry>
     <title>用Web-Harvest抓腾讯微博</title>
-    <link href="http://www.goorockey.com/2014/03/05/webharvest-4-tweibo/"/>
-    <id>http://www.goorockey.com/2014/03/05/webharvest-4-tweibo/</id>
+    <link href="http://goorockey.github.io/2014/03/05/webharvest-4-tweibo/"/>
+    <id>http://goorockey.github.io/2014/03/05/webharvest-4-tweibo/</id>
     <published>2014-03-05T13:31:00.000Z</published>
     <updated>2021-08-09T15:53:17.706Z</updated>
     
@@ -403,19 +403,19 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="programming" scheme="http://www.goorockey.com/categories/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/categories/programming/"/>
     
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="Web-Harvest" scheme="http://www.goorockey.com/tags/Web-Harvest/"/>
+    <category term="Web-Harvest" scheme="http://goorockey.github.io/tags/Web-Harvest/"/>
     
   </entry>
   
   <entry>
     <title>我的firefox</title>
-    <link href="http://www.goorockey.com/2013/09/08/my-firefox-config/"/>
-    <id>http://www.goorockey.com/2013/09/08/my-firefox-config/</id>
+    <link href="http://goorockey.github.io/2013/09/08/my-firefox-config/"/>
+    <id>http://goorockey.github.io/2013/09/08/my-firefox-config/</id>
     <published>2013-09-07T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.701Z</updated>
     
@@ -429,17 +429,17 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="others" scheme="http://www.goorockey.com/categories/others/"/>
+    <category term="others" scheme="http://goorockey.github.io/categories/others/"/>
     
     
-    <category term="firefox" scheme="http://www.goorockey.com/tags/firefox/"/>
+    <category term="firefox" scheme="http://goorockey.github.io/tags/firefox/"/>
     
   </entry>
   
   <entry>
     <title>抓网页保存为pdf</title>
-    <link href="http://www.goorockey.com/2012/10/29/grap-html-to-pdf/"/>
-    <id>http://www.goorockey.com/2012/10/29/grap-html-to-pdf/</id>
+    <link href="http://goorockey.github.io/2012/10/29/grap-html-to-pdf/"/>
+    <id>http://goorockey.github.io/2012/10/29/grap-html-to-pdf/</id>
     <published>2012-10-28T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.699Z</updated>
     
@@ -452,19 +452,19 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="others" scheme="http://www.goorockey.com/categories/others/"/>
+    <category term="others" scheme="http://goorockey.github.io/categories/others/"/>
     
     
-    <category term="others" scheme="http://www.goorockey.com/tags/others/"/>
+    <category term="others" scheme="http://goorockey.github.io/tags/others/"/>
     
-    <category term="pdf" scheme="http://www.goorockey.com/tags/pdf/"/>
+    <category term="pdf" scheme="http://goorockey.github.io/tags/pdf/"/>
     
   </entry>
   
   <entry>
     <title>玩一下hadoop</title>
-    <link href="http://www.goorockey.com/2012/10/21/try-hadoop/"/>
-    <id>http://www.goorockey.com/2012/10/21/try-hadoop/</id>
+    <link href="http://goorockey.github.io/2012/10/21/try-hadoop/"/>
+    <id>http://goorockey.github.io/2012/10/21/try-hadoop/</id>
     <published>2012-10-21T15:47:00.000Z</published>
     <updated>2021-08-09T15:53:17.705Z</updated>
     
@@ -479,19 +479,19 @@ var dialog = remote.require(&amp;#39;dialog&amp;#39;);
     
     
     
-    <category term="hadoop" scheme="http://www.goorockey.com/categories/hadoop/"/>
+    <category term="hadoop" scheme="http://goorockey.github.io/categories/hadoop/"/>
     
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="hadoop" scheme="http://www.goorockey.com/tags/hadoop/"/>
+    <category term="hadoop" scheme="http://goorockey.github.io/tags/hadoop/"/>
     
   </entry>
   
   <entry>
     <title>关于exploit exercise nebula level01</title>
-    <link href="http://www.goorockey.com/2012/10/10/about-exploit-exercise-nebula-level01/"/>
-    <id>http://www.goorockey.com/2012/10/10/about-exploit-exercise-nebula-level01/</id>
+    <link href="http://goorockey.github.io/2012/10/10/about-exploit-exercise-nebula-level01/"/>
+    <id>http://goorockey.github.io/2012/10/10/about-exploit-exercise-nebula-level01/</id>
     <published>2012-10-09T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.697Z</updated>
     
@@ -525,21 +525,21 @@ int main(int argc, char **argv, char **envp)
     
     
     
-    <category term="linux" scheme="http://www.goorockey.com/categories/linux/"/>
+    <category term="linux" scheme="http://goorockey.github.io/categories/linux/"/>
     
     
-    <category term="linux" scheme="http://www.goorockey.com/tags/linux/"/>
+    <category term="linux" scheme="http://goorockey.github.io/tags/linux/"/>
     
-    <category term="programming" scheme="http://www.goorockey.com/tags/programming/"/>
+    <category term="programming" scheme="http://goorockey.github.io/tags/programming/"/>
     
-    <category term="security" scheme="http://www.goorockey.com/tags/security/"/>
+    <category term="security" scheme="http://goorockey.github.io/tags/security/"/>
     
   </entry>
   
   <entry>
     <title>python发邮件脚本</title>
-    <link href="http://www.goorockey.com/2012/09/30/python-send-mail/"/>
-    <id>http://www.goorockey.com/2012/09/30/python-send-mail/</id>
+    <link href="http://goorockey.github.io/2012/09/30/python-send-mail/"/>
+    <id>http://goorockey.github.io/2012/09/30/python-send-mail/</id>
     <published>2012-09-29T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.703Z</updated>
     
@@ -571,17 +571,17 @@ blat - -body &amp;lt;邮件正文&amp;gt; -from &amp;lt;发送地址&amp;gt; -to
     
     
     
-    <category term="python" scheme="http://www.goorockey.com/categories/python/"/>
+    <category term="python" scheme="http://goorockey.github.io/categories/python/"/>
     
     
-    <category term="python" scheme="http://www.goorockey.com/tags/python/"/>
+    <category term="python" scheme="http://goorockey.github.io/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>Scheme里面的pair和list</title>
-    <link href="http://www.goorockey.com/2012/09/25/pair-and-list-in-scheme/"/>
-    <id>http://www.goorockey.com/2012/09/25/pair-and-list-in-scheme/</id>
+    <link href="http://goorockey.github.io/2012/09/25/pair-and-list-in-scheme/"/>
+    <id>http://goorockey.github.io/2012/09/25/pair-and-list-in-scheme/</id>
     <published>2012-09-24T16:00:00.000Z</published>
     <updated>2021-08-09T15:53:17.702Z</updated>
     
@@ -597,12 +597,12 @@ blat - -body &amp;lt;邮件正文&amp;gt; -from &amp;lt;发送地址&amp;gt; -to
     
     
     
-    <category term="lisp" scheme="http://www.goorockey.com/categories/lisp/"/>
+    <category term="lisp" scheme="http://goorockey.github.io/categories/lisp/"/>
     
     
-    <category term="lisp" scheme="http://www.goorockey.com/tags/lisp/"/>
+    <category term="lisp" scheme="http://goorockey.github.io/tags/lisp/"/>
     
-    <category term="scheme" scheme="http://www.goorockey.com/tags/scheme/"/>
+    <category term="scheme" scheme="http://goorockey.github.io/tags/scheme/"/>
     
   </entry>
   

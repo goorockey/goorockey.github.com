@@ -17,26 +17,26 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"goorockey.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="一、摘要： 进程只是线程的容器，存放数据和代码，但不执行代码。  线程才是执行代码的实体。  作业是对一个或多个进程的统一管理，能添加一般无法添加的限制。   二、进程1.概念 进程只是线程的容器，为线程执行代码提供资源、营造运行环境。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Windows核心编程》读书笔记2--进程、作业、线程">
-<meta property="og:url" content="http://www.goorockey.com/2011/09/03/note-for-windows-programming-2/index.html">
+<meta property="og:url" content="http://goorockey.github.io/2011/09/03/note-for-windows-programming-2/index.html">
 <meta property="og:site_name" content="Goorockey&#39;s Blog">
 <meta property="og:description" content="一、摘要： 进程只是线程的容器，存放数据和代码，但不执行代码。  线程才是执行代码的实体。  作业是对一个或多个进程的统一管理，能添加一般无法添加的限制。   二、进程1.概念 进程只是线程的容器，为线程执行代码提供资源、营造运行环境。">
 <meta property="og:locale">
-<meta property="og:image" content="http://www.goorockey.com/uploads/2011/09/clip_image0011.png">
+<meta property="og:image" content="http://goorockey.github.io/uploads/2011/09/clip_image0011.png">
 <meta property="article:published_time" content="2011-09-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-08-09T15:53:17.702Z">
+<meta property="article:modified_time" content="2021-08-10T14:06:51.358Z">
 <meta property="article:author" content="goorockey">
 <meta property="article:tag" content="programming">
 <meta property="article:tag" content="windows">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.goorockey.com/uploads/2011/09/clip_image0011.png">
+<meta name="twitter:image" content="http://goorockey.github.io/uploads/2011/09/clip_image0011.png">
 
-<link rel="canonical" href="http://www.goorockey.com/2011/09/03/note-for-windows-programming-2/">
+<link rel="canonical" href="http://goorockey.github.io/2011/09/03/note-for-windows-programming-2/">
 
 
 <script id="page-configurations">
@@ -171,7 +171,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2011/09/03/note-for-windows-programming-2/">
+    <link itemprop="mainEntityOfPage" href="http://goorockey.github.io/2011/09/03/note-for-windows-programming-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -201,7 +201,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-09 23:53:17" itemprop="dateModified" datetime="2021-08-09T23:53:17+08:00">2021-08-09</time>
+                <time title="Modified: 2021-08-10 22:06:51" itemprop="dateModified" datetime="2021-08-10T22:06:51+08:00">2021-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -376,7 +376,7 @@ Threads can also have their own security context, which can be used for imperson
 <ul>
 <li>初始化线程时会把 线程函数的入参(pvParam)、线程函数的指针(pfnStartAddrj) 压栈。</li>
 </ul>
-<p><img src="http://www.goorockey.com/uploads/2011/09/clip_image0011.png" alt="线程堆栈"></p>
+<p><img src="http://goorockey.github.io/uploads/2011/09/clip_image0011.png" alt="线程堆栈"></p>
 <ul>
 <li>每个线程还有一个指令寄存器（IP）和堆栈指针寄存器（SP）。IP初始指向BaseThreadStart函数，它包含在Kernel32.dll中。</li>
 </ul>

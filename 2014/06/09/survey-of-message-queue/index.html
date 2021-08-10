@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.goorockey.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"goorockey.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="最近在做的系统准备加个消息队列，重构成“master-queue-workers”的结构. 感觉现在好多系统都是这个结构。这样master就专心接受用户的请求，把任务放进队列，让workers去处理。master就可以立刻回复用户，而不用等待处理完整个业务才回复。 主流的消息队列方案可以看这里。 我主要考虑的方案有rabbitMQ、redis、celery、mongodb。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="消息队列方案粗略调研">
-<meta property="og:url" content="http://www.goorockey.com/2014/06/09/survey-of-message-queue/index.html">
+<meta property="og:url" content="http://goorockey.github.io/2014/06/09/survey-of-message-queue/index.html">
 <meta property="og:site_name" content="Goorockey&#39;s Blog">
 <meta property="og:description" content="最近在做的系统准备加个消息队列，重构成“master-queue-workers”的结构. 感觉现在好多系统都是这个结构。这样master就专心接受用户的请求，把任务放进队列，让workers去处理。master就可以立刻回复用户，而不用等待处理完整个业务才回复。 主流的消息队列方案可以看这里。 我主要考虑的方案有rabbitMQ、redis、celery、mongodb。">
 <meta property="og:locale">
@@ -36,7 +36,7 @@
 <meta property="article:tag" content="queue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.goorockey.com/2014/06/09/survey-of-message-queue/">
+<link rel="canonical" href="http://goorockey.github.io/2014/06/09/survey-of-message-queue/">
 
 
 <script id="page-configurations">
@@ -171,7 +171,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://www.goorockey.com/2014/06/09/survey-of-message-queue/">
+    <link itemprop="mainEntityOfPage" href="http://goorockey.github.io/2014/06/09/survey-of-message-queue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
