@@ -1,5 +1,5 @@
 # goorockey.github.com
-My Hexo Blog: http://www.goorockey.com
+My Hexo Blog: http://goorockey.github.io
 
 # Installation
 

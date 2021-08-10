@@ -12,7 +12,7 @@ categories: network
 
 NAT是Network Address Translation,网络地址转换，会在网关中实现局域网内部ip和外网ip之间转换。
 
-![NAT](http://www.goorockey.com/uploads/2012/03/nat.png)
+![NAT](http://goorockey.github.io/uploads/2012/03/nat.png)
 
 如上图，局域网内部网段是192.168.1.X，这些ip只在这个局域网内有意义，外网无法根据这些ip定位计算机。
 
@@ -66,7 +66,7 @@ NAT有四种转换方式：
 
 1.Static NAT
 
-![Static NAT](http://www.goorockey.com/uploads/2012/03/nat-static.jpg)
+![Static NAT](http://goorockey.github.io/uploads/2012/03/nat-static.jpg)
 
 局域网有多个外网ip，数量等于或多于内网ip数。
 
@@ -76,7 +76,7 @@ NAT有四种转换方式：
 
 2.Dynamic NAT
 
-![Dynamic NAT](http://www.goorockey.com/uploads/2012/03/nat-dynamic.jpg)
+![Dynamic NAT](http://goorockey.github.io/uploads/2012/03/nat-dynamic.jpg)
 
 局域网有多个外网ip，但数量少于内网ip数。
 
@@ -86,7 +86,7 @@ NAT有四种转换方式：
 
 3.Overload NAT
 
-![Overload NAT](http://www.goorockey.com/uploads/2012/03/nat-overload.jpg)
+![Overload NAT](http://goorockey.github.io/uploads/2012/03/nat-overload.jpg)
 
 如果局域网只有一个外网ip，每个内网ip都映射到这个外网ip，但端口口会不同。
 
@@ -94,7 +94,7 @@ NAT有四种转换方式：
 
 4.Overlap NAT
 
-![Overlap NAT](http://www.goorockey.com/uploads/2012/03/nat-overlap.jpg)
+![Overlap NAT](http://goorockey.github.io/uploads/2012/03/nat-overlap.jpg)
 
 当内网的ip在外网中已经注册且已被其他机子使用时，网关要在选择一个外网中已注册但未被使用的ip做转换。
 

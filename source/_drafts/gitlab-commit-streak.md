@@ -219,7 +219,7 @@ end
 
 最后修改截图如下
 
-![gitlab-commit-streak](http://www.goorockey.com/uploads/2015/gitlab-commit-streak.png)
+![gitlab-commit-streak](http://goorockey.github.io/uploads/2015/gitlab-commit-streak.png)
 
 Github上提交的PR在[这里](https://github.com/gitlabhq/gitlabhq/pull/9233)。
 

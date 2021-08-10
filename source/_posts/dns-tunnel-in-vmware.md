@@ -17,7 +17,7 @@ DNS隧道是什么就不解释了。google一下DNS隧道能搜到风河、云�
 
 简单的拓扑图如下：
 
-![拓扑图](http://www.goorockey.com/uploads/2012/03/image_thumb2.png)
+![拓扑图](http://goorockey.github.io/uploads/2012/03/image_thumb2.png)
 
 整个回路就是：
 
@@ -120,7 +120,7 @@ DNS记录类型还会有：
 
 则在HostC用nslookup能成功返回DNS信息：
 
-![DNS信息](http://www.goorockey.com/uploads/2012/03/20594453_thumb.png)
+![DNS信息](http://goorockey.github.io/uploads/2012/03/20594453_thumb.png)
 
 但还要配置iptables，使其他机子可以访问DNS服务的端口。
 

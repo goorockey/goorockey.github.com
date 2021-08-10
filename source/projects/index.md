@@ -27,7 +27,7 @@ layout: page
 
     我的油猴脚本
 
-## [Yet-Another-Wishlist](http://www.goorockey.com/yet-another-wishlist)
+## [Yet-Another-Wishlist](http://github.com/goorockey/yet-another-wishlist)
 
     用ReactJS、LeanCloud、Bootstrap Material实现的心愿单，纯练手
 
